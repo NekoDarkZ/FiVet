@@ -10,8 +10,18 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.22'
+
+    //Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // JPA
+    implementation 'javax.persistence:javax.persistence-api:2.2'
 
     // ORM Lite
     implementation 'com.j256.ormlite:ormlite-core:6.1'
@@ -19,6 +29,11 @@ dependencies {
 
     //Database Driver
     implementation 'com.h2database:h2:2.1.210'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+
+    // Logger
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
 }
 
 test {
