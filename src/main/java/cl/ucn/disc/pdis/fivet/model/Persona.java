@@ -17,28 +17,69 @@
 
 package cl.ucn.disc.pdis.fivet.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Persona Class.
+ *
+ * @author Sebastián Murquio Castillo
  */
-public final class Persona extends Entity {
+@DatabaseTable(tableName = "persona")
+public final class Persona {
+
     /**
-     * name atribute.
+     * Id: Primary key and autoincrement.
+     */
+    @DatabaseField(generatedId = true)
+    private Integer id;
+
+    /**
+     * The Nombre.
      *
      */
-    private final String name;
+    @DatabaseField(canBeNull = false)
+    private String nombre;
 
     /**
-     * rut atribute.
+     * The Apellido.
+     *
      */
-    private final String rut;
+    @DatabaseField(canBeNull = false)
+    private String apellido;
 
     /**
-     * Persona constructor.
-     * @param name of the person.
-     * @param rut of the person.
+     * The rut.
      */
-    public Persona(String name, String rut) {
-        this.name = name;
+    @DatabaseField(canBeNull = false, index = true)
+    private String rut;
+
+    /**
+     * Empty constructor.
+     */
+    Persona() {
+        //nothing here.
+    }
+
+    public Persona(String nombre, String apellido, String rut){
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.rut = rut;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getRut() {
+        return rut;
     }
 }

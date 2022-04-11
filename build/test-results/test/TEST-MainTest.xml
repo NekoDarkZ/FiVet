@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-11T19:01:21" hostname="LAPTOP-36S05MD7" time="1.541">
+  <properties/>
+  <testcase name="testDatabase()" classname="MainTest" time="1.541"/>
+  <system-out><![CDATA[2022-04-11 15:01:21,641 [DEBUG] DaoManager created dao for class class cl.ucn.disc.pdis.fivet.model.Persona with reflection
+2022-04-11 15:01:21,649 [INFO] TableUtils creating table 'persona'
+2022-04-11 15:01:21,651 [INFO] TableUtils creating index 'persona_rut_idx' for table 'persona
+2022-04-11 15:01:22,293 [DEBUG] BaseJdbcConnectionSource opened connection to jdbc:h2:mem:fivet_db got #419272944
+2022-04-11 15:01:22,793 [INFO] TableUtils executed create table statement changed 0 rows: CREATE TABLE IF NOT EXISTS `persona` (`id` INTEGER AUTO_INCREMENT , `nombre` VARCHAR(255) NOT NULL , `apellido` VARCHAR(255) NOT NULL , `rut` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`) ) 
+2022-04-11 15:01:22,799 [INFO] TableUtils executed create table statement changed 0 rows: CREATE INDEX IF NOT EXISTS `persona_rut_idx` ON `persona` ( `rut` )
+2022-04-11 15:01:22,891 [DEBUG] BaseMappedStatement insert data with statement 'INSERT INTO `persona` (`nombre` ,`apellido` ,`rut` ) VALUES (?,?,?)' and 3 args, changed 1 rows
+2022-04-11 15:01:22,892 [DEBUG] BaseMappedStatement assigned id '1' from keyholder to 'id' in Persona object
+2022-04-11 15:01:22,942 [DEBUG] BaseMappedStatement query-for-id using 'SELECT * FROM `persona` WHERE `id` = ?' and 1 args, got 1 result
+2022-04-11 15:01:22,948 [DEBUG] BaseJdbcConnectionSource closed connection #419272944
+]]></system-out>
+  <system-err><![CDATA[[2022.04.11 15:01:22] (Coverage): Error during class instrumentation: org.h2.value.ValueToObjectConverter: java.lang.RuntimeException: java.io.IOException: Class org/locationtech/jts/geom/Geometry not found
+]]></system-err>
+</testsuite>
