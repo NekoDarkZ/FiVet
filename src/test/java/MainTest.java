@@ -57,7 +57,7 @@ public class MainTest {
             Persona personaDb = daoPersona.queryForId(persona.getId());
 
             Assertions.assertEquals(persona.getNombre(), personaDb.getNombre(), "Nombre not equals");
-            Assertions.assertEquals(persona.getApellido(), personaDb.getApellido(), "Apellido not equals");
+            Assertions.assertEquals(persona.getEmail(), personaDb.getEmail(), "Email not equals");
             Assertions.assertEquals(persona.getRut(), personaDb.getRut(), "Rut not equals");
         } catch (Exception e) {
             e.printStackTrace();

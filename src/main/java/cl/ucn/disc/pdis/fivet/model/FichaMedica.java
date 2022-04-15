@@ -17,10 +17,12 @@
 
 package cl.ucn.disc.pdis.fivet.model;
 
+import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
+
 /**
  * FichaMedica Class.
  */
-public final class FichaMedica extends Entity {
+public final class FichaMedica extends BaseEntity {
 
     /**
      * numero atribute.

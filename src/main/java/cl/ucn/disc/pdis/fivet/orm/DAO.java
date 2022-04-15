@@ -15,26 +15,43 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.pdis.fivet.model;
+package cl.ucn.disc.pdis.fivet.orm;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
- * Entity Class.
+ * Data Access Object: DAO
+ * @param <T>
+ *
+ * @author Sebastián Murquio-Castillo
  */
-public abstract class Entity {
-    /**
-     * Id of the entity.
-     */
-    protected Integer id;
+public interface DAO <T extends BaseEntity> {
 
     /**
-     * the deleted at date and time.
+     * Get optional, T
+     * @param id to search
+     * @return a T
      */
-    protected LocalDateTime deletedAt;
+    Optional<T> get(Integer id);
 
     /**
-     * the created at date and time.
+     * Get all the Ts
      */
-    protected LocalDateTime createdAt;
+    List<T> getAll();
+
+    /**
+     * Save a T
+     */
+    void save(T t);
+
+    /**
+     * Delete a T.
+     */
+    void delete(T t);
+
+    /**
+     * Delete a T with id.
+     */
+    void delete(Integer id);
 }

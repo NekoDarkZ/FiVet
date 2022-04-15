@@ -15,46 +15,36 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.pdis.fivet.model;
+package cl.ucn.disc.pdis.fivet.orm;
 
-import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.time.ZonedDateTime;
 
 /**
- * Persona Class.
+ * Base Entity Class.
  *
- * @author Sebastián Murquio Castillo
+ * @author Sebastián Murquio-Castillo
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@DatabaseTable
-public final class Persona extends BaseEntity {
-
+public abstract class BaseEntity {
     /**
-     * The RUT.
+     * Id of the entity.
      */
     @Getter
-    @DatabaseField(canBeNull = false, unique = true)
-    private String rut;
+    @DatabaseField(generatedId = true)
+    protected Integer id;
 
     /**
-     * The Nombre.
+     * the deleted at date and time.
+     */
+    @Getter
+    @DatabaseField
+    protected ZonedDateTime deletedAt;
+
+    /**
+     * the created at date and time.
      */
     @Getter
     @DatabaseField(canBeNull = false)
-    private String nombre;
-
-    /**
-     * The Email.
-     */
-    @Getter
-    @DatabaseField(canBeNull = false, unique = true)
-    private String email;
-
+    protected ZonedDateTime createdAt = ZonedDateTime.now();
 }
