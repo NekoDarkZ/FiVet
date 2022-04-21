@@ -1,10 +1,61 @@
-ï15:37:53.342 [Test worker] DEBUG com.j256.ormlite.dao.DaoManager - created dao for class class cl.ucn.disc.pdis.fivet.model.Persona with reflection
-^15:37:53.347 [Test worker] INFO com.j256.ormlite.table.TableUtils - creating table 'persona'
-y15:37:53.348 [Test worker] INFO com.j256.ormlite.table.TableUtils - creating index 'persona_rut_idx' for table 'persona
-å15:37:53.530 [Test worker] DEBUG com.j256.ormlite.jdbc.BaseJdbcConnectionSource - opened connection to jdbc:h2:mem:fivet_db got #584291287
-±15:37:53.642 [Test worker] INFO com.j256.ormlite.table.TableUtils - executed create table statement changed 0 rows: CREATE TABLE IF NOT EXISTS `persona` (`id` INTEGER AUTO_INCREMENT , `nombre` VARCHAR(255) NOT NULL , `apellido` VARCHAR(255) NOT NULL , `rut` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`) ) 
-π15:37:53.645 [Test worker] INFO com.j256.ormlite.table.TableUtils - executed create table statement changed 0 rows: CREATE INDEX IF NOT EXISTS `persona_rut_idx` ON `persona` ( `rut` )
-—15:37:53.668 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `persona` (`nombre` ,`apellido` ,`rut` ) VALUES (?,?,?)' and 3 args, changed 1 rows
-é15:37:53.668 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - assigned id '1' from keyholder to 'id' in Persona object
-™15:37:53.683 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `persona` WHERE `id` = ?' and 1 args, got 1 result
-p15:37:53.686 [Test worker] DEBUG com.j256.ormlite.jdbc.BaseJdbcConnectionSource - closed connection #584291287
+\19:47:05.309 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Starting the MainTest...
+h19:47:05.313 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Registering the ZonedDateTimeType...
+u19:47:05.415 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the Connection, using: jdbc:h2:mem:fivet
+Z19:47:05.470 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Dropping the tables...
+ô19:47:05.498 [Test worker] DEBUG com.j256.ormlite.dao.DaoManager - created dao for class class cl.ucn.disc.pdis.fivet.TestDAO$TheEntity with reflection
+a19:47:05.498 [Test worker] INFO com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
+â19:47:05.693 [Test worker] DEBUG com.j256.ormlite.jdbc.BaseJdbcConnectionSource - opened connection to jdbc:h2:mem:fivet got #534801297
+£19:47:05.805 [Test worker] INFO com.j256.ormlite.table.TableUtils - ignoring drop error 'org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "THE_ENTITY" no encontrada
+-Table "THE_ENTITY" not found; SQL statement:
+NDROP TABLE `the_entity` [42102-210]' for statement: DROP TABLE `the_entity` 
+Z19:47:05.806 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating the tables...
+a19:47:05.806 [Test worker] INFO com.j256.ormlite.table.TableUtils - creating table 'the_entity'
+»19:47:05.823 [Test worker] INFO com.j256.ormlite.table.TableUtils - executed create table statement changed 0 rows: CREATE TABLE `the_entity` (`theString` VARCHAR(255) NOT NULL , `theDate` VARCHAR(100) NOT NULL , `theInteger` INTEGER NOT NULL , `theDouble` DOUBLE PRECISION NOT NULL , `theBoolean` BOOLEAN NOT NULL , `id` INTEGER AUTO_INCREMENT , `deletedAt` VARCHAR(100) , `createdAt` VARCHAR(100) NOT NULL ,  UNIQUE (`theString`), PRIMARY KEY (`id`) ) 
+^19:47:05.823 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the ORMLiteDAO...
+X19:47:05.824 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating entities...
+ö19:47:05.848 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
+ê19:47:05.848 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - assigned id '1' from keyholder to 'id' in TheEntity object
+|19:47:05.914 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@ba84158[
+  theBoolean=true
+A  theDate=2022-04-20T19:47:05.825369600-04:00[America/Santiago]
+  theDouble=128.0
+  theInteger=128
+  theString=The String A
+C  createdAt=2022-04-20T19:47:05.825369600-04:00[America/Santiago]
+  deletedAt=<null>
+  id=1
+]
+ö19:47:05.916 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
+ê19:47:05.916 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - assigned id '2' from keyholder to 'id' in TheEntity object
+|19:47:05.916 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@c9c88e2[
+  theBoolean=false
+A  theDate=2022-04-20T19:47:05.915125900-04:00[America/Santiago]
+  theDouble=1024.0
+  theInteger=1024
+  theString=The String B
+C  createdAt=2022-04-20T19:47:05.915125900-04:00[America/Santiago]
+  deletedAt=<null>
+  id=2
+]
+Q19:47:05.917 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving...
+≠19:47:05.961 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+19:47:05.962 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@3e0157f7[
+  theBoolean=true
+A  theDate=2022-04-20T19:47:05.825369600-04:00[America/Santiago]
+  theDouble=128.0
+  theInteger=128
+  theString=The String A
+C  createdAt=2022-04-20T19:47:05.825369600-04:00[America/Santiago]
+  deletedAt=<null>
+  id=1
+]
+O19:47:05.962 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Deleting...
+µ19:47:05.966 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - delete data with statement 'DELETE FROM `the_entity` WHERE `id` = ?' and 1 args, changed 1 rows
+µ19:47:05.972 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - delete data with statement 'DELETE FROM `the_entity` WHERE `id` = ?' and 1 args, changed 0 rows
+b19:47:05.972 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving deleted entities...
+Ø19:47:05.973 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
+Ø19:47:05.974 [Test worker] DEBUG com.j256.ormlite.stmt.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
+a19:47:05.975 [Test worker] INFO com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
+å19:47:05.977 [Test worker] INFO com.j256.ormlite.table.TableUtils - executed drop table statement changed 0 rows: DROP TABLE `the_entity` 
+I19:47:05.978 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Done.
+p19:47:05.978 [Test worker] DEBUG com.j256.ormlite.jdbc.BaseJdbcConnectionSource - closed connection #534801297

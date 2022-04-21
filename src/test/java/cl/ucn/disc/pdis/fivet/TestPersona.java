@@ -15,6 +15,8 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+package cl.ucn.disc.pdis.fivet;
+
 import cl.ucn.disc.pdis.fivet.model.Persona;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -26,7 +28,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
-public class MainTest {
+public class TestPersona {
     /**
      * Testing Ormlite + H2 (database)
      */
