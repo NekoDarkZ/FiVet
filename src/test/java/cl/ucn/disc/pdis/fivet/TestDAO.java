@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sebastián Murquio Castillo
+ * Copyright 2022 Sebastian Murquio Castillo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -35,8 +35,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 /**
  * Testing the DAO.
@@ -83,7 +83,6 @@ public final class TestDAO {
 
         // Create..
         log.debug("Creating entities...");
-
         {
             TheEntity theEntityA = TheEntity.builder()
                     .theString("The String A")
@@ -92,7 +91,8 @@ public final class TestDAO {
                     .theBoolean(Boolean.TRUE)
                     .build();
             dao.save(theEntityA);
-            log.debug("To db: {}", ToStringBuilder.reflectionToString(theEntityA, ToStringStyle.MULTI_LINE_STYLE));
+            log.debug("To db: {}",
+                    ToStringBuilder.reflectionToString(theEntityA, ToStringStyle.MULTI_LINE_STYLE));
 
             TheEntity theEntityB = TheEntity.builder()
                     .theString("The String B")
@@ -114,15 +114,19 @@ public final class TestDAO {
         // Fake Delete...
         log.debug("Deleting...");
         {
-            dao.delete(1);
-            Assertions.assertThrows(SQLException.class, () -> dao.delete(10));
+            TheEntity theEntity = dao.get(1).orElseThrow();
+            dao.delete(theEntity);
+
+            Optional<TheEntity> theEntity2 = dao.get(10);
+            Assertions.assertTrue(theEntity2.isEmpty(), "The entity with id 10 was not null");
         }
 
         // Retrieve...
         log.debug("Retrieving deleted entities...");
         {
-            Assertions.assertTrue(dao.get(1).isEmpty(), "DAO 1 was not null");
-            Assertions.assertTrue(dao.get(0).isEmpty(), "DAO 1 was not null");
+            TheEntity theEntity = dao.get(1).orElseThrow();
+            log.debug("from db: {}", ToStringBuilder.reflectionToString(theEntity, ToStringStyle.MULTI_LINE_STYLE));
+           Assertions.assertFalse(dao.get(1).isEmpty(), "DAO 1 was null");
         }
 
         // Drop the database
@@ -132,13 +136,13 @@ public final class TestDAO {
     }
 
     /**
-     * Inner Entity Class-
+     * Inner Entity Class.
      */
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     @DatabaseTable(tableName = "the_entity")
-    private static final class TheEntity extends BaseEntity{
+    private static final class TheEntity extends BaseEntity {
 
         /**
          * The name.

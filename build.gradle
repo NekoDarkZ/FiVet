@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.j256.ormlite:ormlite-core:6.1'
     implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
 
-    //Database Driver
+    // Database Driver
     implementation 'com.h2database:h2:2.1.210'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation 'org.postgresql:postgresql:42.3.4'

@@ -24,6 +24,7 @@ import lombok.NonNull;
 import lombok.SneakyThrows;
 
 import java.sql.SQLException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ import java.util.Optional;
  *
  * @author Sebastián Murquio-Castillo
  */
-public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T>{
+public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
 
     /**
      * The real DAO (connection to ORMlite DAO)
@@ -94,10 +95,20 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T>{
      *
      * @param t to delete
      */
-    //@SneakyThrows(SQLException.class)
+    @SneakyThrows(SQLException.class)
     @Override
     public void delete(T t) {
-        this.delete(t.getId());
+        boolean exist = this.theDao.idExists(t.getId());
+
+        if (!exist) {
+            throw new SQLException("The entity with id: {} no exists.", String.valueOf(t.getId()));
+        } else {
+            t.deletedAt = ZonedDateTime.now();
+            int deleted = this.theDao.update(t);
+            if (deleted != 1) {
+                throw new SQLException("Entity with the id {} is already deleted.", String.valueOf(t.getId()));
+            }
+        }
     }
 
     /**
@@ -109,7 +120,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T>{
     @Override
     public void delete(Integer id) {
         int deleted = this.theDao.deleteById(id);
-        if (deleted != 1){
+        if (deleted != 1) {
             throw new SQLException("Rows deleted != 1");
         }
     }

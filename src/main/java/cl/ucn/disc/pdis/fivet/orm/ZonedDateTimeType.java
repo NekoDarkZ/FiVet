@@ -78,7 +78,7 @@ public final class ZonedDateTimeType extends BaseDataType {
     @Override
     public Object javaToSqlArg(FieldType fieldType, Object javaObject){
         ZonedDateTime zdt = (ZonedDateTime) javaObject;
-        if(zdt == null) return null;
+        if (zdt == null) return null;
         return DTF.format(zdt);
     }
 
@@ -96,7 +96,7 @@ public final class ZonedDateTimeType extends BaseDataType {
      */
     @Override
     public Object sqlArgToJava(FieldType fieldType, Object sqlArg, int columnPos){
-        if(sqlArg == null) return null;
+        if (sqlArg == null) return null;
         return ZonedDateTime.parse((String) sqlArg, DTF);
     }
 }

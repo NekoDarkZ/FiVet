@@ -18,22 +18,32 @@
 package cl.ucn.disc.pdis.fivet;
 
 import cl.ucn.disc.pdis.fivet.model.Persona;
+import cl.ucn.disc.pdis.fivet.orm.ZonedDateTimeType;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.field.DataPersisterManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-
+@Slf4j
 public class TestPersona {
     /**
      * Testing Ormlite + H2 (database)
      */
     @Test
     public void testDatabase() throws SQLException{
+        log.debug("Starting the TestPersona...");
+
+        log.debug("Registering the ZonedDateTimeType...");
+        DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
+
         //  The Database to use (in RAM Memory)
         String databaseUrl = "jdbc:h2:mem:fivet_db";
 
@@ -47,16 +57,18 @@ public class TestPersona {
             Dao<Persona, Integer> daoPersona = DaoManager.createDao(connectionSource, Persona.class);
 
             // New Persona
-            Persona persona = new Persona("Andrea", "Contreras", "152532873");
+            Persona persona = new Persona("152532873", "Andrea Contreras", "andrea.contreras@ucn.cl");
 
             // Insert Persona into the database
             int tuples = daoPersona.create(persona);
-            //log.debug("Id: {}", persona.getId());
+            log.debug("Id: {}", persona.getId());
 
             Assertions.assertEquals(1, tuples, "Save tuples != 1");
 
             //Get from db
             Persona personaDb = daoPersona.queryForId(persona.getId());
+
+            log.debug("From db: {}", ToStringBuilder.reflectionToString(personaDb, ToStringStyle.MULTI_LINE_STYLE));
 
             Assertions.assertEquals(persona.getNombre(), personaDb.getNombre(), "Nombre not equals");
             Assertions.assertEquals(persona.getEmail(), personaDb.getEmail(), "Email not equals");
