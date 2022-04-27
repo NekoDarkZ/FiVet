@@ -1,89 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cl.ucn.disc.pdis.fivet.TestDAO" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-25T23:31:03" hostname="LAPTOP-36S05MD7" time="0.59">
+<testsuite name="cl.ucn.disc.pdis.fivet.TestDAO" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-27T22:58:21" hostname="LAPTOP-36S05MD7" time="1.623">
   <properties/>
-  <testcase name="The Main Test" classname="cl.ucn.disc.pdis.fivet.TestDAO" time="0.59"/>
-  <system-out><![CDATA[19:31:02,946 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-19:31:02,947 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/C:/Users/murqu/IdeaProjects/FiVet/build/resources/main/logback.xml]
-19:31:03,036 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-19:31:03,041 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
-19:31:03,048 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-19:31:03,079 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
-19:31:03,080 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
-19:31:03,081 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@68ca624a - Registering current configuration as safe fallback point
-19:31:03.099 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Starting the MainTest...
-19:31:03.101 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Registering the ZonedDateTimeType...
-19:31:03.130 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the Connection, using: jdbc:h2:mem:fivet
-19:31:03.176 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Dropping the tables...
-19:31:03.208 [Test worker] DEBUG com.j256.ormlite.dao.DaoManager - created dao for class class cl.ucn.disc.pdis.fivet.TestDAO$TheEntity with reflection
-19:31:03.208 [Test worker] INFO  com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
-19:31:03.424 [Test worker] DEBUG c.j.o.jdbc.BaseJdbcConnectionSource - opened connection to jdbc:h2:mem:fivet got #1944375979
-19:31:03.541 [Test worker] INFO  com.j256.ormlite.table.TableUtils - ignoring drop error 'org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "THE_ENTITY" no encontrada
+  <testcase name="The Main Test" classname="cl.ucn.disc.pdis.fivet.TestDAO" time="1.623"/>
+  <system-out><![CDATA[18:58:21,161 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+18:58:21,161 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/C:/Users/murqu/IdeaProjects/FiVet/build/resources/main/logback.xml]
+18:58:21,328 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+18:58:21,338 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+18:58:21,352 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+18:58:21,427 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+18:58:21,429 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+18:58:21,432 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@2c52e97c - Registering current configuration as safe fallback point
+18:58:21.467 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Starting the MainTest...
+18:58:21.473 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Registering the ZonedDateTimeType...
+18:58:21.529 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the Connection, using: jdbc:h2:mem:fivet
+18:58:21.622 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Dropping the tables...
+18:58:21.700 [Test worker] DEBUG com.j256.ormlite.dao.DaoManager - created dao for class class cl.ucn.disc.pdis.fivet.TestDAO$TheEntity with reflection
+18:58:21.701 [Test worker] INFO  com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
+18:58:22.328 [Test worker] DEBUG c.j.o.jdbc.BaseJdbcConnectionSource - opened connection to jdbc:h2:mem:fivet got #184737580
+18:58:22.763 [Test worker] INFO  com.j256.ormlite.table.TableUtils - ignoring drop error 'org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "THE_ENTITY" no encontrada
 Table "THE_ENTITY" not found; SQL statement:
 DROP TABLE `the_entity` [42102-210]' for statement: DROP TABLE `the_entity` 
-19:31:03.542 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating the tables...
-19:31:03.542 [Test worker] INFO  com.j256.ormlite.table.TableUtils - creating table 'the_entity'
-19:31:03.557 [Test worker] INFO  com.j256.ormlite.table.TableUtils - executed create table statement changed 0 rows: CREATE TABLE `the_entity` (`theString` VARCHAR(255) NOT NULL , `theDate` VARCHAR(100) NOT NULL , `theInteger` INTEGER NOT NULL , `theDouble` DOUBLE PRECISION NOT NULL , `theBoolean` BOOLEAN NOT NULL , `id` INTEGER AUTO_INCREMENT , `deletedAt` VARCHAR(100) , `createdAt` VARCHAR(100) NOT NULL ,  UNIQUE (`theString`), PRIMARY KEY (`id`) ) 
-19:31:03.558 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the ORMLiteDAO...
-19:31:03.558 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating entities...
-19:31:03.585 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
-19:31:03.586 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - assigned id '1' from keyholder to 'id' in TheEntity object
-19:31:03.606 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@48f66f5b[
+18:58:22.765 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating the tables...
+18:58:22.765 [Test worker] INFO  com.j256.ormlite.table.TableUtils - creating table 'the_entity'
+18:58:22.793 [Test worker] INFO  com.j256.ormlite.table.TableUtils - executed create table statement changed 0 rows: CREATE TABLE `the_entity` (`theString` VARCHAR(255) NOT NULL , `theDate` VARCHAR(100) NOT NULL , `theInteger` INTEGER NOT NULL , `theDouble` DOUBLE PRECISION NOT NULL , `theBoolean` BOOLEAN NOT NULL , `id` INTEGER AUTO_INCREMENT , `deletedAt` VARCHAR(100) , `createdAt` VARCHAR(100) NOT NULL ,  UNIQUE (`theString`), PRIMARY KEY (`id`) ) 
+18:58:22.794 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Building the ORMLiteDAO...
+18:58:22.796 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Creating entities...
+18:58:22.868 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
+18:58:22.868 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - assigned id '1' from keyholder to 'id' in TheEntity object
+18:58:22.916 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@5985baae[
   theBoolean=true
-  theDate=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
+  theDate=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
   theDouble=128.0
   theInteger=128
   theString=The String A
-  createdAt=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
+  createdAt=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
   deletedAt=<null>
   id=1
 ]
-19:31:03.608 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
-19:31:03.608 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - assigned id '2' from keyholder to 'id' in TheEntity object
-19:31:03.608 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@5644bfb4[
+18:58:22.919 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - insert data with statement 'INSERT INTO `the_entity` (`theString` ,`theDate` ,`theInteger` ,`theDouble` ,`theBoolean` ,`deletedAt` ,`createdAt` ) VALUES (?,?,?,?,?,?,?)' and 7 args, changed 1 rows
+18:58:22.919 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - assigned id '2' from keyholder to 'id' in TheEntity object
+18:58:22.920 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - To db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@34a0a89e[
   theBoolean=false
-  theDate=2022-04-25T19:31:03.606644200-04:00[America/Santiago]
+  theDate=2022-04-27T18:58:22.917458900-04:00[America/Santiago]
   theDouble=1024.0
   theInteger=1024
   theString=The String B
-  createdAt=2022-04-25T19:31:03.606644200-04:00[America/Santiago]
+  createdAt=2022-04-27T18:58:22.917458900-04:00[America/Santiago]
   deletedAt=<null>
   id=2
 ]
-19:31:03.609 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving...
-19:31:03.633 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
-19:31:03.633 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@23c89047[
+18:58:22.921 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving...
+18:58:22.963 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:22.964 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@26bf950c[
   theBoolean=true
-  theDate=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
+  theDate=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
   theDouble=128.0
   theInteger=128
   theString=The String A
-  createdAt=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
+  createdAt=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
   deletedAt=<null>
   id=1
 ]
-19:31:03.634 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Deleting...
-19:31:03.635 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
-19:31:03.645 [Test worker] DEBUG c.j256.ormlite.stmt.StatementBuilder - built statement SELECT COUNT(*) FROM `the_entity` WHERE `id` = ?
-19:31:03.650 [Test worker] DEBUG c.j.ormlite.stmt.StatementExecutor - query of 'SELECT COUNT(*) FROM `the_entity` WHERE `id` = ?' returned 1
-19:31:03.654 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - update data with statement 'UPDATE `the_entity` SET `theString` = ?, `theDate` = ?, `theInteger` = ?, `theDouble` = ?, `theBoolean` = ?, `deletedAt` = ?, `createdAt` = ? WHERE `id` = ?' and 8 args, changed 1 rows
-19:31:03.655 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
-19:31:03.658 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving deleted entities...
-19:31:03.659 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
-19:31:03.660 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@2f3c33f3[
+18:58:22.965 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving all...
+18:58:22.975 [Test worker] DEBUG c.j256.ormlite.stmt.StatementBuilder - built statement SELECT * FROM `the_entity`
+18:58:22.979 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - prepared statement 'SELECT * FROM `the_entity`' with 0 args
+18:58:22.981 [Test worker] DEBUG com.j256.ormlite.stmt.SelectIterator - starting iterator @1743436787 for 'SELECT * FROM `the_entity`'
+18:58:22.982 [Test worker] DEBUG com.j256.ormlite.stmt.SelectIterator - closed iterator @1743436787 after 2 rows
+18:58:22.983 [Test worker] DEBUG c.j.ormlite.stmt.StatementExecutor - query of 'SELECT * FROM `the_entity`' with 0 args returned 2 results
+18:58:22.984 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: java.util.ArrayList@3497a4ab[
+  size=2
+]
+18:58:22.984 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Deleting...
+18:58:22.985 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:22.997 [Test worker] DEBUG c.j256.ormlite.stmt.StatementBuilder - built statement SELECT COUNT(*) FROM `the_entity` WHERE `id` = ?
+18:58:23.006 [Test worker] DEBUG c.j.ormlite.stmt.StatementExecutor - query of 'SELECT COUNT(*) FROM `the_entity` WHERE `id` = ?' returned 1
+18:58:23.014 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - update data with statement 'UPDATE `the_entity` SET `theString` = ?, `theDate` = ?, `theInteger` = ?, `theDouble` = ?, `theBoolean` = ?, `deletedAt` = ?, `createdAt` = ? WHERE `id` = ?' and 8 args, changed 1 rows
+18:58:23.016 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:23.026 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
+18:58:23.030 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
+18:58:23.031 [Test worker] DEBUG c.j.ormlite.stmt.StatementExecutor - query of 'SELECT COUNT(*) FROM `the_entity` WHERE `id` = ?' returned 1
+18:58:23.032 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:23.034 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - update data with statement 'UPDATE `the_entity` SET `theString` = ?, `theDate` = ?, `theInteger` = ?, `theDouble` = ?, `theBoolean` = ?, `deletedAt` = ?, `createdAt` = ? WHERE `id` = ?' and 8 args, changed 1 rows
+18:58:23.036 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:23.037 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got no results
+18:58:23.037 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Retrieving deleted entities...
+18:58:23.039 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:23.040 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - from db: cl.ucn.disc.pdis.fivet.TestDAO$TheEntity@2ea25ffa[
   theBoolean=true
-  theDate=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
+  theDate=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
   theDouble=128.0
   theInteger=128
   theString=The String A
-  createdAt=2022-04-25T19:31:03.559765300-04:00[America/Santiago]
-  deletedAt=2022-04-25T19:31:03.650522100-04:00[America/Santiago]
+  createdAt=2022-04-27T18:58:22.797779100-04:00[America/Santiago]
+  deletedAt=2022-04-27T18:58:23.006221300-04:00[America/Santiago]
   id=1
 ]
-19:31:03.661 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
-19:31:03.662 [Test worker] INFO  com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
-19:31:03.664 [Test worker] INFO  com.j256.ormlite.table.TableUtils - executed drop table statement changed 0 rows: DROP TABLE `the_entity` 
-19:31:03.664 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Done.
-19:31:03.664 [Test worker] DEBUG c.j.o.jdbc.BaseJdbcConnectionSource - closed connection #1944375979
+18:58:23.042 [Test worker] DEBUG c.j.o.s.mapped.BaseMappedStatement - query-for-id using 'SELECT * FROM `the_entity` WHERE `id` = ?' and 1 args, got 1 result
+18:58:23.044 [Test worker] INFO  com.j256.ormlite.table.TableUtils - dropping table 'the_entity'
+18:58:23.046 [Test worker] INFO  com.j256.ormlite.table.TableUtils - executed drop table statement changed 0 rows: DROP TABLE `the_entity` 
+18:58:23.047 [Test worker] DEBUG cl.ucn.disc.pdis.fivet.TestDAO - Done.
+18:58:23.047 [Test worker] DEBUG c.j.o.jdbc.BaseJdbcConnectionSource - closed connection #184737580
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[[2022.04.27 18:58:22] (Coverage): Error during class instrumentation: org.h2.value.ValueToObjectConverter: java.lang.RuntimeException: java.io.IOException: Class org/locationtech/jts/geom/Geometry not found
+]]></system-err>
 </testsuite>

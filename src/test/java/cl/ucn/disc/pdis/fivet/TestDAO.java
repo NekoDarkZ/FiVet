@@ -35,7 +35,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -111,14 +114,33 @@ public final class TestDAO {
             log.debug("from db: {}", ToStringBuilder.reflectionToString(theEntity, ToStringStyle.MULTI_LINE_STYLE));
         }
 
+        // Retrieve all..
+        log.debug("Retrieving all...");
+        {
+            List<TheEntity> entities = dao.getAll();
+            log.debug("from db: {}", ToStringBuilder.reflectionToString(entities, ToStringStyle.MULTI_LINE_STYLE));
+        }
+
         // Fake Delete...
         log.debug("Deleting...");
         {
-            TheEntity theEntity = dao.get(1).orElseThrow();
-            dao.delete(theEntity);
+            // with delete(T t)
+            TheEntity theEntityA = dao.get(1).orElseThrow();
+            dao.delete(theEntityA);
 
-            Optional<TheEntity> theEntity2 = dao.get(10);
-            Assertions.assertTrue(theEntity2.isEmpty(), "The entity with id 10 was not null");
+            Optional<TheEntity> theEntity1 = dao.get(1);
+            Assertions.assertTrue(theEntity1.isPresent(), "The entity with id 1 was null");
+
+            Optional<TheEntity> t2 = dao.get(10);
+            Assertions.assertThrows(NoSuchElementException.class, () ->{dao.delete(dao.get(10).get());});
+
+            // with delete(id)
+            dao.delete(2);
+
+            Optional<TheEntity> theEntity3 = dao.get(2);
+            Assertions.assertTrue(theEntity3.isPresent(), "The entity with id 2 was null");
+
+            Assertions.assertThrows(NoSuchElementException.class, () ->{dao.delete(dao.get(10).get().getId());});
         }
 
         // Retrieve...

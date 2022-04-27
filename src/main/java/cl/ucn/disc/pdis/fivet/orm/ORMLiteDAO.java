@@ -61,6 +61,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     public Optional<T> get(final Integer id) {
         // Exec the SQL
         T t = this.theDao.queryForId(id);
+
         return t == null ? Optional.empty() : Optional.of(t);
     }
 
@@ -84,7 +85,6 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     @Override
     public void save(T t) {
         int created = this.theDao.create(t);
-
         if (created != 1){
             throw new SQLException("Rows created != 1");
         }
@@ -119,9 +119,18 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     @SneakyThrows(SQLException.class)
     @Override
     public void delete(Integer id) {
-        int deleted = this.theDao.deleteById(id);
-        if (deleted != 1) {
-            throw new SQLException("Rows deleted != 1");
+
+        boolean exist = this.theDao.idExists(id);
+
+        if (!exist) {
+            throw new SQLException("The entity with id: {} not exists.", String.valueOf(id));
+        } else {
+            T t = this.theDao.queryForId(id);
+            t.deletedAt = ZonedDateTime.now();
+            int deleted = this.theDao.update(t);
+            if (deleted != 1) {
+                throw new SQLException("Entity with the id {} is already deleted.", String.valueOf(t.getId()));
+            }
         }
     }
 }
