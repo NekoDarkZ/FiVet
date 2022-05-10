@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sebastián Murquio Castillo
+ * Copyright 2022 Sebastian Murquio Castillo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -15,9 +15,8 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.pdis.fivet;
+package cl.ucn.disc.pdis.fivet.model;
 
-import cl.ucn.disc.pdis.fivet.model.Persona;
 import cl.ucn.disc.pdis.fivet.orm.ZonedDateTimeType;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -31,14 +30,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 @Slf4j
 public class TestPersona {
     /**
      * Testing Ormlite + H2 (database)
      */
     @Test
-    public void testDatabase() throws SQLException{
+    public void testDatabase(){
         log.debug("Starting the TestPersona...");
 
         log.debug("Registering the ZonedDateTimeType...");
@@ -57,7 +55,28 @@ public class TestPersona {
             Dao<Persona, Integer> daoPersona = DaoManager.createDao(connectionSource, Persona.class);
 
             // New Persona
-            Persona persona = new Persona("152532873", "Andrea Contreras", "andrea.contreras@ucn.cl");
+            Persona persona = new Persona(
+                    "152532873",
+                    "Andrea Contreras",
+                    "andrea.contreras@ucn.cl",
+                    "Avenida Angamos 123",
+                    911223344,
+                    1234567,
+                    "12345678");
+
+            Persona persona2 = Persona.builder()
+                    .rut("123456780")
+                    .nombre("Random Person")
+                    .email("random.person@gmail.com")
+                    .direccion("Random Avenue 123")
+                    .telefonoMovil(912345678)
+                    .telefonoFijo(2233441)
+                    .passwd("random123")
+                    .build();
+
+            // Setting another password
+            String passwd = "thisisnotapassword";
+            persona2.setPasswd(passwd);
 
             // Insert Persona into the database
             int tuples = daoPersona.create(persona);
@@ -70,9 +89,30 @@ public class TestPersona {
 
             log.debug("From db: {}", ToStringBuilder.reflectionToString(personaDb, ToStringStyle.MULTI_LINE_STYLE));
 
-            Assertions.assertEquals(persona.getNombre(), personaDb.getNombre(), "Nombre not equals");
-            Assertions.assertEquals(persona.getEmail(), personaDb.getEmail(), "Email not equals");
-            Assertions.assertEquals(persona.getRut(), personaDb.getRut(), "Rut not equals");
+            // Testing rut
+            Assertions.assertEquals(
+                    persona.getRut(), personaDb.getRut(),
+                    "Rut not equals");
+            // Testing nombre
+            Assertions.assertEquals(
+                    persona.getNombre(), personaDb.getNombre(),
+                    "Nombre not equals");
+            // Testing email
+            Assertions.assertEquals(
+                    persona.getEmail(), personaDb.getEmail(),
+                    "Email not equals");
+            // Testing direccion
+            Assertions.assertEquals(persona.getDireccion(), personaDb.getDireccion(),
+                    "Direccion not equals");
+            // Testing telefono movil
+            Assertions.assertEquals(persona.getTelefonoMovil(), personaDb.getTelefonoMovil(),
+                    "Telefono Movil not equals");
+            // Testing telefono fijo
+            Assertions.assertEquals(persona.getTelefonoFijo(), personaDb.getTelefonoFijo(),
+                    "Telefono Fijo not equals");
+            // Testing password
+            Assertions.assertEquals(persona.getPasswd(), personaDb.getPasswd(),
+                    "Password not equals");
         } catch (Exception e) {
             e.printStackTrace();
         }

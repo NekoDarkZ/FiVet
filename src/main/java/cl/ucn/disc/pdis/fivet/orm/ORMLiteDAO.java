@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sebastián Murquio Castillo
+ * Copyright 2022 Sebastian Murquio Castillo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -17,11 +17,13 @@
 
 package cl.ucn.disc.pdis.fivet.orm;
 
+import com.google.common.collect.Lists;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import lombok.NonNull;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
@@ -31,8 +33,9 @@ import java.util.Optional;
 /**
  * The ORMLite implementation of DAO.
  *
- * @author Sebastián Murquio-Castillo
+ * @author Sebastian Murquio-Castillo
  */
+@Slf4j
 public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
 
     /**
@@ -61,8 +64,31 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     public Optional<T> get(final Integer id) {
         // Exec the SQL
         T t = this.theDao.queryForId(id);
+        if (t == null) {
+            return Optional.empty();
+        }
+        if (t.getDeletedAt() != null) {
+            return Optional.empty();
+        }
+        return Optional.of(t);
+    }
 
-        return t == null ? Optional.empty() : Optional.of(t);
+    /**
+     * Gets an Optional T using an attribute and value given
+     * @param attrib to use
+     * @param value to search
+     * @return Optional T
+     */
+    @SneakyThrows(SQLException.class)
+    @Override
+    public Optional<T> get(final String attrib, final Object value) {
+        List<T> list = this.theDao.queryForEq(attrib, value);
+
+        for (T t : list)
+            if (t.getDeletedAt() == null) {
+                return Optional.of(t);
+            }
+        return Optional.empty();
     }
 
     /**
@@ -73,7 +99,14 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     @SneakyThrows(SQLException.class)
     @Override
     public List<T> getAll() {
-        return this.theDao.queryForAll();
+        List<T> list = Lists.newArrayList();
+
+        for (T t : this.theDao.queryForAll()) {
+            if (t.getDeletedAt() == null) {
+                list.add(t);
+            }
+        }
+        return list;
     }
 
     /**
@@ -101,12 +134,11 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
         boolean exist = this.theDao.idExists(t.getId());
 
         if (!exist) {
-            throw new SQLException("The entity with id: {} no exists.", String.valueOf(t.getId()));
+            log.warn("T object not found");
         } else {
             t.deletedAt = ZonedDateTime.now();
-            int deleted = this.theDao.update(t);
-            if (deleted != 1) {
-                throw new SQLException("Entity with the id {} is already deleted.", String.valueOf(t.getId()));
+            if (this.theDao.update(t) != 1) {
+                throw new SQLException("Rows updated != 1");
             }
         }
     }
@@ -118,18 +150,23 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
      */
     @SneakyThrows(SQLException.class)
     @Override
-    public void delete(Integer id) {
+    public void delete(final Integer id) {
 
         boolean exist = this.theDao.idExists(id);
 
         if (!exist) {
             throw new SQLException("The entity with id: {} not exists.", String.valueOf(id));
         } else {
-            T t = this.theDao.queryForId(id);
-            t.deletedAt = ZonedDateTime.now();
-            int deleted = this.theDao.update(t);
-            if (deleted != 1) {
-                throw new SQLException("Entity with the id {} is already deleted.", String.valueOf(t.getId()));
+            Optional<T> t = this.get(id);
+
+            if (t.isEmpty()) {
+                log.warn("Entity t with id: {} not found", id);
+                return;
+            }
+
+            t.get().deletedAt = ZonedDateTime.now();
+            if (this.theDao.update(t.get()) != 1) {
+                throw new SQLException("Rows updated != 1");
             }
         }
     }

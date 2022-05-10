@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Sebastián Murquio Castillo
+ * Copyright 2022 Sebastian Murquio Castillo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
@@ -20,15 +20,12 @@ package cl.ucn.disc.pdis.fivet.model;
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Persona Class.
  *
- * @author Sebastián Murquio Castillo
+ * @author Sebastian Murquio-Castillo
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -56,5 +53,34 @@ public final class Persona extends BaseEntity {
     @Getter
     @DatabaseField(canBeNull = false, unique = true)
     private String email;
+
+    /**
+     * The Direccion.
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String direccion;
+
+    /**
+     * The Telefono Movil.
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private Integer telefonoMovil;
+
+    /**
+     * The Telefono Fijo.
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private Integer telefonoFijo;
+
+    /**
+     * The password.
+     */
+    @Getter
+    @Setter
+    @DatabaseField(canBeNull = false)
+    private String passwd;
 
 }

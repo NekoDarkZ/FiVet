@@ -15,51 +15,29 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.pdis.fivet.orm;
+package cl.ucn.disc.pdis.fivet.services;
 
-import java.util.List;
+import cl.ucn.disc.pdis.fivet.model.Persona;
+
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * Data Access Object: DAO
- * @param <T> to use
- *
- * @author Sebastian Murquio-Castillo
+ * The Fivet Controller
  */
-public interface DAO <T extends BaseEntity> {
+public interface FivetController {
+    /**
+     * autenticar method
+     * @param login rut or email to login
+     * @param password to login
+     * @return a Persona
+     */
+    Optional<Persona> autenticar(String login, String password);
 
     /**
-     * Get optional, T
-     * @param id to search
-     * @return a T
+     * Add a Persona into the backend
+     * @param persona to add
+     * @param password to hash
      */
-    Optional<T> get(Integer id);
-
-    /**
-     * Get an Optional T giving a attribute and a value
-     * @param attrib to use
-     * @param value to search
-     * @return optional T
-     */
-    Optional<T> get(String attrib, Object value);
-
-    /**
-     * Get all the Ts
-     */
-    List<T> getAll();
-
-    /**
-     * Save a T
-     */
-    void save(T t);
-
-    /**
-     * Delete a T.
-     */
-    void delete(T t);
-
-    /**
-     * Delete a T with id.
-     */
-    void delete(Integer id);
+    void add(Persona persona, String password);
 }

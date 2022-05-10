@@ -15,12 +15,8 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.pdis.fivet;
+package cl.ucn.disc.pdis.fivet.orm;
 
-import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
-import cl.ucn.disc.pdis.fivet.orm.DAO;
-import cl.ucn.disc.pdis.fivet.orm.ORMLiteDAO;
-import cl.ucn.disc.pdis.fivet.orm.ZonedDateTimeType;
 import com.j256.ormlite.field.DataPersisterManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -35,7 +31,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -54,7 +49,7 @@ public final class TestDAO {
      */
     @SneakyThrows
     @Test
-    @DisplayName("The Main Test")
+    @DisplayName("The Main Test for DAO")
     void theMain(){
         log.debug("Starting the MainTest...");
 
@@ -112,6 +107,17 @@ public final class TestDAO {
         {
             TheEntity theEntity = dao.get(1).orElseThrow();
             log.debug("from db: {}", ToStringBuilder.reflectionToString(theEntity, ToStringStyle.MULTI_LINE_STYLE));
+
+            Assertions.assertDoesNotThrow(() ->
+            {
+                dao.get("theinteger", 100);
+            });
+        }
+
+        // Retrieve using Atribute...
+        {
+            Optional<TheEntity> theEntity = dao.get("theinteger", 1024);
+            Assertions.assertTrue(theEntity.isPresent(), "The Entity was null");
         }
 
         // Retrieve all..
@@ -128,27 +134,34 @@ public final class TestDAO {
             TheEntity theEntityA = dao.get(1).orElseThrow();
             dao.delete(theEntityA);
 
+            // Retrieve the entity deleted
             Optional<TheEntity> theEntity1 = dao.get(1);
-            Assertions.assertTrue(theEntity1.isPresent(), "The entity with id 1 was null");
+            Assertions.assertFalse(theEntity1.isPresent(), "The entity with id 1 was not null");
 
+            // Deleting something already deleted
+            dao.delete(theEntityA);
+
+            // Getting an Optional Empty
             Optional<TheEntity> t2 = dao.get(10);
-            Assertions.assertThrows(NoSuchElementException.class, () ->{dao.delete(dao.get(10).get());});
+            Assertions.assertThrows(NoSuchElementException.class, () ->{
+                dao.delete(t2.get());});
 
             // with delete(id)
             dao.delete(2);
 
             Optional<TheEntity> theEntity3 = dao.get(2);
-            Assertions.assertTrue(theEntity3.isPresent(), "The entity with id 2 was null");
+            Assertions.assertFalse(theEntity3.isPresent(), "The entity with id 2 was null");
 
-            Assertions.assertThrows(NoSuchElementException.class, () ->{dao.delete(dao.get(10).get().getId());});
+            Assertions.assertThrows(NoSuchElementException.class, () ->{
+                dao.delete(dao.get(10).get().getId());});
         }
 
         // Retrieve...
         log.debug("Retrieving deleted entities...");
         {
-            TheEntity theEntity = dao.get(1).orElseThrow();
+            Optional<TheEntity> theEntity = dao.get(1);
             log.debug("from db: {}", ToStringBuilder.reflectionToString(theEntity, ToStringStyle.MULTI_LINE_STYLE));
-           Assertions.assertFalse(dao.get(1).isEmpty(), "DAO 1 was null");
+           Assertions.assertTrue(dao.get(1).isEmpty(), "DAO 1 was not null");
         }
 
         // Drop the database
