@@ -70,6 +70,8 @@ dependencies {
 
     // Bcrypt implementation
     implementation 'org.springframework.security:spring-security-crypto:5.6.3'
+    runtimeOnly 'org.bouncycastle:bcprov-jdk15on:1.70'
+    runtimeOnly 'org.springframework:spring-jcl:5.3.19'
 
 }
 

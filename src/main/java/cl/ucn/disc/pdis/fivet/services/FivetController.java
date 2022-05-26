@@ -19,20 +19,27 @@ package cl.ucn.disc.pdis.fivet.services;
 
 import cl.ucn.disc.pdis.fivet.model.Persona;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 /**
  * The Fivet Controller
  */
 public interface FivetController {
+
+    /**
+     * Retrieve a Persona by email or rut
+     * @param login email or rut
+     * @return a Optional Persona
+     */
+    Optional<Persona> retrieveByLogin(String login);
+
     /**
      * autenticar method
      * @param login rut or email to login
      * @param password to login
      * @return a Persona
      */
-    Optional<Persona> autenticar(String login, String password);
+    Optional<Persona> authenticate(String login, String password);
 
     /**
      * Add a Persona into the backend
@@ -40,4 +47,10 @@ public interface FivetController {
      * @param password to hash
      */
     void add(Persona persona, String password);
+
+    /**
+     * Delete a Persona by id
+     * @param id to delete
+     */
+    void delete(Integer id);
 }

@@ -18,22 +18,110 @@
 package cl.ucn.disc.pdis.fivet.model;
 
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.Collection;
 
 /**
  * FichaMedica Class.
+ *
+ * @author Sebastian Murquio-Castillo
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@DatabaseTable
 public final class FichaMedica extends BaseEntity {
 
     /**
-     * numero atribute.
+     * The number of the FichaMedica
      */
-    private final Integer numero;
+    @Getter
+    @DatabaseField(canBeNull = false, unique = true)
+    private Integer numero;
 
     /**
-     * FichaMedica constructor.
-     * @param numero to use.
+     * the name of the Patient
      */
-    public FichaMedica(Integer numero) {
-        this.numero = numero;
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String nombrePaciente;
+
+    /**
+     * The especie of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String especie;
+
+    /**
+     * The date of birth of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private LocalDate fechaNacimiento;
+
+    /**
+     * The raza of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String raza;
+
+    /**
+     * The color of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String color;
+
+    /**
+     * The tipo of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String tipo;
+
+    /**
+     * The sexo of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private Sexo sexo;
+
+    /**
+     * The Duenio of the Patient
+     */
+    @Getter
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "persona_id")
+    private Persona duenio;
+
+    /**
+     * The list of controles of the Patient
+     */
+    @Getter
+    @ForeignCollectionField(eager = true, orderColumnName = "fecha")
+    private Collection<Control> controles;
+
+    /**
+     * Append a Control
+     */
+    public void add(Control control) {
+        this.controles.add(control);
+    }
+
+    /**
+     * The Sexo
+     */
+    public enum Sexo {
+        MACHO,
+        HEMBRA
     }
 }

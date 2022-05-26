@@ -22,9 +22,12 @@ import cl.ucn.disc.pdis.fivet.orm.DAO;
 import cl.ucn.disc.pdis.fivet.orm.ORMLiteDAO;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -36,7 +39,16 @@ import java.util.Optional;
 @Slf4j
 public class FivetControllerImpl implements FivetController {
 
-    private DAO<Persona> daoPersona;
+    /**
+     * The Dao.
+     */
+    private final DAO<Persona> daoPersona;
+
+    /**
+     * The Hasher.
+     */
+    private final static PasswordEncoder PASSWORD_ENCODER =
+            new Argon2PasswordEncoder();
 
     /**
      * The FivetControllerImpl Constructor
@@ -46,6 +58,25 @@ public class FivetControllerImpl implements FivetController {
     public FivetControllerImpl(String dbUrl) {
         ConnectionSource cs = new JdbcConnectionSource(dbUrl);
         this.daoPersona = new ORMLiteDAO<>(cs,Persona.class);
+        this.daoPersona.dropAndCreateTable();
+    }
+
+    /**
+     * Retrieve a Persona by email or rut
+     * @param login email or rut
+     * @return a Optional Persona
+     */
+    @Override
+    public Optional<Persona> retrieveByLogin(String login) {
+        Optional<Persona> persona = this.daoPersona.get("rut", login);
+
+        if (persona.isEmpty()) {
+            persona = this.daoPersona.get("email", login);
+        }
+        if (persona.isEmpty()) {
+            return Optional.empty();
+        }
+        return persona;
     }
 
     /**
@@ -55,7 +86,7 @@ public class FivetControllerImpl implements FivetController {
      * @return a Persona
      */
     @Override
-    public Optional<Persona> autenticar(String login, String passwd) {
+    public Optional<Persona> authenticate(String login, String passwd) {
         Optional<Persona> persona = this.daoPersona.get("rut", login);
 
         if (persona.isEmpty()) {
@@ -65,7 +96,7 @@ public class FivetControllerImpl implements FivetController {
             return Optional.empty();
         }
 
-        if (BCrypt.checkpw(passwd, persona.get().getPasswd())) {
+        if (PASSWORD_ENCODER.matches(passwd, persona.get().getPasswd())) {
             return persona;
         }
 
@@ -80,9 +111,20 @@ public class FivetControllerImpl implements FivetController {
      * @param password to hash
      */
     @Override
-    public void add(Persona persona, String password) {
-        persona.setPasswd(BCrypt.hashpw(password,
-                BCrypt.gensalt(12)));
+    public void add(@NonNull Persona persona, @NonNull String password) {
+        // Hash password
+        persona.setPasswd(PASSWORD_ENCODER.encode(password));
+        // Save the persona
         this.daoPersona.save(persona);
+    }
+
+    /**
+     * Delete a Persona by id
+     * @param id to delete
+     */
+    @Override
+    public void delete(Integer id) {
+        // Soft Delete
+        this.daoPersona.delete(id);
     }
 }

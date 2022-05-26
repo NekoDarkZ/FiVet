@@ -60,8 +60,6 @@ public class TestPersona {
                     "Andrea Contreras",
                     "andrea.contreras@ucn.cl",
                     "Avenida Angamos 123",
-                    911223344,
-                    1234567,
                     "12345678");
 
             Persona persona2 = Persona.builder()
@@ -69,8 +67,6 @@ public class TestPersona {
                     .nombre("Random Person")
                     .email("random.person@gmail.com")
                     .direccion("Random Avenue 123")
-                    .telefonoMovil(912345678)
-                    .telefonoFijo(2233441)
                     .passwd("random123")
                     .build();
 
@@ -104,12 +100,6 @@ public class TestPersona {
             // Testing direccion
             Assertions.assertEquals(persona.getDireccion(), personaDb.getDireccion(),
                     "Direccion not equals");
-            // Testing telefono movil
-            Assertions.assertEquals(persona.getTelefonoMovil(), personaDb.getTelefonoMovil(),
-                    "Telefono Movil not equals");
-            // Testing telefono fijo
-            Assertions.assertEquals(persona.getTelefonoFijo(), personaDb.getTelefonoFijo(),
-                    "Telefono Fijo not equals");
             // Testing password
             Assertions.assertEquals(persona.getPasswd(), personaDb.getPasswd(),
                     "Password not equals");

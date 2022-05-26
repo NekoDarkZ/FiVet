@@ -19,10 +19,7 @@ package cl.ucn.disc.pdis.fivet.orm;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 
@@ -43,7 +40,8 @@ public abstract class BaseEntity {
      * the deleted at date and time.
      */
     @Getter
-    @DatabaseField
+    @Setter
+    @DatabaseField(canBeNull = true)
     protected ZonedDateTime deletedAt;
 
     /**

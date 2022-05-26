@@ -12,10 +12,23 @@ message Persona {
   string rut = 1;
   string nombre = 2;
   string email = 3;
+  string direccion = 4;
+}
+
+message FichaMedica {
+  string numero = 1;
+  string nombrePaciente = 2;
+  string nombreDueno = 3;
 }
 
 service FivetService {
   rpc autenticar(Credencial) returns (Persona) {}
 
-  //rpc registrarControl(control, numeroFicha) returns (Ficha) {}
+  //rpc registrarControl(Control, numeroFicha) returns (Ficha) {}
+
+  //rpc obtenerFicha(numeroFicha) returns Ficha {}
+
+  //rpc buscarFicha(q) returns Ficha[] / List <Ficha> {}
+
+  rpc crearFicha(FichaMedica) returns (FichaMedica) {}
 }

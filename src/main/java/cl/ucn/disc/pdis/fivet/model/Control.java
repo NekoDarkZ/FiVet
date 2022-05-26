@@ -20,10 +20,15 @@ package cl.ucn.disc.pdis.fivet.model;
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.ZonedDateTime;
 
 /**
- * Persona Class.
+ * The Control class
  *
  * @author Sebastian Murquio-Castillo
  */
@@ -31,42 +36,54 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @DatabaseTable
-public final class Persona extends BaseEntity {
+public final class Control extends BaseEntity {
 
     /**
-     * The RUT.
-     */
-    @Getter
-    @DatabaseField(canBeNull = false, unique = true)
-    private String rut;
-
-    /**
-     * The Nombre.
+     * The fecha of Control
      */
     @Getter
     @DatabaseField(canBeNull = false)
-    private String nombre;
+    private ZonedDateTime fecha;
 
     /**
-     * The Email.
+     * The temperature of the Patient
      */
     @Getter
-    @DatabaseField(canBeNull = false, unique = true)
-    private String email;
-
-    /**
-     * The Direccion.
-     */
-    @Getter
-    @DatabaseField(canBeNull = true)
-    private String direccion;
-
-    /**
-     * The password.
-     */
-    @Getter
-    @Setter
     @DatabaseField(canBeNull = false)
-    private String passwd;
+    private Double temperatura;
 
+    /**
+     * The peso of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private Double peso;
+
+    /**
+     * The altura of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private Double altura;
+
+    /**
+     * The diagnostico of the Patient
+     */
+    @Getter
+    @DatabaseField(canBeNull = false)
+    private String diagnostico;
+
+    /**
+     * The Veterinarian who diagnosed the patient
+     */
+    @Getter
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "veterinario", canBeNull = false)
+    private Persona veterinario;
+
+    /**
+     * The Ficha Medica
+     */
+    @Getter
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "fichamedica_id")
+    private FichaMedica fichaMedica;
 }

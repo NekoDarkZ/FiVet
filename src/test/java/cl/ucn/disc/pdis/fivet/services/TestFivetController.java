@@ -52,9 +52,9 @@ public final class TestFivetController {
         DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
 
         // The driver connection
-        String databaseUrl = "jdbc:h2:mem:fivet";
+        // String databaseUrl = "jdbc:h2:mem:fivet";
         // String databaseUrl = "jdbc:postgresql:fivet";
-        // String databaseUrl = "jdbc:sqlite:fivet.db";
+        String databaseUrl = "jdbc:sqlite:fivet.db";
         // String databaseUrl = "jdbc:mysql://localhost:3306/fivet";
 
         log.debug("Building the Connection, using: {}", databaseUrl);
@@ -80,8 +80,6 @@ public final class TestFivetController {
                     .nombre("Random Person")
                     .email("random.person@gmail.com")
                     .direccion("Random Avenue 123")
-                    .telefonoMovil(912345678)
-                    .telefonoFijo(2233441)
                     .build();
             fivetController.add(persona, "soyunacontraseña");
             log.debug("To db: {}", ToStringBuilder.reflectionToString(persona, ToStringStyle.MULTI_LINE_STYLE));
@@ -93,25 +91,33 @@ public final class TestFivetController {
             String login = "123456780";
             String pass = "soyunacontraseña";
 
-            Optional<Persona> persona = fivetController.autenticar(login, pass);
+            Optional<Persona> persona = fivetController.authenticate(login, pass);
             Assertions.assertTrue(persona.isPresent(), "The persona was Empty");
 
             // With a person that not exists in the controller
             login = "0";
             pass = "soyunacontraseña";
-            persona = fivetController.autenticar(login, pass);
+            persona = fivetController.authenticate(login, pass);
             Assertions.assertFalse(persona.isPresent(), "The persona was not Empty");
 
             // With incorrect password
             login = "123456780";
             pass = "incorrect";
-            persona = fivetController.autenticar(login, pass);
+            persona = fivetController.authenticate(login, pass);
             Assertions.assertFalse(persona.isPresent(), "The persona was not Empty");
 
         }
 
+        //Soft Delete
+        {
+            // Soft delete a person by id
+            Persona persona = fivetController.retrieveByLogin("123456780").orElseThrow();
+            fivetController.delete(persona.getId());
+
+        }
+
         // Drop the database
-        TableUtils.dropTable(cs, Persona.class, true);
+        //TableUtils.dropTable(cs, Persona.class, true);
 
         log.debug("Done.");
     }

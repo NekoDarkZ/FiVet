@@ -62,4 +62,9 @@ public interface DAO <T extends BaseEntity> {
      * Delete a T with id.
      */
     void delete(Integer id);
+
+    /**
+     * Drops and Creates a Table
+     */
+    void dropAndCreateTable();
 }

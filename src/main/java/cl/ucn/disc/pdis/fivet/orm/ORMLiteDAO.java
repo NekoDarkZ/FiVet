@@ -17,10 +17,13 @@
 
 package cl.ucn.disc.pdis.fivet.orm;
 
+import cl.ucn.disc.pdis.fivet.model.Persona;
 import com.google.common.collect.Lists;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +47,11 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     private final Dao<T, Integer> theDao;
 
     /**
+     * The ConnectionSource
+     */
+    private static ConnectionSource cs;
+
+    /**
      * The Constructor of ORMLiteDAO.
      * @param cs the connection to the database.
      * @param clazz the type of T.
@@ -51,6 +59,18 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     @SneakyThrows(SQLException.class)
     public ORMLiteDAO(@NonNull final ConnectionSource cs,@NonNull final Class<T> clazz){
         this.theDao = DaoManager.createDao(cs,clazz);
+        ORMLiteDAO.cs = cs;
+    }
+
+    /**
+     * Build a ConnectionSource to use
+     * @param s the database url
+     * @return the ConnectionSource
+     */
+    @SneakyThrows
+    public static ConnectionSource buildConnectionSource(String s) {
+        cs = new JdbcConnectionSource(s);
+        return cs;
     }
 
     /**
@@ -169,5 +189,15 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
                 throw new SQLException("Rows updated != 1");
             }
         }
+    }
+
+    /**
+     * Drops and Creates a Table
+     */
+    @Override
+    @SneakyThrows
+    public void dropAndCreateTable() {
+        TableUtils.dropTable(cs, theDao.getDataClass(), true);
+        TableUtils.createTable(cs, theDao.getDataClass());
     }
 }
