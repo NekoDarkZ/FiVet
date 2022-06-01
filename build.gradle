@@ -34,44 +34,44 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
     // Lombok
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // Logger
     testImplementation 'org.slf4j:slf4j-api:1.7.36'
     testImplementation 'ch.qos.logback:logback-classic:1.2.11'
 
-    // ORM Lite
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // ORMLite
     implementation 'com.j256.ormlite:ormlite-core:6.1'
     implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
 
     // Database Driver
-    implementation 'com.h2database:h2:2.1.210'
+    implementation 'com.h2database:h2:2.1.212'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation 'org.postgresql:postgresql:42.3.4'
-    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'mysql:mysql-connector-java:8.0.29'
 
     // Logger
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
 
-    // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-
     // Commons Lang
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     // gRPC
-    runtimeOnly 'io.grpc:grpc-netty-shaded:1.45.1'
-    implementation 'io.grpc:grpc-protobuf:1.45.1'
-    implementation 'io.grpc:grpc-stub:1.45.1'
+    runtimeOnly 'io.grpc:grpc-netty-shaded:1.46.0'
+    implementation 'io.grpc:grpc-protobuf:1.46.0'
+    implementation 'io.grpc:grpc-stub:1.46.0'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
 
-    // Bcrypt implementation
+    // Crypto Library
     implementation 'org.springframework.security:spring-security-crypto:5.6.3'
     runtimeOnly 'org.bouncycastle:bcprov-jdk15on:1.70'
-    runtimeOnly 'org.springframework:spring-jcl:5.3.19'
+    runtimeOnly 'org.springframework:spring-jcl:5.3.20'
 
 }
 
@@ -79,12 +79,15 @@ protobuf {
     protoc {
         artifact = 'com.google.protobuf:protoc:3.20.0'
     }
+    generatedFilesBaseDir = "$projectDir/src/generated"
+    clean {
+        delete generatedFilesBaseDir
+    }
     plugins {
         grpc {
             artifact = 'io.grpc:protoc-gen-grpc-java:1.45.1'
         }
     }
-
     generateProtoTasks {
         all()*.plugins {
             grpc {}
@@ -92,12 +95,13 @@ protobuf {
     }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs 'build/generated/source/proto/main/grpc'
-            srcDirs 'build/generated/source/proto/main/java'
-        }
+// Inform IDEs like IntelliJ IDEA, Eclipse or NetBeans about the generated code.
+idea {
+    module {
+        sourceDirs += file("src/generated/main/java")
+        sourceDirs += file("src/generated/main/grpc")
+        generatedSourceDirs += file("src/generated/main/java")
+        generatedSourceDirs += file("src/generated/main/grpc")
     }
 }
 

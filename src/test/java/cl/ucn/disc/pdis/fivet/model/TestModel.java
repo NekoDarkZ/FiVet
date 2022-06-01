@@ -18,10 +18,7 @@
 package cl.ucn.disc.pdis.fivet.model;
 
 import cl.ucn.disc.pdis.fivet.orm.DAO;
-import cl.ucn.disc.pdis.fivet.orm.LocalDateType;
 import cl.ucn.disc.pdis.fivet.orm.ORMLiteDAO;
-import cl.ucn.disc.pdis.fivet.orm.ZonedDateTimeType;
-import com.j256.ormlite.field.DataPersisterManager;
 import com.j256.ormlite.support.ConnectionSource;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
@@ -35,6 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 /**
  * The Test of Model
@@ -51,11 +49,6 @@ public final class TestModel {
     @Test
     public void testModel() {
         log.info("Starting the test...");
-
-        log.debug("Registering the ZonedDateTimeType...");
-        DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
-        log.debug("Registering the LocalDateType...");
-        DataPersisterManager.registerDataPersisters(LocalDateType.INSTANCE);
 
         // The password encoder
         PasswordEncoder passwordEncoder = new Argon2PasswordEncoder();
@@ -93,6 +86,19 @@ public final class TestModel {
             Assertions.assertNotNull(persona.getId(), "ID was null");
         }
 
+        // Getting attributes from Persona
+        {
+           Optional<Persona> persona = Optional.of(daoPersona.get(1).orElseThrow());
+           Assertions.assertNotNull(persona.get().getRut(), "Rut was null");
+           Assertions.assertNotNull(persona.get().getNombre(), "Nombre was null");
+           Assertions.assertNotNull(persona.get().getDireccion(), "Direccion was null");
+           Assertions.assertNotNull(persona.get().getEmail(), "Email was null");
+           Assertions.assertNotNull(persona.get().getPasswd(), "Password was null");
+           Assertions.assertNotNull(persona.get().getId(), "ID was null");
+           Assertions.assertNotNull(persona.get().getCreatedAt(), "CreatedAt was null");
+           Assertions.assertNull(persona.get().getDeletedAt(), "CreatedAt wasnt null");
+        }
+
         // Retrieve a Persona
         {
             Persona persona = daoPersona.get(1).orElseThrow();
@@ -117,6 +123,20 @@ public final class TestModel {
             }
         }
 
+        // Getting attributes from FichaMedica
+        {
+            FichaMedica fichaMedica = daoFichaMedica.get(1).orElseThrow();
+            Assertions.assertNotNull(fichaMedica.getId(), "ID was null");
+            Assertions.assertNotNull(fichaMedica.getNumero(), "Numero was null");
+            Assertions.assertNotNull(fichaMedica.getNombrePaciente(), "NombrePaciente was null");
+            Assertions.assertNotNull(fichaMedica.getEspecie(), "Especie was null");
+            Assertions.assertNotNull(fichaMedica.getFechaNacimiento(), "FechaNacimiento was null");
+            Assertions.assertNotNull(fichaMedica.getRaza(), "Raza was null");
+            Assertions.assertNotNull(fichaMedica.getColor(), "Color was null");
+            Assertions.assertNotNull(fichaMedica.getTipo(), "Tipo was null");
+            Assertions.assertNotNull(fichaMedica.getSexo(), "Sexo was null");
+        }
+
         // Retrieve a FichaMedica
         {
             FichaMedica fichaMedica = daoFichaMedica.get(1).orElseThrow();
@@ -136,7 +156,21 @@ public final class TestModel {
                         .veterinario(fichaMedica.getDuenio())
                         .build();
                 fichaMedica.add(control);
+
+
+
+            // Getting attributes from Control
+                
+                Assertions.assertNotNull(control.getId(), "ID was null");
+                Assertions.assertNotNull(control.getFecha(), "Fecha was null");
+                Assertions.assertNotNull(control.getTemperatura(), "Temperatura was null");
+                Assertions.assertNotNull(control.getPeso(), "Peso was null");
+                Assertions.assertNotNull(control.getAltura(), "Altura was null");
+                Assertions.assertNotNull(control.getDiagnostico(), "Diagnostico was null");
+                Assertions.assertNotNull(control.getVeterinario(), "Veterinario was null");
+                Assertions.assertNotNull(control.getFichaMedica(), "FichaMedica was null");
             }
+
         }
 
         // Retrieve a FichaMedica with Control

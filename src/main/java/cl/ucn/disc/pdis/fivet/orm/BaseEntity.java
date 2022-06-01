@@ -28,6 +28,9 @@ import java.time.ZonedDateTime;
  *
  * @author Sebastián Murquio-Castillo
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@DatabaseTable
 public abstract class BaseEntity {
     /**
      * Id of the entity.
@@ -41,7 +44,7 @@ public abstract class BaseEntity {
      */
     @Getter
     @Setter
-    @DatabaseField(canBeNull = true)
+    @DatabaseField
     protected ZonedDateTime deletedAt;
 
     /**

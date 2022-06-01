@@ -21,6 +21,7 @@ import cl.ucn.disc.pdis.fivet.model.Persona;
 import com.google.common.collect.Lists;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.field.DataPersisterManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -40,6 +41,14 @@ import java.util.Optional;
  */
 @Slf4j
 public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
+
+    // Initialize
+    static {
+        log.debug("Registering the ZonedDateTimeType...");
+        DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
+        log.debug("Registering the LocalDateType...");
+        DataPersisterManager.registerDataPersisters(LocalDateType.INSTANCE);
+    }
 
     /**
      * The real DAO (connection to ORMlite DAO)

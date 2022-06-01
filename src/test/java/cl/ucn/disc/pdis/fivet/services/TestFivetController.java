@@ -87,12 +87,19 @@ public final class TestFivetController {
 
         // Log in...
         {
-            // Using the following credentials
+            // Using rut as login
             String login = "123456780";
             String pass = "soyunacontraseña";
 
             Optional<Persona> persona = fivetController.authenticate(login, pass);
             Assertions.assertTrue(persona.isPresent(), "The persona was Empty");
+
+            // Using email as login
+            login = "random.person@gmail.com";
+            pass = "soyunacontraseña";
+
+            Optional<Persona> persona2 = fivetController.authenticate(login, pass);
+            Assertions.assertTrue(persona2.isPresent(), "The persona was Empty");
 
             // With a person that not exists in the controller
             login = "0";
@@ -117,7 +124,7 @@ public final class TestFivetController {
         }
 
         // Drop the database
-        //TableUtils.dropTable(cs, Persona.class, true);
+        TableUtils.dropTable(cs, Persona.class, true);
 
         log.debug("Done.");
     }

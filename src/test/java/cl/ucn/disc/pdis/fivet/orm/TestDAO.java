@@ -53,9 +53,6 @@ public final class TestDAO {
     void theMain(){
         log.debug("Starting the MainTest...");
 
-        log.debug("Registering the ZonedDateTimeType...");
-        DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
-
         // The driver connection
         String databaseUrl = "jdbc:h2:mem:fivet";
         // String databaseUrl = "jdbc:postgresql:fivet";
@@ -65,7 +62,7 @@ public final class TestDAO {
         log.debug("Building the Connection, using: {}", databaseUrl);
         // Build the Connection with auto close (clean up)
         @Cleanup
-        ConnectionSource cs = new JdbcConnectionSource(databaseUrl);
+        ConnectionSource cs = ORMLiteDAO.buildConnectionSource(databaseUrl);
 
         log.debug("Dropping the tables...");
         // Drop the database
@@ -100,6 +97,14 @@ public final class TestDAO {
                     .build();
             dao.save(theEntityB);
             log.debug("To db: {}", ToStringBuilder.reflectionToString(theEntityB, ToStringStyle.MULTI_LINE_STYLE));
+
+            TheEntity theEntityC = TheEntity.builder()
+                    .theString("The String C")
+                    .theInteger(512)
+                    .theDouble(512.0)
+                    .theBoolean(Boolean.FALSE)
+                    .build();
+            dao.save(theEntityC);
         }
 
         // Retrieve..
@@ -114,7 +119,7 @@ public final class TestDAO {
             });
         }
 
-        // Retrieve using Atribute...
+        // Retrieve using Attribute...
         {
             Optional<TheEntity> theEntity = dao.get("theinteger", 1024);
             Assertions.assertTrue(theEntity.isPresent(), "The Entity was null");
@@ -143,17 +148,21 @@ public final class TestDAO {
 
             // Getting an Optional Empty
             Optional<TheEntity> t2 = dao.get(10);
-            Assertions.assertThrows(NoSuchElementException.class, () ->{
-                dao.delete(t2.get());});
+            Assertions.assertThrows(NoSuchElementException.class, () -> t2.ifPresent(dao::delete));
 
             // with delete(id)
             dao.delete(2);
 
-            Optional<TheEntity> theEntity3 = dao.get(2);
-            Assertions.assertFalse(theEntity3.isPresent(), "The entity with id 2 was null");
+            Optional<TheEntity> theEntity2 = dao.get(2);
+            Assertions.assertFalse(theEntity2.isPresent(), "The entity with id 2 was null");
 
             Assertions.assertThrows(NoSuchElementException.class, () ->{
-                dao.delete(dao.get(10).get().getId());});
+                if (dao.get(10).isEmpty()) dao.delete(dao.get(10).get().getId());});
+
+            // With setDelete
+            Optional<TheEntity> theEntity3 = dao.get(3);
+            theEntity3.ifPresent(theEntity -> theEntity.setDeletedAt(ZonedDateTime.now()));
+            Assertions.assertFalse(dao.get(3).isEmpty(), "The entity with id 3 was null");
         }
 
         // Retrieve...

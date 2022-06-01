@@ -3,32 +3,56 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "cl.ucn.disc.pdis.fivet.grpc";
 
-message Credencial {
+message AuthenticateReq {
   string login = 1;
   string password = 2;
 }
 
-message Persona {
+message AddControlReq {
+  string control = 1;
+  string numeroFicha = 2;
+}
+
+message RetrieveFichaReq {
+  string ficha = 1;
+}
+
+message SearchFichaReq {
+  string q = 1;
+}
+
+message AddFichaReq {
+  string ficha = 1;
+}
+
+message PersonaReply {
   string rut = 1;
   string nombre = 2;
   string email = 3;
   string direccion = 4;
 }
 
-message FichaMedica {
+message FichaReply {
   string numero = 1;
   string nombrePaciente = 2;
-  string nombreDueno = 3;
+ // string especie = 3;
+ // string fechaNacimiento = 4;
+ // string raza = 5;
+ // string color = 6;
+ // string tipo = 7;
+ // string sexo = 8;
+  string duenio = 3;
+ // string controles = 10;
 }
 
 service FivetService {
-  rpc autenticar(Credencial) returns (Persona) {}
+  rpc authenticate(AuthenticateReq) returns (PersonaReply) {}
 
-  //rpc registrarControl(Control, numeroFicha) returns (Ficha) {}
+  rpc addControl(AddControlReq) returns (FichaReply) {}
 
-  //rpc obtenerFicha(numeroFicha) returns Ficha {}
+  rpc retrieveFicha(RetrieveFichaReq) returns (FichaReply) {}
 
-  //rpc buscarFicha(q) returns Ficha[] / List <Ficha> {}
+  rpc searchFicha(SearchFichaReq) returns (stream FichaReply) {}
 
-  rpc crearFicha(FichaMedica) returns (FichaMedica) {}
+  rpc addFicha(AddFichaReq) returns (FichaReply) {}
 }

@@ -1,8 +1,6 @@
 package cl.ucn.disc.pdis.fivet;
 
-import cl.ucn.disc.pdis.fivet.grpc.Credencial;
-import cl.ucn.disc.pdis.fivet.grpc.FivetServiceGrpc;
-import cl.ucn.disc.pdis.fivet.grpc.Persona;
+import cl.ucn.disc.pdis.fivet.grpc.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -32,9 +30,9 @@ public final class FivetClient {
         FivetServiceGrpc.FivetServiceBlockingStub stub = FivetServiceGrpc.newBlockingStub(channel);
 
         try {
-            Persona persona = stub.autenticar(Credencial.newBuilder()
-                    .setLogin("sebastian.murquio@alumnos.ucn.cl")
-                    .setPassword("smurquio123")
+            PersonaReply persona = stub.authenticate(AuthenticateReq.newBuilder()
+                            .setLogin("sebastian.murquio@alumnos.ucn.cl")
+                            .setPassword("seba1234")
                     .build());
             log.debug("Persona: {}", persona);
         } catch (StatusRuntimeException e) {

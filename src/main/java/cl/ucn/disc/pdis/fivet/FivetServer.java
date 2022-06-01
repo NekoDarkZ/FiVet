@@ -18,20 +18,14 @@
 
 package cl.ucn.disc.pdis.fivet;
 
-import cl.ucn.disc.pdis.fivet.grpc.Credencial;
-import cl.ucn.disc.pdis.fivet.grpc.FivetServiceGrpc;
-import cl.ucn.disc.pdis.fivet.grpc.Persona;
-import cl.ucn.disc.pdis.fivet.orm.ZonedDateTimeType;
+import cl.ucn.disc.pdis.fivet.grpc.*;
 import cl.ucn.disc.pdis.fivet.services.FivetController;
 import cl.ucn.disc.pdis.fivet.services.FivetControllerImpl;
-import com.j256.ormlite.field.DataPersisterManager;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -48,9 +42,6 @@ public final class FivetServer {
      */
     @SneakyThrows
     public static void main(String[] args) {
-
-        log.debug("Registering the ZonedDateTimeType...");
-        DataPersisterManager.registerDataPersisters(ZonedDateTimeType.INSTANCE);
 
         log.debug("Building the FivetServiceImpl ...");
         FivetServiceImpl fivetService = new FivetServiceImpl("jdbc:h2:mem:fivet");
@@ -95,14 +86,14 @@ public final class FivetServer {
          * @param responseObserver StreamObserver of Persona
          */
         @Override
-        public void autenticar(Credencial request, StreamObserver<Persona> responseObserver) {
+        public void authenticate(AuthenticateReq request, StreamObserver<PersonaReply> responseObserver) {
 
             // Retrieve from Controller
             Optional<cl.ucn.disc.pdis.fivet.model.Persona> persona2 = this.fivetController.retrieveByLogin(
                     request.getLogin());
             if (persona2.isPresent()) {
                 // Return the observer
-                responseObserver.onNext(Persona.newBuilder()
+                responseObserver.onNext(PersonaReply.newBuilder()
                         .setRut(persona2.get().getRut())
                         .setNombre(persona2.get().getNombre())
                         .setEmail(persona2.get().getEmail())
@@ -110,7 +101,7 @@ public final class FivetServer {
                         .build());
                 responseObserver.onCompleted();
             } else {
-                responseObserver.onNext(Persona.newBuilder()
+                responseObserver.onNext(PersonaReply.newBuilder()
                         .setRut("199682954")
                         .setNombre("Sebastian Murquio Castillo")
                         .setEmail("sebastian.murquio@alumnos.ucn.cl")

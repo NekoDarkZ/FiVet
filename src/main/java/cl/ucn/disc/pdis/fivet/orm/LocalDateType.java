@@ -65,6 +65,7 @@ public final class LocalDateType extends BaseDataType {
         return DEFAULT_WIDTH;
     }
 
+
     /**
      * Convert a default string object and return the appropriate argument to a SQL insert or update statement.
      */
