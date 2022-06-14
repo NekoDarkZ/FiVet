@@ -4,27 +4,26 @@
 package cl.ucn.disc.pdis.fivet.grpc;
 
 /**
- * Protobuf type {@code AuthenticateReq}
+ * Protobuf type {@code SearchFichaMedicaReq}
  */
-public final class AuthenticateReq extends
+public final class SearchFichaMedicaReq extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:AuthenticateReq)
-    AuthenticateReqOrBuilder {
+    // @@protoc_insertion_point(message_implements:SearchFichaMedicaReq)
+    SearchFichaMedicaReqOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use AuthenticateReq.newBuilder() to construct.
-  private AuthenticateReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use SearchFichaMedicaReq.newBuilder() to construct.
+  private SearchFichaMedicaReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private AuthenticateReq() {
-    login_ = "";
-    password_ = "";
+  private SearchFichaMedicaReq() {
+    query_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new AuthenticateReq();
+    return new SearchFichaMedicaReq();
   }
 
   @java.lang.Override
@@ -32,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private AuthenticateReq(
+  private SearchFichaMedicaReq(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -53,13 +52,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            login_ = s;
-            break;
-          }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            password_ = s;
+            query_ = s;
             break;
           }
           default: {
@@ -85,87 +78,49 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_AuthenticateReq_descriptor;
+    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_SearchFichaMedicaReq_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_AuthenticateReq_fieldAccessorTable
+    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_SearchFichaMedicaReq_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.class, cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.Builder.class);
+            cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.class, cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.Builder.class);
   }
 
-  public static final int LOGIN_FIELD_NUMBER = 1;
-  private volatile java.lang.Object login_;
+  public static final int QUERY_FIELD_NUMBER = 1;
+  private volatile java.lang.Object query_;
   /**
-   * <code>string login = 1;</code>
-   * @return The login.
+   * <code>string query = 1;</code>
+   * @return The query.
    */
   @java.lang.Override
-  public java.lang.String getLogin() {
-    java.lang.Object ref = login_;
+  public java.lang.String getQuery() {
+    java.lang.Object ref = query_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      login_ = s;
+      query_ = s;
       return s;
     }
   }
   /**
-   * <code>string login = 1;</code>
-   * @return The bytes for login.
+   * <code>string query = 1;</code>
+   * @return The bytes for query.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getLoginBytes() {
-    java.lang.Object ref = login_;
+      getQueryBytes() {
+    java.lang.Object ref = query_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      login_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int PASSWORD_FIELD_NUMBER = 2;
-  private volatile java.lang.Object password_;
-  /**
-   * <code>string password = 2;</code>
-   * @return The password.
-   */
-  @java.lang.Override
-  public java.lang.String getPassword() {
-    java.lang.Object ref = password_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      password_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string password = 2;</code>
-   * @return The bytes for password.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPasswordBytes() {
-    java.lang.Object ref = password_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      password_ = b;
+      query_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -186,11 +141,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(login_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, login_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(query_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, query_);
     }
     unknownFields.writeTo(output);
   }
@@ -201,11 +153,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(login_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, login_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(password_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(query_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, query_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -217,15 +166,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq)) {
+    if (!(obj instanceof cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq)) {
       return super.equals(obj);
     }
-    cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq other = (cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq) obj;
+    cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq other = (cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq) obj;
 
-    if (!getLogin()
-        .equals(other.getLogin())) return false;
-    if (!getPassword()
-        .equals(other.getPassword())) return false;
+    if (!getQuery()
+        .equals(other.getQuery())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -237,78 +184,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + LOGIN_FIELD_NUMBER;
-    hash = (53 * hash) + getLogin().hashCode();
-    hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
-    hash = (53 * hash) + getPassword().hashCode();
+    hash = (37 * hash) + QUERY_FIELD_NUMBER;
+    hash = (53 * hash) + getQuery().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(byte[] data)
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(java.io.InputStream input)
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseDelimitedFrom(java.io.InputStream input)
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseDelimitedFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -321,7 +266,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq prototype) {
+  public static Builder newBuilder(cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -337,26 +282,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code AuthenticateReq}
+   * Protobuf type {@code SearchFichaMedicaReq}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:AuthenticateReq)
-      cl.ucn.disc.pdis.fivet.grpc.AuthenticateReqOrBuilder {
+      // @@protoc_insertion_point(builder_implements:SearchFichaMedicaReq)
+      cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReqOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_AuthenticateReq_descriptor;
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_SearchFichaMedicaReq_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_AuthenticateReq_fieldAccessorTable
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_SearchFichaMedicaReq_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.class, cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.Builder.class);
+              cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.class, cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.Builder.class);
     }
 
-    // Construct using cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.newBuilder()
+    // Construct using cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -374,9 +319,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      login_ = "";
-
-      password_ = "";
+      query_ = "";
 
       return this;
     }
@@ -384,17 +327,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_AuthenticateReq_descriptor;
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_SearchFichaMedicaReq_descriptor;
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq getDefaultInstanceForType() {
-      return cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.getDefaultInstance();
+    public cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq getDefaultInstanceForType() {
+      return cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.getDefaultInstance();
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq build() {
-      cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq result = buildPartial();
+    public cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq build() {
+      cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -402,10 +345,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq buildPartial() {
-      cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq result = new cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq(this);
-      result.login_ = login_;
-      result.password_ = password_;
+    public cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq buildPartial() {
+      cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq result = new cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq(this);
+      result.query_ = query_;
       onBuilt();
       return result;
     }
@@ -444,22 +386,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq) {
-        return mergeFrom((cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq)other);
+      if (other instanceof cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq) {
+        return mergeFrom((cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq other) {
-      if (other == cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq.getDefaultInstance()) return this;
-      if (!other.getLogin().isEmpty()) {
-        login_ = other.login_;
-        onChanged();
-      }
-      if (!other.getPassword().isEmpty()) {
-        password_ = other.password_;
+    public Builder mergeFrom(cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq other) {
+      if (other == cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq.getDefaultInstance()) return this;
+      if (!other.getQuery().isEmpty()) {
+        query_ = other.query_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -477,11 +415,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq parsedMessage = null;
+      cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq) e.getUnfinishedMessage();
+        parsedMessage = (cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -491,154 +429,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object login_ = "";
+    private java.lang.Object query_ = "";
     /**
-     * <code>string login = 1;</code>
-     * @return The login.
+     * <code>string query = 1;</code>
+     * @return The query.
      */
-    public java.lang.String getLogin() {
-      java.lang.Object ref = login_;
+    public java.lang.String getQuery() {
+      java.lang.Object ref = query_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        login_ = s;
+        query_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string login = 1;</code>
-     * @return The bytes for login.
+     * <code>string query = 1;</code>
+     * @return The bytes for query.
      */
     public com.google.protobuf.ByteString
-        getLoginBytes() {
-      java.lang.Object ref = login_;
+        getQueryBytes() {
+      java.lang.Object ref = query_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        login_ = b;
+        query_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string login = 1;</code>
-     * @param value The login to set.
+     * <code>string query = 1;</code>
+     * @param value The query to set.
      * @return This builder for chaining.
      */
-    public Builder setLogin(
+    public Builder setQuery(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      login_ = value;
+      query_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string login = 1;</code>
+     * <code>string query = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearLogin() {
+    public Builder clearQuery() {
       
-      login_ = getDefaultInstance().getLogin();
+      query_ = getDefaultInstance().getQuery();
       onChanged();
       return this;
     }
     /**
-     * <code>string login = 1;</code>
-     * @param value The bytes for login to set.
+     * <code>string query = 1;</code>
+     * @param value The bytes for query to set.
      * @return This builder for chaining.
      */
-    public Builder setLoginBytes(
+    public Builder setQueryBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      login_ = value;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object password_ = "";
-    /**
-     * <code>string password = 2;</code>
-     * @return The password.
-     */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        password_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @return The bytes for password.
-     */
-    public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @param value The password to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPassword(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      password_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPassword() {
-      
-      password_ = getDefaultInstance().getPassword();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string password = 2;</code>
-     * @param value The bytes for password to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPasswordBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      password_ = value;
+      query_ = value;
       onChanged();
       return this;
     }
@@ -655,41 +517,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:AuthenticateReq)
+    // @@protoc_insertion_point(builder_scope:SearchFichaMedicaReq)
   }
 
-  // @@protoc_insertion_point(class_scope:AuthenticateReq)
-  private static final cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:SearchFichaMedicaReq)
+  private static final cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq();
+    DEFAULT_INSTANCE = new cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq();
   }
 
-  public static cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq getDefaultInstance() {
+  public static cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AuthenticateReq>
-      PARSER = new com.google.protobuf.AbstractParser<AuthenticateReq>() {
+  private static final com.google.protobuf.Parser<SearchFichaMedicaReq>
+      PARSER = new com.google.protobuf.AbstractParser<SearchFichaMedicaReq>() {
     @java.lang.Override
-    public AuthenticateReq parsePartialFrom(
+    public SearchFichaMedicaReq parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new AuthenticateReq(input, extensionRegistry);
+      return new SearchFichaMedicaReq(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<AuthenticateReq> parser() {
+  public static com.google.protobuf.Parser<SearchFichaMedicaReq> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AuthenticateReq> getParserForType() {
+  public com.google.protobuf.Parser<SearchFichaMedicaReq> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public cl.ucn.disc.pdis.fivet.grpc.AuthenticateReq getDefaultInstanceForType() {
+  public cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -3,8 +3,8 @@
 
 package cl.ucn.disc.pdis.fivet.grpc;
 
-public interface PersonaReplyOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:PersonaReply)
+public interface AddPersonaReqOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:AddPersonaReq)
     com.google.protobuf.MessageOrBuilder {
 
   /**

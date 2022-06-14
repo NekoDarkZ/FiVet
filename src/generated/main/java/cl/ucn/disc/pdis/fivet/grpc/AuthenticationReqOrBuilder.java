@@ -3,8 +3,8 @@
 
 package cl.ucn.disc.pdis.fivet.grpc;
 
-public interface AuthenticateReqOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:AuthenticateReq)
+public interface AuthenticationReqOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:AuthenticationReq)
     com.google.protobuf.MessageOrBuilder {
 
   /**

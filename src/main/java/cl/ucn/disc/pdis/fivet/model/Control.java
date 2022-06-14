@@ -20,10 +20,7 @@ package cl.ucn.disc.pdis.fivet.model;
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 
@@ -77,6 +74,7 @@ public final class Control extends BaseEntity {
      * The Veterinarian who diagnosed the patient
      */
     @Getter
+    @Setter
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "veterinario", canBeNull = false)
     private Persona veterinario;
 

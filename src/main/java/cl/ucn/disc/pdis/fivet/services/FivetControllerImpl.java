@@ -17,6 +17,8 @@
 
 package cl.ucn.disc.pdis.fivet.services;
 
+import cl.ucn.disc.pdis.fivet.model.Control;
+import cl.ucn.disc.pdis.fivet.model.FichaMedica;
 import cl.ucn.disc.pdis.fivet.model.Persona;
 import cl.ucn.disc.pdis.fivet.orm.DAO;
 import cl.ucn.disc.pdis.fivet.orm.ORMLiteDAO;
@@ -26,7 +28,6 @@ import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -40,9 +41,19 @@ import java.util.Optional;
 public class FivetControllerImpl implements FivetController {
 
     /**
-     * The Dao.
+     * The Dao of Persona.
      */
     private final DAO<Persona> daoPersona;
+
+    /**
+     * The Dao of FichaMedica.
+     */
+    private final DAO<FichaMedica> daoFichaMedica;
+
+    /**
+     * The Dao of Control
+     */
+    private final DAO<Control> daoControl;
 
     /**
      * The Hasher.
@@ -58,7 +69,11 @@ public class FivetControllerImpl implements FivetController {
     public FivetControllerImpl(String dbUrl) {
         ConnectionSource cs = new JdbcConnectionSource(dbUrl);
         this.daoPersona = new ORMLiteDAO<>(cs,Persona.class);
+        this.daoFichaMedica = new ORMLiteDAO<>(cs,FichaMedica.class);
+        this.daoControl = new ORMLiteDAO<>(cs,Control.class);
         this.daoPersona.dropAndCreateTable();
+        this.daoFichaMedica.dropAndCreateTable();
+        this.daoControl.dropAndCreateTable();
     }
 
     /**
@@ -105,6 +120,17 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
+     * Add a persona to the backend
+     *
+     * @param persona to add
+     */
+    @Override
+    public void addPersona(Persona persona) {
+        // Save Persona
+        this.daoPersona.save(persona);
+    }
+
+    /**
      * Add a Persona into the backend
      *
      * @param persona  to add
@@ -116,6 +142,47 @@ public class FivetControllerImpl implements FivetController {
         persona.setPasswd(PASSWORD_ENCODER.encode(password));
         // Save the persona
         this.daoPersona.save(persona);
+    }
+
+    /**
+     * Add a control to a FichaMedica
+     * @param control to add
+     * @param numeroFichaMedica to attach
+     */
+    @Override
+    public void addControl(@NonNull Control control, int numeroFichaMedica) {
+        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
+        if (fichaMedica.isPresent()) {
+            fichaMedica.get().add(control);
+        } else {
+            log.warn("FichaMedica not found.");
+        }
+    }
+
+    /**
+     * Add a FichaMedica into the backend
+     * @param fichaMedica to add
+     */
+    @Override
+    public void addFichaMedica(@NonNull FichaMedica fichaMedica) {
+        // Save the FichaMedica
+        this.daoFichaMedica.save(fichaMedica);
+    }
+
+    /**
+     * Retrieve a FichaMedica from backend
+     *
+     * @param numeroFichaMedica to retrieve
+     * @return a FichaMedica
+     */
+    @Override
+    public Optional<FichaMedica> retrieveFichaMedica(int numeroFichaMedica) {
+        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
+        if (fichaMedica.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return fichaMedica;
+        }
     }
 
     /**

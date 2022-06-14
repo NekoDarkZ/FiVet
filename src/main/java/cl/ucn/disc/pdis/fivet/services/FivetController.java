@@ -17,6 +17,8 @@
 
 package cl.ucn.disc.pdis.fivet.services;
 
+import cl.ucn.disc.pdis.fivet.model.Control;
+import cl.ucn.disc.pdis.fivet.model.FichaMedica;
 import cl.ucn.disc.pdis.fivet.model.Persona;
 
 import java.util.Optional;
@@ -34,12 +36,38 @@ public interface FivetController {
     Optional<Persona> retrieveByLogin(String login);
 
     /**
-     * autenticar method
+     * authenticate method
      * @param login rut or email to login
      * @param password to login
      * @return a Persona
      */
     Optional<Persona> authenticate(String login, String password);
+
+    /**
+     * Add a persona to the backend
+     * @param persona to add
+     */
+    void addPersona(Persona persona);
+
+    /**
+     * Add a control to a FichaMedica
+     * @param control to add
+     * @param numeroFichaMedica to attach
+     */
+    void addControl(Control control, int numeroFichaMedica);
+
+    /**
+     * Add a FichaMedica into the backend
+     * @param fichaMedica to add
+     */
+    void addFichaMedica(FichaMedica fichaMedica);
+
+    /**
+     * Retrieve a FichaMedica from backend
+     * @param numeroFichaMedica to retrieve
+     * @return a FichaMedica
+     */
+    Optional<FichaMedica> retrieveFichaMedica(int numeroFichaMedica);
 
     /**
      * Add a Persona into the backend

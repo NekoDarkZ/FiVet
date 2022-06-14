@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -148,7 +149,7 @@ public final class TestDAO {
 
             // Getting an Optional Empty
             Optional<TheEntity> t2 = dao.get(10);
-            Assertions.assertThrows(NoSuchElementException.class, () -> t2.ifPresent(dao::delete));
+            Assertions.assertThrows(SQLException.class, () -> dao.delete(10));
 
             // with delete(id)
             dao.delete(2);

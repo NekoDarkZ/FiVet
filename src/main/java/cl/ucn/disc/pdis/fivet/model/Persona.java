@@ -66,7 +66,7 @@ public final class Persona extends BaseEntity {
      */
     @Getter
     @Setter
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = true)
     private String passwd;
 
 }

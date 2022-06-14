@@ -16,8 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AddControlReq() {
-    control_ = "";
-    numeroFicha_ = "";
   }
 
   @java.lang.Override
@@ -51,15 +49,21 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+            cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder subBuilder = null;
+            if (control_ != null) {
+              subBuilder = control_.toBuilder();
+            }
+            control_ = input.readMessage(cl.ucn.disc.pdis.fivet.grpc.ControlEntity.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(control_);
+              control_ = subBuilder.buildPartial();
+            }
 
-            control_ = s;
             break;
           }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 16: {
 
-            numeroFicha_ = s;
+            numeroFichaMedica_ = input.readInt32();
             break;
           }
           default: {
@@ -97,79 +101,40 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int CONTROL_FIELD_NUMBER = 1;
-  private volatile java.lang.Object control_;
+  private cl.ucn.disc.pdis.fivet.grpc.ControlEntity control_;
   /**
-   * <code>string control = 1;</code>
+   * <code>.ControlEntity control = 1;</code>
+   * @return Whether the control field is set.
+   */
+  @java.lang.Override
+  public boolean hasControl() {
+    return control_ != null;
+  }
+  /**
+   * <code>.ControlEntity control = 1;</code>
    * @return The control.
    */
   @java.lang.Override
-  public java.lang.String getControl() {
-    java.lang.Object ref = control_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      control_ = s;
-      return s;
-    }
+  public cl.ucn.disc.pdis.fivet.grpc.ControlEntity getControl() {
+    return control_ == null ? cl.ucn.disc.pdis.fivet.grpc.ControlEntity.getDefaultInstance() : control_;
   }
   /**
-   * <code>string control = 1;</code>
-   * @return The bytes for control.
+   * <code>.ControlEntity control = 1;</code>
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getControlBytes() {
-    java.lang.Object ref = control_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      control_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder getControlOrBuilder() {
+    return getControl();
   }
 
-  public static final int NUMEROFICHA_FIELD_NUMBER = 2;
-  private volatile java.lang.Object numeroFicha_;
+  public static final int NUMEROFICHAMEDICA_FIELD_NUMBER = 2;
+  private int numeroFichaMedica_;
   /**
-   * <code>string numeroFicha = 2;</code>
-   * @return The numeroFicha.
+   * <code>int32 numeroFichaMedica = 2;</code>
+   * @return The numeroFichaMedica.
    */
   @java.lang.Override
-  public java.lang.String getNumeroFicha() {
-    java.lang.Object ref = numeroFicha_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      numeroFicha_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string numeroFicha = 2;</code>
-   * @return The bytes for numeroFicha.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getNumeroFichaBytes() {
-    java.lang.Object ref = numeroFicha_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      numeroFicha_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getNumeroFichaMedica() {
+    return numeroFichaMedica_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -186,11 +151,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(control_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, control_);
+    if (control_ != null) {
+      output.writeMessage(1, getControl());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(numeroFicha_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, numeroFicha_);
+    if (numeroFichaMedica_ != 0) {
+      output.writeInt32(2, numeroFichaMedica_);
     }
     unknownFields.writeTo(output);
   }
@@ -201,11 +166,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(control_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, control_);
+    if (control_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, getControl());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(numeroFicha_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, numeroFicha_);
+    if (numeroFichaMedica_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, numeroFichaMedica_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -222,10 +189,13 @@ private static final long serialVersionUID = 0L;
     }
     cl.ucn.disc.pdis.fivet.grpc.AddControlReq other = (cl.ucn.disc.pdis.fivet.grpc.AddControlReq) obj;
 
-    if (!getControl()
-        .equals(other.getControl())) return false;
-    if (!getNumeroFicha()
-        .equals(other.getNumeroFicha())) return false;
+    if (hasControl() != other.hasControl()) return false;
+    if (hasControl()) {
+      if (!getControl()
+          .equals(other.getControl())) return false;
+    }
+    if (getNumeroFichaMedica()
+        != other.getNumeroFichaMedica()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -237,10 +207,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CONTROL_FIELD_NUMBER;
-    hash = (53 * hash) + getControl().hashCode();
-    hash = (37 * hash) + NUMEROFICHA_FIELD_NUMBER;
-    hash = (53 * hash) + getNumeroFicha().hashCode();
+    if (hasControl()) {
+      hash = (37 * hash) + CONTROL_FIELD_NUMBER;
+      hash = (53 * hash) + getControl().hashCode();
+    }
+    hash = (37 * hash) + NUMEROFICHAMEDICA_FIELD_NUMBER;
+    hash = (53 * hash) + getNumeroFichaMedica();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -374,9 +346,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      control_ = "";
-
-      numeroFicha_ = "";
+      if (controlBuilder_ == null) {
+        control_ = null;
+      } else {
+        control_ = null;
+        controlBuilder_ = null;
+      }
+      numeroFichaMedica_ = 0;
 
       return this;
     }
@@ -404,8 +380,12 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public cl.ucn.disc.pdis.fivet.grpc.AddControlReq buildPartial() {
       cl.ucn.disc.pdis.fivet.grpc.AddControlReq result = new cl.ucn.disc.pdis.fivet.grpc.AddControlReq(this);
-      result.control_ = control_;
-      result.numeroFicha_ = numeroFicha_;
+      if (controlBuilder_ == null) {
+        result.control_ = control_;
+      } else {
+        result.control_ = controlBuilder_.build();
+      }
+      result.numeroFichaMedica_ = numeroFichaMedica_;
       onBuilt();
       return result;
     }
@@ -454,13 +434,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(cl.ucn.disc.pdis.fivet.grpc.AddControlReq other) {
       if (other == cl.ucn.disc.pdis.fivet.grpc.AddControlReq.getDefaultInstance()) return this;
-      if (!other.getControl().isEmpty()) {
-        control_ = other.control_;
-        onChanged();
+      if (other.hasControl()) {
+        mergeControl(other.getControl());
       }
-      if (!other.getNumeroFicha().isEmpty()) {
-        numeroFicha_ = other.numeroFicha_;
-        onChanged();
+      if (other.getNumeroFichaMedica() != 0) {
+        setNumeroFichaMedica(other.getNumeroFichaMedica());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -491,154 +469,152 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object control_ = "";
+    private cl.ucn.disc.pdis.fivet.grpc.ControlEntity control_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        cl.ucn.disc.pdis.fivet.grpc.ControlEntity, cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder> controlBuilder_;
     /**
-     * <code>string control = 1;</code>
+     * <code>.ControlEntity control = 1;</code>
+     * @return Whether the control field is set.
+     */
+    public boolean hasControl() {
+      return controlBuilder_ != null || control_ != null;
+    }
+    /**
+     * <code>.ControlEntity control = 1;</code>
      * @return The control.
      */
-    public java.lang.String getControl() {
-      java.lang.Object ref = control_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        control_ = s;
-        return s;
+    public cl.ucn.disc.pdis.fivet.grpc.ControlEntity getControl() {
+      if (controlBuilder_ == null) {
+        return control_ == null ? cl.ucn.disc.pdis.fivet.grpc.ControlEntity.getDefaultInstance() : control_;
       } else {
-        return (java.lang.String) ref;
+        return controlBuilder_.getMessage();
       }
     }
     /**
-     * <code>string control = 1;</code>
-     * @return The bytes for control.
+     * <code>.ControlEntity control = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getControlBytes() {
-      java.lang.Object ref = control_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        control_ = b;
-        return b;
+    public Builder setControl(cl.ucn.disc.pdis.fivet.grpc.ControlEntity value) {
+      if (controlBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        control_ = value;
+        onChanged();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        controlBuilder_.setMessage(value);
       }
+
+      return this;
     }
     /**
-     * <code>string control = 1;</code>
-     * @param value The control to set.
-     * @return This builder for chaining.
+     * <code>.ControlEntity control = 1;</code>
      */
     public Builder setControl(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      control_ = value;
-      onChanged();
+        cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder builderForValue) {
+      if (controlBuilder_ == null) {
+        control_ = builderForValue.build();
+        onChanged();
+      } else {
+        controlBuilder_.setMessage(builderForValue.build());
+      }
+
       return this;
     }
     /**
-     * <code>string control = 1;</code>
-     * @return This builder for chaining.
+     * <code>.ControlEntity control = 1;</code>
+     */
+    public Builder mergeControl(cl.ucn.disc.pdis.fivet.grpc.ControlEntity value) {
+      if (controlBuilder_ == null) {
+        if (control_ != null) {
+          control_ =
+            cl.ucn.disc.pdis.fivet.grpc.ControlEntity.newBuilder(control_).mergeFrom(value).buildPartial();
+        } else {
+          control_ = value;
+        }
+        onChanged();
+      } else {
+        controlBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.ControlEntity control = 1;</code>
      */
     public Builder clearControl() {
-      
-      control_ = getDefaultInstance().getControl();
-      onChanged();
+      if (controlBuilder_ == null) {
+        control_ = null;
+        onChanged();
+      } else {
+        control_ = null;
+        controlBuilder_ = null;
+      }
+
       return this;
     }
     /**
-     * <code>string control = 1;</code>
-     * @param value The bytes for control to set.
-     * @return This builder for chaining.
+     * <code>.ControlEntity control = 1;</code>
      */
-    public Builder setControlBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+    public cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder getControlBuilder() {
       
-      control_ = value;
       onChanged();
-      return this;
+      return getControlFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.ControlEntity control = 1;</code>
+     */
+    public cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder getControlOrBuilder() {
+      if (controlBuilder_ != null) {
+        return controlBuilder_.getMessageOrBuilder();
+      } else {
+        return control_ == null ?
+            cl.ucn.disc.pdis.fivet.grpc.ControlEntity.getDefaultInstance() : control_;
+      }
+    }
+    /**
+     * <code>.ControlEntity control = 1;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        cl.ucn.disc.pdis.fivet.grpc.ControlEntity, cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder> 
+        getControlFieldBuilder() {
+      if (controlBuilder_ == null) {
+        controlBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            cl.ucn.disc.pdis.fivet.grpc.ControlEntity, cl.ucn.disc.pdis.fivet.grpc.ControlEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder>(
+                getControl(),
+                getParentForChildren(),
+                isClean());
+        control_ = null;
+      }
+      return controlBuilder_;
     }
 
-    private java.lang.Object numeroFicha_ = "";
+    private int numeroFichaMedica_ ;
     /**
-     * <code>string numeroFicha = 2;</code>
-     * @return The numeroFicha.
+     * <code>int32 numeroFichaMedica = 2;</code>
+     * @return The numeroFichaMedica.
      */
-    public java.lang.String getNumeroFicha() {
-      java.lang.Object ref = numeroFicha_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        numeroFicha_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    @java.lang.Override
+    public int getNumeroFichaMedica() {
+      return numeroFichaMedica_;
     }
     /**
-     * <code>string numeroFicha = 2;</code>
-     * @return The bytes for numeroFicha.
-     */
-    public com.google.protobuf.ByteString
-        getNumeroFichaBytes() {
-      java.lang.Object ref = numeroFicha_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        numeroFicha_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string numeroFicha = 2;</code>
-     * @param value The numeroFicha to set.
+     * <code>int32 numeroFichaMedica = 2;</code>
+     * @param value The numeroFichaMedica to set.
      * @return This builder for chaining.
      */
-    public Builder setNumeroFicha(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      numeroFicha_ = value;
+    public Builder setNumeroFichaMedica(int value) {
+      
+      numeroFichaMedica_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string numeroFicha = 2;</code>
+     * <code>int32 numeroFichaMedica = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNumeroFicha() {
+    public Builder clearNumeroFichaMedica() {
       
-      numeroFicha_ = getDefaultInstance().getNumeroFicha();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string numeroFicha = 2;</code>
-     * @param value The bytes for numeroFicha to set.
-     * @return This builder for chaining.
-     */
-    public Builder setNumeroFichaBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      numeroFicha_ = value;
+      numeroFichaMedica_ = 0;
       onChanged();
       return this;
     }

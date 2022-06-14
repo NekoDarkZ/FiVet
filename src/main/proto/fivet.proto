@@ -3,56 +3,81 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "cl.ucn.disc.pdis.fivet.grpc";
 
-message AuthenticateReq {
-  string login = 1;
-  string password = 2;
+message FichaMedicaEntity {
+  int32 numero = 1;
+  string nombrePaciente = 2;
+  string especie = 3;
+  string fechaNacimiento = 4;
+  string raza = 5;
+  string color = 6;
+  string tipo = 7;
+  SexoEntity sexo = 8;
+  PersonaEntity duenio = 9;
+  repeated ControlEntity controles = 10;
 }
 
-message AddControlReq {
-  string control = 1;
-  string numeroFicha = 2;
-}
-
-message RetrieveFichaReq {
-  string ficha = 1;
-}
-
-message SearchFichaReq {
-  string q = 1;
-}
-
-message AddFichaReq {
-  string ficha = 1;
-}
-
-message PersonaReply {
+message PersonaEntity {
   string rut = 1;
   string nombre = 2;
   string email = 3;
   string direccion = 4;
 }
 
-message FichaReply {
-  string numero = 1;
-  string nombrePaciente = 2;
- // string especie = 3;
- // string fechaNacimiento = 4;
- // string raza = 5;
- // string color = 6;
- // string tipo = 7;
- // string sexo = 8;
-  string duenio = 3;
- // string controles = 10;
+message ControlEntity {
+  string fecha = 1;
+  double temperatura = 2;
+  double peso = 3;
+  double altura = 4;
+  string diagnostico = 5;
+  PersonaEntity veterinario = 6;
+  FichaMedicaEntity fichaMedica = 7;
+}
+
+enum SexoEntity {
+  UNDEFINED = 0;
+  MACHO = 1;
+  HEMBRA = 2;
+}
+
+message AuthenticationReq {
+  string login = 1;
+  string password = 2;
+}
+
+message PersonaReply {
+  PersonaEntity persona = 1;
+}
+
+message AddPersonaReq {
+  PersonaEntity persona = 1;
+}
+
+message AddControlReq {
+  ControlEntity control = 1;
+  int32 numeroFichaMedica = 2;
+}
+
+message FichaMedicaReply {
+  FichaMedicaEntity fichaMedica = 1;
+}
+
+message RetrieveFichaMedicaReq {
+  int32 numeroFichaMedica = 1;
+}
+
+message SearchFichaMedicaReq {
+  string query = 1;
+}
+
+message AddFichaMedicaReq {
+  FichaMedicaEntity fichaMedica = 1;
 }
 
 service FivetService {
-  rpc authenticate(AuthenticateReq) returns (PersonaReply) {}
-
-  rpc addControl(AddControlReq) returns (FichaReply) {}
-
-  rpc retrieveFicha(RetrieveFichaReq) returns (FichaReply) {}
-
-  rpc searchFicha(SearchFichaReq) returns (stream FichaReply) {}
-
-  rpc addFicha(AddFichaReq) returns (FichaReply) {}
+  rpc authenticate(AuthenticationReq) returns (PersonaReply) {}
+  rpc addPersona(AddPersonaReq) returns (PersonaReply) {}
+  rpc addControl(AddControlReq) returns (FichaMedicaReply) {}
+  rpc retrieveFicha(RetrieveFichaMedicaReq) returns (FichaMedicaReply) {}
+  rpc searchFicha(SearchFichaMedicaReq) returns (stream FichaMedicaReply) {}
+  rpc addFicha(AddFichaMedicaReq) returns (FichaMedicaReply) {}
 }

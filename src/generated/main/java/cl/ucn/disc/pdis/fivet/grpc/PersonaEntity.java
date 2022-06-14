@@ -4,28 +4,29 @@
 package cl.ucn.disc.pdis.fivet.grpc;
 
 /**
- * Protobuf type {@code FichaReply}
+ * Protobuf type {@code PersonaEntity}
  */
-public final class FichaReply extends
+public final class PersonaEntity extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:FichaReply)
-    FichaReplyOrBuilder {
+    // @@protoc_insertion_point(message_implements:PersonaEntity)
+    PersonaEntityOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use FichaReply.newBuilder() to construct.
-  private FichaReply(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use PersonaEntity.newBuilder() to construct.
+  private PersonaEntity(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private FichaReply() {
-    numero_ = "";
-    nombrePaciente_ = "";
-    duenio_ = "";
+  private PersonaEntity() {
+    rut_ = "";
+    nombre_ = "";
+    email_ = "";
+    direccion_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new FichaReply();
+    return new PersonaEntity();
   }
 
   @java.lang.Override
@@ -33,7 +34,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private FichaReply(
+  private PersonaEntity(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -54,19 +55,25 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            numero_ = s;
+            rut_ = s;
             break;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            nombrePaciente_ = s;
+            nombre_ = s;
             break;
           }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            duenio_ = s;
+            email_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            direccion_ = s;
             break;
           }
           default: {
@@ -92,143 +99,163 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_FichaReply_descriptor;
+    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_PersonaEntity_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_FichaReply_fieldAccessorTable
+    return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_PersonaEntity_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            cl.ucn.disc.pdis.fivet.grpc.FichaReply.class, cl.ucn.disc.pdis.fivet.grpc.FichaReply.Builder.class);
+            cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.class, cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.Builder.class);
   }
 
-  public static final int NUMERO_FIELD_NUMBER = 1;
-  private volatile java.lang.Object numero_;
+  public static final int RUT_FIELD_NUMBER = 1;
+  private volatile java.lang.Object rut_;
   /**
-   * <code>string numero = 1;</code>
-   * @return The numero.
+   * <code>string rut = 1;</code>
+   * @return The rut.
    */
   @java.lang.Override
-  public java.lang.String getNumero() {
-    java.lang.Object ref = numero_;
+  public java.lang.String getRut() {
+    java.lang.Object ref = rut_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      numero_ = s;
+      rut_ = s;
       return s;
     }
   }
   /**
-   * <code>string numero = 1;</code>
-   * @return The bytes for numero.
+   * <code>string rut = 1;</code>
+   * @return The bytes for rut.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getNumeroBytes() {
-    java.lang.Object ref = numero_;
+      getRutBytes() {
+    java.lang.Object ref = rut_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      numero_ = b;
+      rut_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int NOMBREPACIENTE_FIELD_NUMBER = 2;
-  private volatile java.lang.Object nombrePaciente_;
+  public static final int NOMBRE_FIELD_NUMBER = 2;
+  private volatile java.lang.Object nombre_;
   /**
-   * <code>string nombrePaciente = 2;</code>
-   * @return The nombrePaciente.
+   * <code>string nombre = 2;</code>
+   * @return The nombre.
    */
   @java.lang.Override
-  public java.lang.String getNombrePaciente() {
-    java.lang.Object ref = nombrePaciente_;
+  public java.lang.String getNombre() {
+    java.lang.Object ref = nombre_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      nombrePaciente_ = s;
+      nombre_ = s;
       return s;
     }
   }
   /**
-   * <code>string nombrePaciente = 2;</code>
-   * @return The bytes for nombrePaciente.
+   * <code>string nombre = 2;</code>
+   * @return The bytes for nombre.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getNombrePacienteBytes() {
-    java.lang.Object ref = nombrePaciente_;
+      getNombreBytes() {
+    java.lang.Object ref = nombre_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      nombrePaciente_ = b;
+      nombre_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int DUENIO_FIELD_NUMBER = 3;
-  private volatile java.lang.Object duenio_;
+  public static final int EMAIL_FIELD_NUMBER = 3;
+  private volatile java.lang.Object email_;
   /**
-   * <pre>
-   * string especie = 3;
-   * string fechaNacimiento = 4;
-   * string raza = 5;
-   * string color = 6;
-   * string tipo = 7;
-   * string sexo = 8;
-   * </pre>
-   *
-   * <code>string duenio = 3;</code>
-   * @return The duenio.
+   * <code>string email = 3;</code>
+   * @return The email.
    */
   @java.lang.Override
-  public java.lang.String getDuenio() {
-    java.lang.Object ref = duenio_;
+  public java.lang.String getEmail() {
+    java.lang.Object ref = email_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      duenio_ = s;
+      email_ = s;
       return s;
     }
   }
   /**
-   * <pre>
-   * string especie = 3;
-   * string fechaNacimiento = 4;
-   * string raza = 5;
-   * string color = 6;
-   * string tipo = 7;
-   * string sexo = 8;
-   * </pre>
-   *
-   * <code>string duenio = 3;</code>
-   * @return The bytes for duenio.
+   * <code>string email = 3;</code>
+   * @return The bytes for email.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getDuenioBytes() {
-    java.lang.Object ref = duenio_;
+      getEmailBytes() {
+    java.lang.Object ref = email_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      duenio_ = b;
+      email_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DIRECCION_FIELD_NUMBER = 4;
+  private volatile java.lang.Object direccion_;
+  /**
+   * <code>string direccion = 4;</code>
+   * @return The direccion.
+   */
+  @java.lang.Override
+  public java.lang.String getDireccion() {
+    java.lang.Object ref = direccion_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      direccion_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string direccion = 4;</code>
+   * @return The bytes for direccion.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDireccionBytes() {
+    java.lang.Object ref = direccion_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      direccion_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -249,14 +276,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(numero_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, numero_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(rut_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, rut_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nombrePaciente_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nombrePaciente_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nombre_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nombre_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(duenio_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, duenio_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(direccion_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, direccion_);
     }
     unknownFields.writeTo(output);
   }
@@ -267,14 +297,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(numero_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, numero_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(rut_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, rut_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nombrePaciente_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nombrePaciente_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nombre_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nombre_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(duenio_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, duenio_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(email_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(direccion_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, direccion_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -286,17 +319,19 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof cl.ucn.disc.pdis.fivet.grpc.FichaReply)) {
+    if (!(obj instanceof cl.ucn.disc.pdis.fivet.grpc.PersonaEntity)) {
       return super.equals(obj);
     }
-    cl.ucn.disc.pdis.fivet.grpc.FichaReply other = (cl.ucn.disc.pdis.fivet.grpc.FichaReply) obj;
+    cl.ucn.disc.pdis.fivet.grpc.PersonaEntity other = (cl.ucn.disc.pdis.fivet.grpc.PersonaEntity) obj;
 
-    if (!getNumero()
-        .equals(other.getNumero())) return false;
-    if (!getNombrePaciente()
-        .equals(other.getNombrePaciente())) return false;
-    if (!getDuenio()
-        .equals(other.getDuenio())) return false;
+    if (!getRut()
+        .equals(other.getRut())) return false;
+    if (!getNombre()
+        .equals(other.getNombre())) return false;
+    if (!getEmail()
+        .equals(other.getEmail())) return false;
+    if (!getDireccion()
+        .equals(other.getDireccion())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -308,80 +343,82 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NUMERO_FIELD_NUMBER;
-    hash = (53 * hash) + getNumero().hashCode();
-    hash = (37 * hash) + NOMBREPACIENTE_FIELD_NUMBER;
-    hash = (53 * hash) + getNombrePaciente().hashCode();
-    hash = (37 * hash) + DUENIO_FIELD_NUMBER;
-    hash = (53 * hash) + getDuenio().hashCode();
+    hash = (37 * hash) + RUT_FIELD_NUMBER;
+    hash = (53 * hash) + getRut().hashCode();
+    hash = (37 * hash) + NOMBRE_FIELD_NUMBER;
+    hash = (53 * hash) + getNombre().hashCode();
+    hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+    hash = (53 * hash) + getEmail().hashCode();
+    hash = (37 * hash) + DIRECCION_FIELD_NUMBER;
+    hash = (53 * hash) + getDireccion().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(byte[] data)
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(java.io.InputStream input)
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseDelimitedFrom(java.io.InputStream input)
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseDelimitedFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply parseFrom(
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -394,7 +431,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(cl.ucn.disc.pdis.fivet.grpc.FichaReply prototype) {
+  public static Builder newBuilder(cl.ucn.disc.pdis.fivet.grpc.PersonaEntity prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -410,26 +447,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code FichaReply}
+   * Protobuf type {@code PersonaEntity}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:FichaReply)
-      cl.ucn.disc.pdis.fivet.grpc.FichaReplyOrBuilder {
+      // @@protoc_insertion_point(builder_implements:PersonaEntity)
+      cl.ucn.disc.pdis.fivet.grpc.PersonaEntityOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_FichaReply_descriptor;
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_PersonaEntity_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_FichaReply_fieldAccessorTable
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_PersonaEntity_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              cl.ucn.disc.pdis.fivet.grpc.FichaReply.class, cl.ucn.disc.pdis.fivet.grpc.FichaReply.Builder.class);
+              cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.class, cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.Builder.class);
     }
 
-    // Construct using cl.ucn.disc.pdis.fivet.grpc.FichaReply.newBuilder()
+    // Construct using cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -447,11 +484,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      numero_ = "";
+      rut_ = "";
 
-      nombrePaciente_ = "";
+      nombre_ = "";
 
-      duenio_ = "";
+      email_ = "";
+
+      direccion_ = "";
 
       return this;
     }
@@ -459,17 +498,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_FichaReply_descriptor;
+      return cl.ucn.disc.pdis.fivet.grpc.Fivet.internal_static_PersonaEntity_descriptor;
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.FichaReply getDefaultInstanceForType() {
-      return cl.ucn.disc.pdis.fivet.grpc.FichaReply.getDefaultInstance();
+    public cl.ucn.disc.pdis.fivet.grpc.PersonaEntity getDefaultInstanceForType() {
+      return cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.getDefaultInstance();
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.FichaReply build() {
-      cl.ucn.disc.pdis.fivet.grpc.FichaReply result = buildPartial();
+    public cl.ucn.disc.pdis.fivet.grpc.PersonaEntity build() {
+      cl.ucn.disc.pdis.fivet.grpc.PersonaEntity result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -477,11 +516,12 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public cl.ucn.disc.pdis.fivet.grpc.FichaReply buildPartial() {
-      cl.ucn.disc.pdis.fivet.grpc.FichaReply result = new cl.ucn.disc.pdis.fivet.grpc.FichaReply(this);
-      result.numero_ = numero_;
-      result.nombrePaciente_ = nombrePaciente_;
-      result.duenio_ = duenio_;
+    public cl.ucn.disc.pdis.fivet.grpc.PersonaEntity buildPartial() {
+      cl.ucn.disc.pdis.fivet.grpc.PersonaEntity result = new cl.ucn.disc.pdis.fivet.grpc.PersonaEntity(this);
+      result.rut_ = rut_;
+      result.nombre_ = nombre_;
+      result.email_ = email_;
+      result.direccion_ = direccion_;
       onBuilt();
       return result;
     }
@@ -520,26 +560,30 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof cl.ucn.disc.pdis.fivet.grpc.FichaReply) {
-        return mergeFrom((cl.ucn.disc.pdis.fivet.grpc.FichaReply)other);
+      if (other instanceof cl.ucn.disc.pdis.fivet.grpc.PersonaEntity) {
+        return mergeFrom((cl.ucn.disc.pdis.fivet.grpc.PersonaEntity)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(cl.ucn.disc.pdis.fivet.grpc.FichaReply other) {
-      if (other == cl.ucn.disc.pdis.fivet.grpc.FichaReply.getDefaultInstance()) return this;
-      if (!other.getNumero().isEmpty()) {
-        numero_ = other.numero_;
+    public Builder mergeFrom(cl.ucn.disc.pdis.fivet.grpc.PersonaEntity other) {
+      if (other == cl.ucn.disc.pdis.fivet.grpc.PersonaEntity.getDefaultInstance()) return this;
+      if (!other.getRut().isEmpty()) {
+        rut_ = other.rut_;
         onChanged();
       }
-      if (!other.getNombrePaciente().isEmpty()) {
-        nombrePaciente_ = other.nombrePaciente_;
+      if (!other.getNombre().isEmpty()) {
+        nombre_ = other.nombre_;
         onChanged();
       }
-      if (!other.getDuenio().isEmpty()) {
-        duenio_ = other.duenio_;
+      if (!other.getEmail().isEmpty()) {
+        email_ = other.email_;
+        onChanged();
+      }
+      if (!other.getDireccion().isEmpty()) {
+        direccion_ = other.direccion_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -557,11 +601,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      cl.ucn.disc.pdis.fivet.grpc.FichaReply parsedMessage = null;
+      cl.ucn.disc.pdis.fivet.grpc.PersonaEntity parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (cl.ucn.disc.pdis.fivet.grpc.FichaReply) e.getUnfinishedMessage();
+        parsedMessage = (cl.ucn.disc.pdis.fivet.grpc.PersonaEntity) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -571,275 +615,306 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object numero_ = "";
+    private java.lang.Object rut_ = "";
     /**
-     * <code>string numero = 1;</code>
-     * @return The numero.
+     * <code>string rut = 1;</code>
+     * @return The rut.
      */
-    public java.lang.String getNumero() {
-      java.lang.Object ref = numero_;
+    public java.lang.String getRut() {
+      java.lang.Object ref = rut_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        numero_ = s;
+        rut_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string numero = 1;</code>
-     * @return The bytes for numero.
+     * <code>string rut = 1;</code>
+     * @return The bytes for rut.
      */
     public com.google.protobuf.ByteString
-        getNumeroBytes() {
-      java.lang.Object ref = numero_;
+        getRutBytes() {
+      java.lang.Object ref = rut_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        numero_ = b;
+        rut_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string numero = 1;</code>
-     * @param value The numero to set.
+     * <code>string rut = 1;</code>
+     * @param value The rut to set.
      * @return This builder for chaining.
      */
-    public Builder setNumero(
+    public Builder setRut(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      numero_ = value;
+      rut_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string numero = 1;</code>
+     * <code>string rut = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNumero() {
+    public Builder clearRut() {
       
-      numero_ = getDefaultInstance().getNumero();
+      rut_ = getDefaultInstance().getRut();
       onChanged();
       return this;
     }
     /**
-     * <code>string numero = 1;</code>
-     * @param value The bytes for numero to set.
+     * <code>string rut = 1;</code>
+     * @param value The bytes for rut to set.
      * @return This builder for chaining.
      */
-    public Builder setNumeroBytes(
+    public Builder setRutBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      numero_ = value;
+      rut_ = value;
       onChanged();
       return this;
     }
 
-    private java.lang.Object nombrePaciente_ = "";
+    private java.lang.Object nombre_ = "";
     /**
-     * <code>string nombrePaciente = 2;</code>
-     * @return The nombrePaciente.
+     * <code>string nombre = 2;</code>
+     * @return The nombre.
      */
-    public java.lang.String getNombrePaciente() {
-      java.lang.Object ref = nombrePaciente_;
+    public java.lang.String getNombre() {
+      java.lang.Object ref = nombre_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        nombrePaciente_ = s;
+        nombre_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string nombrePaciente = 2;</code>
-     * @return The bytes for nombrePaciente.
+     * <code>string nombre = 2;</code>
+     * @return The bytes for nombre.
      */
     public com.google.protobuf.ByteString
-        getNombrePacienteBytes() {
-      java.lang.Object ref = nombrePaciente_;
+        getNombreBytes() {
+      java.lang.Object ref = nombre_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        nombrePaciente_ = b;
+        nombre_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string nombrePaciente = 2;</code>
-     * @param value The nombrePaciente to set.
+     * <code>string nombre = 2;</code>
+     * @param value The nombre to set.
      * @return This builder for chaining.
      */
-    public Builder setNombrePaciente(
+    public Builder setNombre(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      nombrePaciente_ = value;
+      nombre_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string nombrePaciente = 2;</code>
+     * <code>string nombre = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNombrePaciente() {
+    public Builder clearNombre() {
       
-      nombrePaciente_ = getDefaultInstance().getNombrePaciente();
+      nombre_ = getDefaultInstance().getNombre();
       onChanged();
       return this;
     }
     /**
-     * <code>string nombrePaciente = 2;</code>
-     * @param value The bytes for nombrePaciente to set.
+     * <code>string nombre = 2;</code>
+     * @param value The bytes for nombre to set.
      * @return This builder for chaining.
      */
-    public Builder setNombrePacienteBytes(
+    public Builder setNombreBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      nombrePaciente_ = value;
+      nombre_ = value;
       onChanged();
       return this;
     }
 
-    private java.lang.Object duenio_ = "";
+    private java.lang.Object email_ = "";
     /**
-     * <pre>
-     * string especie = 3;
-     * string fechaNacimiento = 4;
-     * string raza = 5;
-     * string color = 6;
-     * string tipo = 7;
-     * string sexo = 8;
-     * </pre>
-     *
-     * <code>string duenio = 3;</code>
-     * @return The duenio.
+     * <code>string email = 3;</code>
+     * @return The email.
      */
-    public java.lang.String getDuenio() {
-      java.lang.Object ref = duenio_;
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        duenio_ = s;
+        email_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <pre>
-     * string especie = 3;
-     * string fechaNacimiento = 4;
-     * string raza = 5;
-     * string color = 6;
-     * string tipo = 7;
-     * string sexo = 8;
-     * </pre>
-     *
-     * <code>string duenio = 3;</code>
-     * @return The bytes for duenio.
+     * <code>string email = 3;</code>
+     * @return The bytes for email.
      */
     public com.google.protobuf.ByteString
-        getDuenioBytes() {
-      java.lang.Object ref = duenio_;
+        getEmailBytes() {
+      java.lang.Object ref = email_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        duenio_ = b;
+        email_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <pre>
-     * string especie = 3;
-     * string fechaNacimiento = 4;
-     * string raza = 5;
-     * string color = 6;
-     * string tipo = 7;
-     * string sexo = 8;
-     * </pre>
-     *
-     * <code>string duenio = 3;</code>
-     * @param value The duenio to set.
+     * <code>string email = 3;</code>
+     * @param value The email to set.
      * @return This builder for chaining.
      */
-    public Builder setDuenio(
+    public Builder setEmail(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      duenio_ = value;
+      email_ = value;
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     * string especie = 3;
-     * string fechaNacimiento = 4;
-     * string raza = 5;
-     * string color = 6;
-     * string tipo = 7;
-     * string sexo = 8;
-     * </pre>
-     *
-     * <code>string duenio = 3;</code>
+     * <code>string email = 3;</code>
      * @return This builder for chaining.
      */
-    public Builder clearDuenio() {
+    public Builder clearEmail() {
       
-      duenio_ = getDefaultInstance().getDuenio();
+      email_ = getDefaultInstance().getEmail();
       onChanged();
       return this;
     }
     /**
-     * <pre>
-     * string especie = 3;
-     * string fechaNacimiento = 4;
-     * string raza = 5;
-     * string color = 6;
-     * string tipo = 7;
-     * string sexo = 8;
-     * </pre>
-     *
-     * <code>string duenio = 3;</code>
-     * @param value The bytes for duenio to set.
+     * <code>string email = 3;</code>
+     * @param value The bytes for email to set.
      * @return This builder for chaining.
      */
-    public Builder setDuenioBytes(
+    public Builder setEmailBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      duenio_ = value;
+      email_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object direccion_ = "";
+    /**
+     * <code>string direccion = 4;</code>
+     * @return The direccion.
+     */
+    public java.lang.String getDireccion() {
+      java.lang.Object ref = direccion_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        direccion_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string direccion = 4;</code>
+     * @return The bytes for direccion.
+     */
+    public com.google.protobuf.ByteString
+        getDireccionBytes() {
+      java.lang.Object ref = direccion_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        direccion_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string direccion = 4;</code>
+     * @param value The direccion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDireccion(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      direccion_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string direccion = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDireccion() {
+      
+      direccion_ = getDefaultInstance().getDireccion();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string direccion = 4;</code>
+     * @param value The bytes for direccion to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDireccionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      direccion_ = value;
       onChanged();
       return this;
     }
@@ -856,41 +931,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:FichaReply)
+    // @@protoc_insertion_point(builder_scope:PersonaEntity)
   }
 
-  // @@protoc_insertion_point(class_scope:FichaReply)
-  private static final cl.ucn.disc.pdis.fivet.grpc.FichaReply DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:PersonaEntity)
+  private static final cl.ucn.disc.pdis.fivet.grpc.PersonaEntity DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new cl.ucn.disc.pdis.fivet.grpc.FichaReply();
+    DEFAULT_INSTANCE = new cl.ucn.disc.pdis.fivet.grpc.PersonaEntity();
   }
 
-  public static cl.ucn.disc.pdis.fivet.grpc.FichaReply getDefaultInstance() {
+  public static cl.ucn.disc.pdis.fivet.grpc.PersonaEntity getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<FichaReply>
-      PARSER = new com.google.protobuf.AbstractParser<FichaReply>() {
+  private static final com.google.protobuf.Parser<PersonaEntity>
+      PARSER = new com.google.protobuf.AbstractParser<PersonaEntity>() {
     @java.lang.Override
-    public FichaReply parsePartialFrom(
+    public PersonaEntity parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new FichaReply(input, extensionRegistry);
+      return new PersonaEntity(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<FichaReply> parser() {
+  public static com.google.protobuf.Parser<PersonaEntity> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<FichaReply> getParserForType() {
+  public com.google.protobuf.Parser<PersonaEntity> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public cl.ucn.disc.pdis.fivet.grpc.FichaReply getDefaultInstanceForType() {
+  public cl.ucn.disc.pdis.fivet.grpc.PersonaEntity getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
