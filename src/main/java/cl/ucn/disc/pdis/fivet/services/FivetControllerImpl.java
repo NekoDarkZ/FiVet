@@ -51,11 +51,6 @@ public class FivetControllerImpl implements FivetController {
     private final DAO<FichaMedica> daoFichaMedica;
 
     /**
-     * The Dao of Control
-     */
-    private final DAO<Control> daoControl;
-
-    /**
      * The Hasher.
      */
     private final static PasswordEncoder PASSWORD_ENCODER =
@@ -70,10 +65,8 @@ public class FivetControllerImpl implements FivetController {
         ConnectionSource cs = new JdbcConnectionSource(dbUrl);
         this.daoPersona = new ORMLiteDAO<>(cs,Persona.class);
         this.daoFichaMedica = new ORMLiteDAO<>(cs,FichaMedica.class);
-        this.daoControl = new ORMLiteDAO<>(cs,Control.class);
         this.daoPersona.dropAndCreateTable();
         this.daoFichaMedica.dropAndCreateTable();
-        this.daoControl.dropAndCreateTable();
     }
 
     /**
@@ -153,7 +146,6 @@ public class FivetControllerImpl implements FivetController {
     public void addControl(@NonNull Control control, int numeroFichaMedica) {
         Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
         if (fichaMedica.isPresent()) {
-            daoControl.save(control);
             fichaMedica.get().add(control);
         } else {
             log.warn("FichaMedica not found.");

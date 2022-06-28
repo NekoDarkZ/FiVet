@@ -66,9 +66,12 @@ public final class FivetClient {
                             .setColor("Gris")
                             .setTipo("Normal")
                             .setSexo(SexoEntity.HEMBRA)
-                            .setDuenio(stub.retrievePersona(RetrievePersonaReq.newBuilder()
-                                    .setLogin("199682954")
-                                    .build()).getPersona())
+                            .setDuenio(PersonaEntity.newBuilder()
+                                    .setRut("199682954")
+                                    .setNombre("Sebastian Murquio Castillo")
+                                    .setEmail("sebastian.murquio@alumnos.ucn.cl")
+                                    .setDireccion("Angamos #0610")
+                                    .build())
                             .build())
                     .build());
             log.debug("FichaMedica from AddFicha: {}", fichaMedica.getFichaMedica());
@@ -87,8 +90,6 @@ public final class FivetClient {
                     .setVeterinario(stub.retrievePersona(RetrievePersonaReq.newBuilder()
                                     .setLogin("199682954")
                             .build()).getPersona())
-                    .setFichaMedica(stub.retrieveFichaMedica(RetrieveFichaMedicaReq.newBuilder()
-                                    .setNumeroFichaMedica(1).build()).getFichaMedica())
                     .build();
 
             FichaMedicaReply fichaMedicaReply = stub.addControl(AddControlReq.newBuilder()

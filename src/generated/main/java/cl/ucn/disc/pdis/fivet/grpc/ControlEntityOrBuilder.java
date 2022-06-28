@@ -63,19 +63,4 @@ public interface ControlEntityOrBuilder extends
    * <code>.PersonaEntity veterinario = 6;</code>
    */
   cl.ucn.disc.pdis.fivet.grpc.PersonaEntityOrBuilder getVeterinarioOrBuilder();
-
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   * @return Whether the fichaMedica field is set.
-   */
-  boolean hasFichaMedica();
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   * @return The fichaMedica.
-   */
-  cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity getFichaMedica();
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   */
-  cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder getFichaMedicaOrBuilder();
 }

@@ -125,14 +125,21 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
         optionalFichaMedica.ifPresentOrElse(fichaMedica -> {
 
             Control control = ModelAdapter.build(controlEntity);
-            log.debug(control.getVeterinario().getNombre());
-            this.fivetController.addControl(control, fichaMedica.getNumero());
 
-            responseObserver.onNext(FichaMedicaReply.newBuilder()
-                            .setFichaMedica(ModelAdapter.build(fichaMedica))
-                    .build());
+            Optional<Persona> optionalVeterinario =
+                    this.fivetController.retrieveByLogin(controlEntity.getVeterinario().getRut());
 
-            responseObserver.onCompleted();
+            optionalVeterinario.ifPresentOrElse(veterinario -> {
+
+                control.setVeterinario(veterinario);
+                this.fivetController.addControl(control, fichaMedica.getNumero());
+
+                responseObserver.onNext(FichaMedicaReply.newBuilder()
+                        .setFichaMedica(ModelAdapter.build(fichaMedica))
+                        .build());
+
+                responseObserver.onCompleted();
+            },() -> responseObserver.onError(buildException(Code.NOT_FOUND, "Veterinario not found")));
 
         }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
     }
@@ -167,9 +174,7 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
                             .setPersona(ModelAdapter.build(persona))
                     .build());
             responseObserver.onCompleted();
-        }, () -> {
-            responseObserver.onError(buildException(Code.NOT_FOUND, "Persona not found"));
-        });
+        }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "Persona not found")));
     }
 
     /**
@@ -190,6 +195,19 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
                 () -> {
 
                     FichaMedica fichaMedica = ModelAdapter.build(fichaMedicaEntity);
+
+                    Optional<Persona> optionalDuenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+
+                    optionalDuenio.ifPresentOrElse(fichaMedica::setDuenio, () -> {
+
+                        this.fivetController.addPersona(fichaMedica.getDuenio());
+                        Optional<Persona> duenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+
+                        duenio.ifPresent(fichaMedica::setDuenio);
+                    });
+
+                    log.debug("Duenio id: {}", fichaMedica.getDuenio().getId());
+
                     this.fivetController.addFichaMedica(fichaMedica);
 
                     responseObserver.onNext(FichaMedicaReply.newBuilder()

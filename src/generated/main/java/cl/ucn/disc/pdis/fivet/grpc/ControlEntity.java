@@ -90,19 +90,6 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 58: {
-            cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder subBuilder = null;
-            if (fichaMedica_ != null) {
-              subBuilder = fichaMedica_.toBuilder();
-            }
-            fichaMedica_ = input.readMessage(cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(fichaMedica_);
-              fichaMedica_ = subBuilder.buildPartial();
-            }
-
-            break;
-          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -272,32 +259,6 @@ private static final long serialVersionUID = 0L;
     return getVeterinario();
   }
 
-  public static final int FICHAMEDICA_FIELD_NUMBER = 7;
-  private cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity fichaMedica_;
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   * @return Whether the fichaMedica field is set.
-   */
-  @java.lang.Override
-  public boolean hasFichaMedica() {
-    return fichaMedica_ != null;
-  }
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   * @return The fichaMedica.
-   */
-  @java.lang.Override
-  public cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity getFichaMedica() {
-    return fichaMedica_ == null ? cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.getDefaultInstance() : fichaMedica_;
-  }
-  /**
-   * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-   */
-  @java.lang.Override
-  public cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder getFichaMedicaOrBuilder() {
-    return getFichaMedica();
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -330,9 +291,6 @@ private static final long serialVersionUID = 0L;
     if (veterinario_ != null) {
       output.writeMessage(6, getVeterinario());
     }
-    if (fichaMedica_ != null) {
-      output.writeMessage(7, getFichaMedica());
-    }
     unknownFields.writeTo(output);
   }
 
@@ -363,10 +321,6 @@ private static final long serialVersionUID = 0L;
     if (veterinario_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getVeterinario());
-    }
-    if (fichaMedica_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(7, getFichaMedica());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -401,11 +355,6 @@ private static final long serialVersionUID = 0L;
       if (!getVeterinario()
           .equals(other.getVeterinario())) return false;
     }
-    if (hasFichaMedica() != other.hasFichaMedica()) return false;
-    if (hasFichaMedica()) {
-      if (!getFichaMedica()
-          .equals(other.getFichaMedica())) return false;
-    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -433,10 +382,6 @@ private static final long serialVersionUID = 0L;
     if (hasVeterinario()) {
       hash = (37 * hash) + VETERINARIO_FIELD_NUMBER;
       hash = (53 * hash) + getVeterinario().hashCode();
-    }
-    if (hasFichaMedica()) {
-      hash = (37 * hash) + FICHAMEDICA_FIELD_NUMBER;
-      hash = (53 * hash) + getFichaMedica().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -587,12 +532,6 @@ private static final long serialVersionUID = 0L;
         veterinario_ = null;
         veterinarioBuilder_ = null;
       }
-      if (fichaMedicaBuilder_ == null) {
-        fichaMedica_ = null;
-      } else {
-        fichaMedica_ = null;
-        fichaMedicaBuilder_ = null;
-      }
       return this;
     }
 
@@ -628,11 +567,6 @@ private static final long serialVersionUID = 0L;
         result.veterinario_ = veterinario_;
       } else {
         result.veterinario_ = veterinarioBuilder_.build();
-      }
-      if (fichaMedicaBuilder_ == null) {
-        result.fichaMedica_ = fichaMedica_;
-      } else {
-        result.fichaMedica_ = fichaMedicaBuilder_.build();
       }
       onBuilt();
       return result;
@@ -701,9 +635,6 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasVeterinario()) {
         mergeVeterinario(other.getVeterinario());
-      }
-      if (other.hasFichaMedica()) {
-        mergeFichaMedica(other.getFichaMedica());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1096,125 +1027,6 @@ private static final long serialVersionUID = 0L;
         veterinario_ = null;
       }
       return veterinarioBuilder_;
-    }
-
-    private cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity fichaMedica_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder> fichaMedicaBuilder_;
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     * @return Whether the fichaMedica field is set.
-     */
-    public boolean hasFichaMedica() {
-      return fichaMedicaBuilder_ != null || fichaMedica_ != null;
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     * @return The fichaMedica.
-     */
-    public cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity getFichaMedica() {
-      if (fichaMedicaBuilder_ == null) {
-        return fichaMedica_ == null ? cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.getDefaultInstance() : fichaMedica_;
-      } else {
-        return fichaMedicaBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public Builder setFichaMedica(cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity value) {
-      if (fichaMedicaBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        fichaMedica_ = value;
-        onChanged();
-      } else {
-        fichaMedicaBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public Builder setFichaMedica(
-        cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder builderForValue) {
-      if (fichaMedicaBuilder_ == null) {
-        fichaMedica_ = builderForValue.build();
-        onChanged();
-      } else {
-        fichaMedicaBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public Builder mergeFichaMedica(cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity value) {
-      if (fichaMedicaBuilder_ == null) {
-        if (fichaMedica_ != null) {
-          fichaMedica_ =
-            cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.newBuilder(fichaMedica_).mergeFrom(value).buildPartial();
-        } else {
-          fichaMedica_ = value;
-        }
-        onChanged();
-      } else {
-        fichaMedicaBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public Builder clearFichaMedica() {
-      if (fichaMedicaBuilder_ == null) {
-        fichaMedica_ = null;
-        onChanged();
-      } else {
-        fichaMedica_ = null;
-        fichaMedicaBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder getFichaMedicaBuilder() {
-      
-      onChanged();
-      return getFichaMedicaFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    public cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder getFichaMedicaOrBuilder() {
-      if (fichaMedicaBuilder_ != null) {
-        return fichaMedicaBuilder_.getMessageOrBuilder();
-      } else {
-        return fichaMedica_ == null ?
-            cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.getDefaultInstance() : fichaMedica_;
-      }
-    }
-    /**
-     * <code>.FichaMedicaEntity fichaMedica = 7;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder> 
-        getFichaMedicaFieldBuilder() {
-      if (fichaMedicaBuilder_ == null) {
-        fichaMedicaBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity.Builder, cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntityOrBuilder>(
-                getFichaMedica(),
-                getParentForChildren(),
-                isClean());
-        fichaMedica_ = null;
-      }
-      return fichaMedicaBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
