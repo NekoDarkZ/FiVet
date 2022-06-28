@@ -97,8 +97,7 @@ public final class FichaMedica extends BaseEntity {
      * The Duenio of the Patient
      */
     @Getter
-    @Setter
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, maxForeignAutoRefreshLevel = 1, columnName = "duenio")
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "duenio")
     private Persona duenio;
 
     /**

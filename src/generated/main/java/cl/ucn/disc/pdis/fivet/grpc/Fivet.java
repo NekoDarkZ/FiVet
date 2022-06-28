@@ -60,6 +60,11 @@ public final class Fivet {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_RetrieveFichaMedicaReq_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_RetrievePersonaReq_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_RetrievePersonaReq_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_SearchFichaMedicaReq_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -84,35 +89,39 @@ public final class Fivet {
       "\004raza\030\005 \001(\t\022\r\n\005color\030\006 \001(\t\022\014\n\004tipo\030\007 \001(\t" +
       "\022\031\n\004sexo\030\010 \001(\0162\013.SexoEntity\022\036\n\006duenio\030\t " +
       "\001(\0132\016.PersonaEntity\022!\n\tcontroles\030\n \003(\0132\016" +
-      ".ControlEntity\"N\n\rPersonaEntity\022\013\n\003rut\030\001" +
+      ".ControlEntity\"`\n\rPersonaEntity\022\013\n\003rut\030\001" +
       " \001(\t\022\016\n\006nombre\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\021\n\td" +
-      "ireccion\030\004 \001(\t\"\264\001\n\rControlEntity\022\r\n\005fech" +
-      "a\030\001 \001(\t\022\023\n\013temperatura\030\002 \001(\001\022\014\n\004peso\030\003 \001" +
-      "(\001\022\016\n\006altura\030\004 \001(\001\022\023\n\013diagnostico\030\005 \001(\t\022" +
-      "#\n\013veterinario\030\006 \001(\0132\016.PersonaEntity\022\'\n\013" +
-      "fichaMedica\030\007 \001(\0132\022.FichaMedicaEntity\"4\n" +
-      "\021AuthenticationReq\022\r\n\005login\030\001 \001(\t\022\020\n\010pas" +
-      "sword\030\002 \001(\t\"/\n\014PersonaReply\022\037\n\007persona\030\001" +
-      " \001(\0132\016.PersonaEntity\"0\n\rAddPersonaReq\022\037\n" +
-      "\007persona\030\001 \001(\0132\016.PersonaEntity\"K\n\rAddCon" +
-      "trolReq\022\037\n\007control\030\001 \001(\0132\016.ControlEntity" +
-      "\022\031\n\021numeroFichaMedica\030\002 \001(\005\";\n\020FichaMedi" +
-      "caReply\022\'\n\013fichaMedica\030\001 \001(\0132\022.FichaMedi" +
-      "caEntity\"3\n\026RetrieveFichaMedicaReq\022\031\n\021nu" +
-      "meroFichaMedica\030\001 \001(\005\"%\n\024SearchFichaMedi" +
-      "caReq\022\r\n\005query\030\001 \001(\t\"<\n\021AddFichaMedicaRe" +
-      "q\022\'\n\013fichaMedica\030\001 \001(\0132\022.FichaMedicaEnti" +
-      "ty*2\n\nSexoEntity\022\r\n\tUNDEFINED\020\000\022\t\n\005MACHO" +
-      "\020\001\022\n\n\006HEMBRA\020\0022\326\002\n\014FivetService\0223\n\014authe" +
-      "nticate\022\022.AuthenticationReq\032\r.PersonaRep" +
-      "ly\"\000\022-\n\naddPersona\022\016.AddPersonaReq\032\r.Per" +
-      "sonaReply\"\000\0221\n\naddControl\022\016.AddControlRe" +
-      "q\032\021.FichaMedicaReply\"\000\022=\n\rretrieveFicha\022" +
-      "\027.RetrieveFichaMedicaReq\032\021.FichaMedicaRe" +
-      "ply\"\000\022;\n\013searchFicha\022\025.SearchFichaMedica" +
-      "Req\032\021.FichaMedicaReply\"\0000\001\0223\n\010addFicha\022\022" +
-      ".AddFichaMedicaReq\032\021.FichaMedicaReply\"\000B" +
-      "\037\n\033cl.ucn.disc.pdis.fivet.grpcP\001b\006proto3"
+      "ireccion\030\004 \001(\t\022\020\n\010password\030\005 \001(\t\"\264\001\n\rCon" +
+      "trolEntity\022\r\n\005fecha\030\001 \001(\t\022\023\n\013temperatura" +
+      "\030\002 \001(\001\022\014\n\004peso\030\003 \001(\001\022\016\n\006altura\030\004 \001(\001\022\023\n\013" +
+      "diagnostico\030\005 \001(\t\022#\n\013veterinario\030\006 \001(\0132\016" +
+      ".PersonaEntity\022\'\n\013fichaMedica\030\007 \001(\0132\022.Fi" +
+      "chaMedicaEntity\"4\n\021AuthenticationReq\022\r\n\005" +
+      "login\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"/\n\014Persona" +
+      "Reply\022\037\n\007persona\030\001 \001(\0132\016.PersonaEntity\"0" +
+      "\n\rAddPersonaReq\022\037\n\007persona\030\001 \001(\0132\016.Perso" +
+      "naEntity\"K\n\rAddControlReq\022\031\n\021numeroFicha" +
+      "Medica\030\001 \001(\005\022\037\n\007control\030\002 \001(\0132\016.ControlE" +
+      "ntity\";\n\020FichaMedicaReply\022\'\n\013fichaMedica" +
+      "\030\001 \001(\0132\022.FichaMedicaEntity\"3\n\026RetrieveFi" +
+      "chaMedicaReq\022\031\n\021numeroFichaMedica\030\001 \001(\005\"" +
+      "#\n\022RetrievePersonaReq\022\r\n\005login\030\001 \001(\t\"%\n\024" +
+      "SearchFichaMedicaReq\022\r\n\005query\030\001 \001(\t\"<\n\021A" +
+      "ddFichaMedicaReq\022\'\n\013fichaMedica\030\001 \001(\0132\022." +
+      "FichaMedicaEntity*2\n\nSexoEntity\022\r\n\tUNDEF" +
+      "INED\020\000\022\t\n\005MACHO\020\001\022\n\n\006HEMBRA\020\0022\241\003\n\014FivetS" +
+      "ervice\0223\n\014authenticate\022\022.AuthenticationR" +
+      "eq\032\r.PersonaReply\"\000\022-\n\naddPersona\022\016.AddP" +
+      "ersonaReq\032\r.PersonaReply\"\000\0221\n\naddControl" +
+      "\022\016.AddControlReq\032\021.FichaMedicaReply\"\000\022C\n" +
+      "\023retrieveFichaMedica\022\027.RetrieveFichaMedi" +
+      "caReq\032\021.FichaMedicaReply\"\000\0227\n\017retrievePe" +
+      "rsona\022\023.RetrievePersonaReq\032\r.PersonaRepl" +
+      "y\"\000\022A\n\021searchFichaMedica\022\025.SearchFichaMe" +
+      "dicaReq\032\021.FichaMedicaReply\"\0000\001\0229\n\016addFic" +
+      "haMedica\022\022.AddFichaMedicaReq\032\021.FichaMedi" +
+      "caReply\"\000B\037\n\033cl.ucn.disc.pdis.fivet.grpc" +
+      "P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -129,7 +138,7 @@ public final class Fivet {
     internal_static_PersonaEntity_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PersonaEntity_descriptor,
-        new java.lang.String[] { "Rut", "Nombre", "Email", "Direccion", });
+        new java.lang.String[] { "Rut", "Nombre", "Email", "Direccion", "Password", });
     internal_static_ControlEntity_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_ControlEntity_fieldAccessorTable = new
@@ -159,7 +168,7 @@ public final class Fivet {
     internal_static_AddControlReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AddControlReq_descriptor,
-        new java.lang.String[] { "Control", "NumeroFichaMedica", });
+        new java.lang.String[] { "NumeroFichaMedica", "Control", });
     internal_static_FichaMedicaReply_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_FichaMedicaReply_fieldAccessorTable = new
@@ -172,14 +181,20 @@ public final class Fivet {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RetrieveFichaMedicaReq_descriptor,
         new java.lang.String[] { "NumeroFichaMedica", });
-    internal_static_SearchFichaMedicaReq_descriptor =
+    internal_static_RetrievePersonaReq_descriptor =
       getDescriptor().getMessageTypes().get(9);
+    internal_static_RetrievePersonaReq_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_RetrievePersonaReq_descriptor,
+        new java.lang.String[] { "Login", });
+    internal_static_SearchFichaMedicaReq_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_SearchFichaMedicaReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SearchFichaMedicaReq_descriptor,
         new java.lang.String[] { "Query", });
     internal_static_AddFichaMedicaReq_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_AddFichaMedicaReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AddFichaMedicaReq_descriptor,

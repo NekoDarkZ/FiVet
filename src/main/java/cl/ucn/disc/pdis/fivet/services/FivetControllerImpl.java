@@ -153,6 +153,7 @@ public class FivetControllerImpl implements FivetController {
     public void addControl(@NonNull Control control, int numeroFichaMedica) {
         Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
         if (fichaMedica.isPresent()) {
+            daoControl.save(control);
             fichaMedica.get().add(control);
         } else {
             log.warn("FichaMedica not found.");

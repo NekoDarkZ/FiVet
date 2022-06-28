@@ -21,6 +21,7 @@ message PersonaEntity {
   string nombre = 2;
   string email = 3;
   string direccion = 4;
+  string password = 5;
 }
 
 message ControlEntity {
@@ -53,8 +54,8 @@ message AddPersonaReq {
 }
 
 message AddControlReq {
-  ControlEntity control = 1;
-  int32 numeroFichaMedica = 2;
+  int32 numeroFichaMedica = 1;
+  ControlEntity control = 2;
 }
 
 message FichaMedicaReply {
@@ -63,6 +64,10 @@ message FichaMedicaReply {
 
 message RetrieveFichaMedicaReq {
   int32 numeroFichaMedica = 1;
+}
+
+message RetrievePersonaReq {
+  string login = 1;
 }
 
 message SearchFichaMedicaReq {
@@ -74,10 +79,23 @@ message AddFichaMedicaReq {
 }
 
 service FivetService {
+  // OK
   rpc authenticate(AuthenticationReq) returns (PersonaReply) {}
+
+  // OK
   rpc addPersona(AddPersonaReq) returns (PersonaReply) {}
+
+  // OK
   rpc addControl(AddControlReq) returns (FichaMedicaReply) {}
-  rpc retrieveFicha(RetrieveFichaMedicaReq) returns (FichaMedicaReply) {}
-  rpc searchFicha(SearchFichaMedicaReq) returns (stream FichaMedicaReply) {}
-  rpc addFicha(AddFichaMedicaReq) returns (FichaMedicaReply) {}
+
+  // OK
+  rpc retrieveFichaMedica(RetrieveFichaMedicaReq) returns (FichaMedicaReply) {}
+
+  rpc retrievePersona(RetrievePersonaReq) returns (PersonaReply) {}
+
+  // TODO
+  rpc searchFichaMedica(SearchFichaMedicaReq) returns (stream FichaMedicaReply) {}
+
+  // OK
+  rpc addFichaMedica(AddFichaMedicaReq) returns (FichaMedicaReply) {}
 }

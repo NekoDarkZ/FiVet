@@ -8,23 +8,23 @@ public interface AddControlReqOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.ControlEntity control = 1;</code>
+   * <code>int32 numeroFichaMedica = 1;</code>
+   * @return The numeroFichaMedica.
+   */
+  int getNumeroFichaMedica();
+
+  /**
+   * <code>.ControlEntity control = 2;</code>
    * @return Whether the control field is set.
    */
   boolean hasControl();
   /**
-   * <code>.ControlEntity control = 1;</code>
+   * <code>.ControlEntity control = 2;</code>
    * @return The control.
    */
   cl.ucn.disc.pdis.fivet.grpc.ControlEntity getControl();
   /**
-   * <code>.ControlEntity control = 1;</code>
+   * <code>.ControlEntity control = 2;</code>
    */
   cl.ucn.disc.pdis.fivet.grpc.ControlEntityOrBuilder getControlOrBuilder();
-
-  /**
-   * <code>int32 numeroFichaMedica = 2;</code>
-   * @return The numeroFichaMedica.
-   */
-  int getNumeroFichaMedica();
 }

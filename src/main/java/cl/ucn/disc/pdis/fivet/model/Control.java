@@ -75,7 +75,7 @@ public final class Control extends BaseEntity {
      */
     @Getter
     @Setter
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "veterinario", canBeNull = false)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "veterinario")
     private Persona veterinario;
 
     /**

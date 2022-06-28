@@ -54,4 +54,16 @@ public interface PersonaEntityOrBuilder extends
    */
   com.google.protobuf.ByteString
       getDireccionBytes();
+
+  /**
+   * <code>string password = 5;</code>
+   * @return The password.
+   */
+  java.lang.String getPassword();
+  /**
+   * <code>string password = 5;</code>
+   * @return The bytes for password.
+   */
+  com.google.protobuf.ByteString
+      getPasswordBytes();
 }
