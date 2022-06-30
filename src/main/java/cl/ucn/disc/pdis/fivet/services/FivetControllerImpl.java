@@ -30,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -65,8 +67,10 @@ public class FivetControllerImpl implements FivetController {
         ConnectionSource cs = new JdbcConnectionSource(dbUrl);
         this.daoPersona = new ORMLiteDAO<>(cs,Persona.class);
         this.daoFichaMedica = new ORMLiteDAO<>(cs,FichaMedica.class);
+        DAO<Control> daoControl = new ORMLiteDAO<>(cs, Control.class);
         this.daoPersona.dropAndCreateTable();
         this.daoFichaMedica.dropAndCreateTable();
+        daoControl.dropAndCreateTable();
     }
 
     /**
@@ -176,6 +180,15 @@ public class FivetControllerImpl implements FivetController {
         } else {
             return fichaMedica;
         }
+    }
+
+    /**
+     * Retrieve alL FichaMedica from backend
+     * @return a List of FichaMedica
+     */
+    @Override
+    public List<FichaMedica> retrieveAllFichaMedica() {
+        return new ArrayList<>(this.daoFichaMedica.getAll());
     }
 
     /**

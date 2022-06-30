@@ -68,6 +68,9 @@ dependencies {
     implementation 'io.grpc:grpc-stub:1.46.0'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
 
+    testImplementation 'io.grpc:grpc-testing:1.47.0'
+    testImplementation 'com.asarkar.grpc:grpc-test:1.2.1'
+
     // Crypto Library
     implementation 'org.springframework.security:spring-security-crypto:5.6.3'
     runtimeOnly 'org.bouncycastle:bcprov-jdk15on:1.70'

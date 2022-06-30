@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public final class FivetServer {
 
     /**
-     * The Main
+     * The Main.
      */
     @SneakyThrows
     public static void main(String[] args) {

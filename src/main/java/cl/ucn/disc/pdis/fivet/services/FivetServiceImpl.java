@@ -31,6 +31,7 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -164,7 +165,7 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
         }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
     }
 
-
+    /*
     @Override
     public void retrievePersona(RetrievePersonaReq request, StreamObserver<PersonaReply> responseObserver) {
         Optional<Persona> optionalPersona = this.fivetController.retrieveByLogin(request.getLogin());
@@ -175,6 +176,66 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
                     .build());
             responseObserver.onCompleted();
         }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "Persona not found")));
+    }
+    */
+
+    @Override
+    public void searchFichaMedica(SearchFichaMedicaReq request, StreamObserver<FichaMedicaReply> responseObserver) {
+        String metadata = request.getQuery();
+
+        if (metadata.isEmpty()) {
+            responseObserver.onError(buildException(Code.INVALID_ARGUMENT, "Invalid Argument"));
+        } else {
+            // 1. By number of fichaMedica
+
+            if (isNumeric(metadata)) {
+                Optional<FichaMedica> optionalFichaMedica =
+                        this.fivetController.retrieveFichaMedica(Integer.parseInt(metadata));
+
+                optionalFichaMedica.ifPresentOrElse(fichaMedica -> {
+                    responseObserver.onNext(FichaMedicaReply.newBuilder()
+                                    .setFichaMedica(ModelAdapter.build(fichaMedica))
+                            .build());
+                    responseObserver.onCompleted();
+                }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
+            } else {
+
+                int count = 0;
+                List<FichaMedica> fichaMedicaList = this.fivetController.retrieveAllFichaMedica();
+
+                for (FichaMedica fichaMedica : fichaMedicaList) {
+
+                    // 2. By rut of Duenio
+
+                    if (metadata.equalsIgnoreCase(fichaMedica.getDuenio().getRut())) {
+                        count++;
+                        responseObserver.onNext(FichaMedicaReply.newBuilder()
+                                        .setFichaMedica(ModelAdapter.build(fichaMedica))
+                                .build());
+
+                        // 3. By nombre Mascota
+                    } else if (metadata.equalsIgnoreCase(fichaMedica.getNombrePaciente())) {
+                        count++;
+                        responseObserver.onNext(FichaMedicaReply.newBuilder()
+                                .setFichaMedica(ModelAdapter.build(fichaMedica))
+                                .build());
+
+                        // 4. By nombre Duenio
+                    } else if (metadata.equalsIgnoreCase(fichaMedica.getDuenio().getNombre())) {
+                        count++;
+                        responseObserver.onNext(FichaMedicaReply.newBuilder()
+                                .setFichaMedica(ModelAdapter.build(fichaMedica))
+                                .build());
+                    }
+                }
+
+                if (count > 0) {
+                    responseObserver.onCompleted();
+                } else {
+                    responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found"));
+                }
+            }
+        }
     }
 
     /**
@@ -216,6 +277,15 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
 
                     responseObserver.onCompleted();
                 });
+    }
+
+    /**
+     * Check a String to convert into a Integer
+     * @param str to use
+     * @return boolean (0 if not numeric and 1 if is numeric)
+     */
+    private static boolean isNumeric(String str){
+        return str != null && str.matches("[0-9.]+");
     }
 
     /**

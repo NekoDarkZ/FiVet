@@ -21,10 +21,13 @@ import cl.ucn.disc.pdis.fivet.model.Control;
 import cl.ucn.disc.pdis.fivet.model.FichaMedica;
 import cl.ucn.disc.pdis.fivet.model.Persona;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
  * The Fivet Controller
+ *
+ * @author Sebastian Murquio-Castillo
  */
 public interface FivetController {
 
@@ -68,6 +71,12 @@ public interface FivetController {
      * @return a FichaMedica
      */
     Optional<FichaMedica> retrieveFichaMedica(int numeroFichaMedica);
+
+    /**
+     * Retrieve all FichaMedica from backend
+     * @return a List of FichaMedica
+     */
+    List<FichaMedica> retrieveAllFichaMedica();
 
     /**
      * Add a Persona into the backend

@@ -139,37 +139,6 @@ public final class FivetServiceGrpc {
     return getRetrieveFichaMedicaMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq,
-      cl.ucn.disc.pdis.fivet.grpc.PersonaReply> getRetrievePersonaMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "retrievePersona",
-      requestType = cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq.class,
-      responseType = cl.ucn.disc.pdis.fivet.grpc.PersonaReply.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq,
-      cl.ucn.disc.pdis.fivet.grpc.PersonaReply> getRetrievePersonaMethod() {
-    io.grpc.MethodDescriptor<cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq, cl.ucn.disc.pdis.fivet.grpc.PersonaReply> getRetrievePersonaMethod;
-    if ((getRetrievePersonaMethod = FivetServiceGrpc.getRetrievePersonaMethod) == null) {
-      synchronized (FivetServiceGrpc.class) {
-        if ((getRetrievePersonaMethod = FivetServiceGrpc.getRetrievePersonaMethod) == null) {
-          FivetServiceGrpc.getRetrievePersonaMethod = getRetrievePersonaMethod =
-              io.grpc.MethodDescriptor.<cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq, cl.ucn.disc.pdis.fivet.grpc.PersonaReply>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "retrievePersona"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  cl.ucn.disc.pdis.fivet.grpc.PersonaReply.getDefaultInstance()))
-              .setSchemaDescriptor(new FivetServiceMethodDescriptorSupplier("retrievePersona"))
-              .build();
-        }
-      }
-    }
-    return getRetrievePersonaMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq,
       cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply> getSearchFichaMedicaMethod;
 
@@ -321,15 +290,8 @@ public final class FivetServiceGrpc {
     }
 
     /**
-     */
-    public void retrievePersona(cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq request,
-        io.grpc.stub.StreamObserver<cl.ucn.disc.pdis.fivet.grpc.PersonaReply> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRetrievePersonaMethod(), responseObserver);
-    }
-
-    /**
      * <pre>
-     * TODO
+     * OK
      * </pre>
      */
     public void searchFichaMedica(cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq request,
@@ -377,13 +339,6 @@ public final class FivetServiceGrpc {
                 cl.ucn.disc.pdis.fivet.grpc.RetrieveFichaMedicaReq,
                 cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply>(
                   this, METHODID_RETRIEVE_FICHA_MEDICA)))
-          .addMethod(
-            getRetrievePersonaMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
-              new MethodHandlers<
-                cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq,
-                cl.ucn.disc.pdis.fivet.grpc.PersonaReply>(
-                  this, METHODID_RETRIEVE_PERSONA)))
           .addMethod(
             getSearchFichaMedicaMethod(),
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -461,16 +416,8 @@ public final class FivetServiceGrpc {
     }
 
     /**
-     */
-    public void retrievePersona(cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq request,
-        io.grpc.stub.StreamObserver<cl.ucn.disc.pdis.fivet.grpc.PersonaReply> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getRetrievePersonaMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
      * <pre>
-     * TODO
+     * OK
      * </pre>
      */
     public void searchFichaMedica(cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq request,
@@ -546,15 +493,8 @@ public final class FivetServiceGrpc {
     }
 
     /**
-     */
-    public cl.ucn.disc.pdis.fivet.grpc.PersonaReply retrievePersona(cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getRetrievePersonaMethod(), getCallOptions(), request);
-    }
-
-    /**
      * <pre>
-     * TODO
+     * OK
      * </pre>
      */
     public java.util.Iterator<cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply> searchFichaMedica(
@@ -633,14 +573,6 @@ public final class FivetServiceGrpc {
     }
 
     /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<cl.ucn.disc.pdis.fivet.grpc.PersonaReply> retrievePersona(
-        cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getRetrievePersonaMethod(), getCallOptions()), request);
-    }
-
-    /**
      * <pre>
      * OK
      * </pre>
@@ -656,9 +588,8 @@ public final class FivetServiceGrpc {
   private static final int METHODID_ADD_PERSONA = 1;
   private static final int METHODID_ADD_CONTROL = 2;
   private static final int METHODID_RETRIEVE_FICHA_MEDICA = 3;
-  private static final int METHODID_RETRIEVE_PERSONA = 4;
-  private static final int METHODID_SEARCH_FICHA_MEDICA = 5;
-  private static final int METHODID_ADD_FICHA_MEDICA = 6;
+  private static final int METHODID_SEARCH_FICHA_MEDICA = 4;
+  private static final int METHODID_ADD_FICHA_MEDICA = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -692,10 +623,6 @@ public final class FivetServiceGrpc {
         case METHODID_RETRIEVE_FICHA_MEDICA:
           serviceImpl.retrieveFichaMedica((cl.ucn.disc.pdis.fivet.grpc.RetrieveFichaMedicaReq) request,
               (io.grpc.stub.StreamObserver<cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply>) responseObserver);
-          break;
-        case METHODID_RETRIEVE_PERSONA:
-          serviceImpl.retrievePersona((cl.ucn.disc.pdis.fivet.grpc.RetrievePersonaReq) request,
-              (io.grpc.stub.StreamObserver<cl.ucn.disc.pdis.fivet.grpc.PersonaReply>) responseObserver);
           break;
         case METHODID_SEARCH_FICHA_MEDICA:
           serviceImpl.searchFichaMedica((cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq) request,
@@ -770,7 +697,6 @@ public final class FivetServiceGrpc {
               .addMethod(getAddPersonaMethod())
               .addMethod(getAddControlMethod())
               .addMethod(getRetrieveFichaMedicaMethod())
-              .addMethod(getRetrievePersonaMethod())
               .addMethod(getSearchFichaMedicaMethod())
               .addMethod(getAddFichaMedicaMethod())
               .build();

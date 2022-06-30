@@ -108,19 +108,17 @@ public final class Fivet {
       "earchFichaMedicaReq\022\r\n\005query\030\001 \001(\t\"<\n\021Ad" +
       "dFichaMedicaReq\022\'\n\013fichaMedica\030\001 \001(\0132\022.F" +
       "ichaMedicaEntity*2\n\nSexoEntity\022\r\n\tUNDEFI" +
-      "NED\020\000\022\t\n\005MACHO\020\001\022\n\n\006HEMBRA\020\0022\241\003\n\014FivetSe" +
+      "NED\020\000\022\t\n\005MACHO\020\001\022\n\n\006HEMBRA\020\0022\350\002\n\014FivetSe" +
       "rvice\0223\n\014authenticate\022\022.AuthenticationRe" +
       "q\032\r.PersonaReply\"\000\022-\n\naddPersona\022\016.AddPe" +
       "rsonaReq\032\r.PersonaReply\"\000\0221\n\naddControl\022" +
       "\016.AddControlReq\032\021.FichaMedicaReply\"\000\022C\n\023" +
       "retrieveFichaMedica\022\027.RetrieveFichaMedic" +
-      "aReq\032\021.FichaMedicaReply\"\000\0227\n\017retrievePer" +
-      "sona\022\023.RetrievePersonaReq\032\r.PersonaReply" +
-      "\"\000\022A\n\021searchFichaMedica\022\025.SearchFichaMed" +
-      "icaReq\032\021.FichaMedicaReply\"\0000\001\0229\n\016addFich" +
-      "aMedica\022\022.AddFichaMedicaReq\032\021.FichaMedic" +
-      "aReply\"\000B\037\n\033cl.ucn.disc.pdis.fivet.grpcP" +
-      "\001b\006proto3"
+      "aReq\032\021.FichaMedicaReply\"\000\022A\n\021searchFicha" +
+      "Medica\022\025.SearchFichaMedicaReq\032\021.FichaMed" +
+      "icaReply\"\0000\001\0229\n\016addFichaMedica\022\022.AddFich" +
+      "aMedicaReq\032\021.FichaMedicaReply\"\000B\037\n\033cl.uc" +
+      "n.disc.pdis.fivet.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

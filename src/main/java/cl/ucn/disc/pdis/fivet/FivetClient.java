@@ -7,6 +7,7 @@ import io.grpc.StatusRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZonedDateTime;
+import java.util.Iterator;
 
 /**
  * The Client of Fivet.
@@ -59,17 +60,17 @@ public final class FivetClient {
             FichaMedicaReply fichaMedica = stub.addFichaMedica(AddFichaMedicaReq.newBuilder()
                     .setFichaMedica(FichaMedicaEntity.newBuilder()
                             .setNumero(1)
-                            .setNombrePaciente("Fofi")
+                            .setNombrePaciente("Mane")
                             .setEspecie("Gato")
-                            .setFechaNacimiento("2011-11-01")
+                            .setFechaNacimiento("2021-11-16")
                             .setRaza("Calico")
-                            .setColor("Gris")
+                            .setColor("Blanco")
                             .setTipo("Normal")
                             .setSexo(SexoEntity.HEMBRA)
                             .setDuenio(PersonaEntity.newBuilder()
-                                    .setRut("199682954")
-                                    .setNombre("Sebastian Murquio Castillo")
-                                    .setEmail("sebastian.murquio@alumnos.ucn.cl")
+                                    .setRut("199684620")
+                                    .setNombre("Vanesa Briones Ibacache")
+                                    .setEmail("vanesa.briones@alumnos.ucn.cl")
                                     .setDireccion("Angamos #0610")
                                     .build())
                             .build())
@@ -87,9 +88,12 @@ public final class FivetClient {
                     .setPeso(10.5)
                     .setAltura(0.6)
                     .setDiagnostico("Sin novedad")
-                    .setVeterinario(stub.retrievePersona(RetrievePersonaReq.newBuilder()
-                                    .setLogin("199682954")
-                            .build()).getPersona())
+                    .setVeterinario(PersonaEntity.newBuilder()
+                            .setRut("199682954")
+                            .setNombre("Sebastian Murquio Castillo")
+                            .setEmail("sebastian.murquio@alumnos.ucn.cl")
+                            .setDireccion("Angamos #0610")
+                            .build())
                     .build();
 
             FichaMedicaReply fichaMedicaReply = stub.addControl(AddControlReq.newBuilder()
@@ -108,6 +112,19 @@ public final class FivetClient {
                             .setNumeroFichaMedica(1)
                     .build());
             log.debug("FichaMedica from RetrieveFichaMedica: {}", fichaMedica.getFichaMedica());
+        } catch (StatusRuntimeException e) {
+            log.warn("RPC failed: {}", e.getStatus());
+        }
+
+        // Search FichaMedica request
+        try {
+            Iterator<FichaMedicaReply> fichaMedicaReply = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                            .setQuery("1")
+                    .build());
+            while(fichaMedicaReply.hasNext()) {
+                log.debug("FichaMedica from SearchFichaMedica: {}", fichaMedicaReply.next().getFichaMedica());
+            }
+
         } catch (StatusRuntimeException e) {
             log.warn("RPC failed: {}", e.getStatus());
         }
