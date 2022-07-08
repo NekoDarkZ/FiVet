@@ -80,6 +80,32 @@ public final class FivetClient {
             log.warn("RPC failed: {}", e.getStatus());
         }
 
+        // Add FichaMedica request 2
+
+        try {
+            FichaMedicaReply fichaMedica2 = stub.addFichaMedica(AddFichaMedicaReq.newBuilder()
+                    .setFichaMedica(FichaMedicaEntity.newBuilder()
+                            .setNumero(2)
+                            .setNombrePaciente("Fofi")
+                            .setEspecie("Gato")
+                            .setFechaNacimiento("2011-11-15")
+                            .setRaza("Calico")
+                            .setColor("Gris")
+                            .setTipo("Normal")
+                            .setSexo(SexoEntity.HEMBRA)
+                            .setDuenio(PersonaEntity.newBuilder()
+                                    .setRut("199684620")
+                                    .setNombre("Vanesa Briones Ibacache")
+                                    .setEmail("vanesa.briones@alumnos.ucn.cl")
+                                    .setDireccion("Angamos #0610")
+                                    .build())
+                            .build())
+                    .build());
+            log.debug("FichaMedica from AddFicha: {}", fichaMedica2.getFichaMedica());
+        } catch (StatusRuntimeException e) {
+            log.warn("RPC failed: {}", e.getStatus());
+        }
+
         // Add Control request
         try {
             ControlEntity controlEntity = ControlEntity.newBuilder()
@@ -119,7 +145,7 @@ public final class FivetClient {
         // Search FichaMedica request
         try {
             Iterator<FichaMedicaReply> fichaMedicaReply = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
-                            .setQuery("1")
+                            .setQuery("Vanesa Briones Ibacache")
                     .build());
             while(fichaMedicaReply.hasNext()) {
                 log.debug("FichaMedica from SearchFichaMedica: {}", fichaMedicaReply.next().getFichaMedica());

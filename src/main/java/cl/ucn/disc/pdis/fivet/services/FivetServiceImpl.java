@@ -88,26 +88,31 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     public void addPersona(AddPersonaReq request, StreamObserver<PersonaReply> responseObserver) {
 
         PersonaEntity personaEntity = request.getPersona();
-        Optional<Persona> optionalPersona = this.fivetController.retrieveByLogin(personaEntity.getEmail());
 
-        optionalPersona.ifPresentOrElse(persona ->
-                responseObserver.onError(buildException(Code.ALREADY_EXISTS, "Persona already exists")), () -> {
+        if(personaEntity.getRut().isEmpty()) {
+            responseObserver.onError(buildException(Code.INVALID_ARGUMENT, "Invalid Argument"));
+        } else {
+            Optional<Persona> optionalPersona = this.fivetController.retrieveByLogin(personaEntity.getEmail());
 
-            Optional<Persona> optionalPersona1 = this.fivetController.retrieveByLogin(personaEntity.getRut());
-
-            optionalPersona1.ifPresentOrElse(persona ->
+            optionalPersona.ifPresentOrElse(persona ->
                     responseObserver.onError(buildException(Code.ALREADY_EXISTS, "Persona already exists")), () -> {
 
-                Persona persona = ModelAdapter.build(personaEntity);
-                this.fivetController.add(persona,persona.getPasswd());
+                Optional<Persona> optionalPersona1 = this.fivetController.retrieveByLogin(personaEntity.getRut());
 
-                responseObserver.onNext(PersonaReply.newBuilder()
-                                .setPersona(ModelAdapter.build(persona))
-                        .build());
+                optionalPersona1.ifPresentOrElse(persona ->
+                        responseObserver.onError(buildException(Code.ALREADY_EXISTS, "Persona already exists")), () -> {
 
-                responseObserver.onCompleted();
+                    Persona persona = ModelAdapter.build(personaEntity);
+                    this.fivetController.add(persona,persona.getPasswd());
+
+                    responseObserver.onNext(PersonaReply.newBuilder()
+                            .setPersona(ModelAdapter.build(persona))
+                            .build());
+
+                    responseObserver.onCompleted();
+                });
             });
-        });
+        }
     }
 
     /**
@@ -120,29 +125,33 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
 
         ControlEntity controlEntity = request.getControl();
 
-        Optional<FichaMedica> optionalFichaMedica =
-                this.fivetController.retrieveFichaMedica(request.getNumeroFichaMedica());
+        if (controlEntity.getFecha().isEmpty()) {
+            responseObserver.onError(buildException(Code.INVALID_ARGUMENT, "Invalid Argument"));
+        } else {
+            Optional<FichaMedica> optionalFichaMedica =
+                    this.fivetController.retrieveFichaMedica(request.getNumeroFichaMedica());
 
-        optionalFichaMedica.ifPresentOrElse(fichaMedica -> {
+            optionalFichaMedica.ifPresentOrElse(fichaMedica -> {
 
-            Control control = ModelAdapter.build(controlEntity);
+                Control control = ModelAdapter.build(controlEntity);
 
-            Optional<Persona> optionalVeterinario =
-                    this.fivetController.retrieveByLogin(controlEntity.getVeterinario().getRut());
+                Optional<Persona> optionalVeterinario =
+                        this.fivetController.retrieveByLogin(controlEntity.getVeterinario().getRut());
 
-            optionalVeterinario.ifPresentOrElse(veterinario -> {
+                optionalVeterinario.ifPresentOrElse(veterinario -> {
 
-                control.setVeterinario(veterinario);
-                this.fivetController.addControl(control, fichaMedica.getNumero());
+                    control.setVeterinario(veterinario);
+                    this.fivetController.addControl(control, fichaMedica.getNumero());
 
-                responseObserver.onNext(FichaMedicaReply.newBuilder()
-                        .setFichaMedica(ModelAdapter.build(fichaMedica))
-                        .build());
+                    responseObserver.onNext(FichaMedicaReply.newBuilder()
+                            .setFichaMedica(ModelAdapter.build(fichaMedica))
+                            .build());
 
-                responseObserver.onCompleted();
-            },() -> responseObserver.onError(buildException(Code.NOT_FOUND, "Veterinario not found")));
+                    responseObserver.onCompleted();
+                },() -> responseObserver.onError(buildException(Code.NOT_FOUND, "Veterinario not found")));
 
-        }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
+            }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
+        }
     }
 
     /**
@@ -246,37 +255,41 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     @Override
     public void addFichaMedica(AddFichaMedicaReq request, StreamObserver<FichaMedicaReply> responseObserver) {
 
-        FichaMedicaEntity fichaMedicaEntity = request.getFichaMedica();
+        if (request.hasFichaMedica()) {
+            FichaMedicaEntity fichaMedicaEntity = request.getFichaMedica();
 
-        Optional<FichaMedica> optionalFichaMedica =
-                this.fivetController.retrieveFichaMedica(fichaMedicaEntity.getNumero());
+            Optional<FichaMedica> optionalFichaMedica =
+                    this.fivetController.retrieveFichaMedica(fichaMedicaEntity.getNumero());
 
-        optionalFichaMedica.ifPresentOrElse(fichaMedica ->
-                        responseObserver.onError(buildException(Code.ALREADY_EXISTS, "FichaMedica already exists")),
-                () -> {
+            optionalFichaMedica.ifPresentOrElse(fichaMedica ->
+                            responseObserver.onError(buildException(Code.ALREADY_EXISTS, "FichaMedica already exists")),
+                    () -> {
 
-                    FichaMedica fichaMedica = ModelAdapter.build(fichaMedicaEntity);
+                        FichaMedica fichaMedica = ModelAdapter.build(fichaMedicaEntity);
 
-                    Optional<Persona> optionalDuenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+                        Optional<Persona> optionalDuenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
 
-                    optionalDuenio.ifPresentOrElse(fichaMedica::setDuenio, () -> {
+                        optionalDuenio.ifPresentOrElse(fichaMedica::setDuenio, () -> {
 
-                        this.fivetController.addPersona(fichaMedica.getDuenio());
-                        Optional<Persona> duenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+                            this.fivetController.addPersona(fichaMedica.getDuenio());
+                            Optional<Persona> duenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
 
-                        duenio.ifPresent(fichaMedica::setDuenio);
+                            duenio.ifPresent(fichaMedica::setDuenio);
+                        });
+
+                        log.debug("Duenio id: {}", fichaMedica.getDuenio().getId());
+
+                        this.fivetController.addFichaMedica(fichaMedica);
+
+                        responseObserver.onNext(FichaMedicaReply.newBuilder()
+                                .setFichaMedica(ModelAdapter.build(fichaMedica))
+                                .build());
+
+                        responseObserver.onCompleted();
                     });
-
-                    log.debug("Duenio id: {}", fichaMedica.getDuenio().getId());
-
-                    this.fivetController.addFichaMedica(fichaMedica);
-
-                    responseObserver.onNext(FichaMedicaReply.newBuilder()
-                            .setFichaMedica(ModelAdapter.build(fichaMedica))
-                            .build());
-
-                    responseObserver.onCompleted();
-                });
+        } else {
+            responseObserver.onError(buildException(Code.INVALID_ARGUMENT, "Invalid Argument"));
+        }
     }
 
     /**
