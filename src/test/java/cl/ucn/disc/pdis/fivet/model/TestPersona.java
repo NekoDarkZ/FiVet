@@ -30,6 +30,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test of Persona
+ *
+ * @author Sebastian Murquio-Castillo
+ */
 @Slf4j
 public class TestPersona {
     /**
@@ -46,7 +51,7 @@ public class TestPersona {
         String databaseUrl = "jdbc:h2:mem:fivet_db";
 
         // Connection source: autoclose with the try/catch
-        try(ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl)){
+        try (ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl)) {
 
             // Create the table from Persona annotations
             TableUtils.createTableIfNotExists(connectionSource, Persona.class);
@@ -103,6 +108,10 @@ public class TestPersona {
             // Testing password
             Assertions.assertEquals(persona.getPasswd(), personaDb.getPasswd(),
                     "Password not equals");
+
+            // Soft Delete
+            daoPersona.delete(personaDb);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

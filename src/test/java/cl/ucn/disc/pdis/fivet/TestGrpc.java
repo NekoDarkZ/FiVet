@@ -18,7 +18,6 @@
 package cl.ucn.disc.pdis.fivet;
 
 import cl.ucn.disc.pdis.fivet.grpc.*;
-import cl.ucn.disc.pdis.fivet.model.FichaMedica;
 import cl.ucn.disc.pdis.fivet.services.FivetServiceImpl;
 import com.asarkar.grpc.test.GrpcCleanupExtension;
 import com.asarkar.grpc.test.Resources;
@@ -78,11 +77,12 @@ public final class TestGrpc {
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 PersonaReply personaReply = stub.addPersona(AddPersonaReq.newBuilder()
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             PersonaReply personaReply1 = stub.addPersona(AddPersonaReq.newBuilder()
                             .setPersona(PersonaEntity.newBuilder()
-                                    .setRut("199682954")
+                                    .setRut("19968295-4")
                                     .setNombre("Sebastian Murquio Castillo")
                                     .setEmail("admin@ucn.cl")
                                     .setPassword("admin123")
@@ -91,32 +91,34 @@ public final class TestGrpc {
                     .build());
 
             log.debug("PersonaReply: {}", personaReply1);
-            Assertions.assertEquals("199682954", personaReply1.getPersona().getRut(), "Wrong RUT");
+            Assertions.assertEquals("19968295-4", personaReply1.getPersona().getRut(), "Wrong RUT");
 
             // With an Email already in DB
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 PersonaReply personaReply = stub.addPersona(AddPersonaReq.newBuilder()
                         .setPersona(PersonaEntity.newBuilder()
-                                .setRut("199684620")
+                                .setRut("19968462-0")
                                 .setNombre("Vanesa Briones Ibacache")
                                 .setEmail("admin@ucn.cl")
                                 .setPassword("admin123")
                                 .setDireccion("Angamos #0610")
                                 .build())
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             // With a Rut already in DB
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 PersonaReply personaReply = stub.addPersona(AddPersonaReq.newBuilder()
                         .setPersona(PersonaEntity.newBuilder()
-                                .setRut("199682954")
+                                .setRut("19968295-4")
                                 .setNombre("Sebastian Murquio Castillo")
                                 .setEmail("anotheradmin@ucn.cl")
                                 .setPassword("admin123")
                                 .setDireccion("Angamos #0610")
                                 .build())
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
         }
 
@@ -127,6 +129,7 @@ public final class TestGrpc {
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 PersonaReply personaReply = stub.authenticate(AuthenticationReq.newBuilder()
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             // No password
@@ -134,6 +137,7 @@ public final class TestGrpc {
                PersonaReply personaReply = stub.authenticate(AuthenticationReq.newBuilder()
                                .setLogin("admin@ucn.cl")
                        .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             // Wrong password
@@ -142,6 +146,7 @@ public final class TestGrpc {
                                 .setLogin("admin@ucn.cl")
                                 .setPassword("wrong password")
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             // Wrong Login
@@ -150,6 +155,7 @@ public final class TestGrpc {
                                 .setLogin("unknown@ucn.cl")
                                 .setPassword("admin123")
                         .build());
+                log.debug("PersonaReply: {}", personaReply);
             });
 
             PersonaReply personaReply = stub.authenticate(AuthenticationReq.newBuilder()
@@ -158,7 +164,7 @@ public final class TestGrpc {
                     .build());
 
             log.debug("PersonaReply: {}", personaReply);
-            Assertions.assertEquals("199682954", personaReply.getPersona().getRut(), "Wrong RUT");
+            Assertions.assertEquals("19968295-4", personaReply.getPersona().getRut(), "Wrong RUT");
         }
 
         // Add FichaMedica
@@ -168,6 +174,7 @@ public final class TestGrpc {
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 FichaMedicaReply fichaMedicaReply = stub.addFichaMedica(AddFichaMedicaReq.newBuilder()
                         .build());
+                log.debug("PersonaReply: {}", fichaMedicaReply);
             });
 
             FichaMedicaReply fichaMedicaReply = stub.addFichaMedica(AddFichaMedicaReq.newBuilder()
@@ -181,7 +188,7 @@ public final class TestGrpc {
                             .setTipo("Normal")
                             .setSexo(SexoEntity.HEMBRA)
                             .setDuenio(PersonaEntity.newBuilder()
-                                    .setRut("199684620")
+                                    .setRut("19968462-0")
                                     .setNombre("Vanesa Briones Ibacache")
                                     .setEmail("vanesa.briones@alumnos.ucn.cl")
                                     .setDireccion("Angamos #0610")
@@ -190,6 +197,30 @@ public final class TestGrpc {
                     .build());
 
             log.debug("FichaMedicaReply: {}", fichaMedicaReply);
+
+            // Empty
+            Assertions.assertThrows(StatusRuntimeException.class, () -> {
+                FichaMedicaReply fichaMedicaReplyAlreadyExists =
+                        stub.addFichaMedica(AddFichaMedicaReq.newBuilder()
+                                        .setFichaMedica(FichaMedicaEntity.newBuilder()
+                                                .setNumero(1)
+                                                .setNombrePaciente("Mane")
+                                                .setEspecie("Gato")
+                                                .setFechaNacimiento("2021-11-16")
+                                                .setRaza("Calico")
+                                                .setColor("Blanco")
+                                                .setTipo("Normal")
+                                                .setSexo(SexoEntity.HEMBRA)
+                                                .setDuenio(PersonaEntity.newBuilder()
+                                                        .setRut("19968462-0")
+                                                        .setNombre("Vanesa Briones Ibacache")
+                                                        .setEmail("vanesa.briones@alumnos.ucn.cl")
+                                                        .setDireccion("Angamos #0610")
+                                                        .build())
+                                                .build())
+                        .build());
+                log.debug("PersonaReply: {}", fichaMedicaReplyAlreadyExists);
+            });
         }
 
         // Add Control
@@ -199,6 +230,7 @@ public final class TestGrpc {
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 FichaMedicaReply fichaMedicaReply = stub.addControl(AddControlReq.newBuilder()
                         .build());
+                log.debug("PersonaReply: {}", fichaMedicaReply);
             });
 
             FichaMedicaReply fichaMedicaReply = stub.addControl(AddControlReq.newBuilder()
@@ -209,7 +241,7 @@ public final class TestGrpc {
                                     .setAltura(0.6)
                                     .setDiagnostico("Sin novedad")
                                     .setVeterinario(PersonaEntity.newBuilder()
-                                            .setRut("199682954")
+                                            .setRut("19968295-4")
                                             .setNombre("Sebastian Murquio Castillo")
                                             .setEmail("sebastian.murquio@alumnos.ucn.cl")
                                             .setDireccion("Angamos #0610")
@@ -228,6 +260,7 @@ public final class TestGrpc {
             Assertions.assertThrows(StatusRuntimeException.class, () -> {
                 FichaMedicaReply fichaMedicaReply = stub.retrieveFichaMedica(RetrieveFichaMedicaReq.newBuilder()
                         .build());
+                log.debug("PersonaReply: {}", fichaMedicaReply);
             });
 
             // NumeroFichaMedica not found
@@ -235,6 +268,7 @@ public final class TestGrpc {
                FichaMedicaReply fichaMedicaReply = stub.retrieveFichaMedica(RetrieveFichaMedicaReq.newBuilder()
                                .setNumeroFichaMedica(100)
                        .build());
+                log.debug("PersonaReply: {}", fichaMedicaReply);
             });
 
 
@@ -248,14 +282,81 @@ public final class TestGrpc {
         // Testing SearchFichaMedica
         log.debug("Testing SearchFichaMedica...");
         {
-            // Empty
-            Assertions.assertThrows(StatusRuntimeException.class, () -> {
-                Iterator<FichaMedicaReply> fichaMedicaReplyIterator
-                        = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
-                        .build());
-            });
+            // By Numero
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorNumero =
+                    stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                                    .setQuery("1")
+                            .build());
 
-            // TODO: terminar test
+            while(fichaMedicaReplyIteratorNumero.hasNext()) {
+                FichaMedicaReply fichaMedicaReply = fichaMedicaReplyIteratorNumero.next();
+                log.debug("FichaMedicaReply: {}.", fichaMedicaReply.getFichaMedica());
+                Assertions.assertEquals(1,
+                        fichaMedicaReply.getFichaMedica().getNumero());
+            }
+
+            // By Rut Duenio
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorRut =
+                    stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                            .setQuery("19968462-0")
+                            .build());
+
+            while(fichaMedicaReplyIteratorRut.hasNext()) {
+                FichaMedicaReply fichaMedicaReply = fichaMedicaReplyIteratorRut.next();
+                log.debug("FichaMedicaReply: {}.", fichaMedicaReply.getFichaMedica());
+                Assertions.assertEquals("19968462-0",
+                        fichaMedicaReply.getFichaMedica().getDuenio().getRut());
+            }
+
+            // By Nombre Mascota
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorMascota =
+                    stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                            .setQuery("Mane")
+                            .build());
+
+            while(fichaMedicaReplyIteratorMascota.hasNext()) {
+                FichaMedicaReply fichaMedicaReply = fichaMedicaReplyIteratorMascota.next();
+                log.debug("FichaMedicaReply: {}.", fichaMedicaReply.getFichaMedica());
+                Assertions.assertEquals("Mane",
+                        fichaMedicaReply.getFichaMedica().getNombrePaciente());
+            }
+
+            // By Nombre Duenio
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorDuenio =
+                    stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                            .setQuery("Vanesa Briones Ibacache")
+                            .build());
+
+            while(fichaMedicaReplyIteratorDuenio.hasNext()) {
+                FichaMedicaReply fichaMedicaReply = fichaMedicaReplyIteratorDuenio.next();
+                log.debug("FichaMedicaReply: {}.", fichaMedicaReply.getFichaMedica());
+                Assertions.assertEquals("Vanesa Briones Ibacache",
+                        fichaMedicaReply.getFichaMedica().getDuenio().getNombre());
+            }
+
+            // Not Found no numeric
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorNonNumeric
+                    = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                            .setQuery("a")
+                            .build());
+
+            Assertions.assertThrows(StatusRuntimeException.class,
+                    fichaMedicaReplyIteratorNonNumeric::hasNext);
+
+            // Not Found numeric
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorNumeric
+                    = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                    .setQuery("100")
+                    .build());
+
+            Assertions.assertThrows(StatusRuntimeException.class, fichaMedicaReplyIteratorNumeric::hasNext);
+
+            // Empty
+            Iterator<FichaMedicaReply> fichaMedicaReplyIteratorEmpty
+                    = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
+                    .build());
+
+            Assertions.assertThrows(StatusRuntimeException.class, fichaMedicaReplyIteratorEmpty::hasNext);
         }
     }
 }

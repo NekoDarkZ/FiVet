@@ -174,20 +174,11 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
         }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
     }
 
-    /*
-    @Override
-    public void retrievePersona(RetrievePersonaReq request, StreamObserver<PersonaReply> responseObserver) {
-        Optional<Persona> optionalPersona = this.fivetController.retrieveByLogin(request.getLogin());
-
-        optionalPersona.ifPresentOrElse(persona -> {
-            responseObserver.onNext(PersonaReply.newBuilder()
-                            .setPersona(ModelAdapter.build(persona))
-                    .build());
-            responseObserver.onCompleted();
-        }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "Persona not found")));
-    }
-    */
-
+    /**
+     * Retrieve a Iterator of {@link  FichaMedica} that match with the query
+     * @param request contains the query to use
+     * @param responseObserver StreamObserver of FichaMedicaReply
+     */
     @Override
     public void searchFichaMedica(SearchFichaMedicaReq request, StreamObserver<FichaMedicaReply> responseObserver) {
         String metadata = request.getQuery();

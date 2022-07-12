@@ -157,8 +157,6 @@ public final class TestModel {
                         .build();
                 fichaMedica.add(control);
 
-
-
             // Getting attributes from Control
                 
                 Assertions.assertNotNull(control.getId(), "ID was null");
@@ -170,7 +168,6 @@ public final class TestModel {
                 Assertions.assertNotNull(control.getVeterinario(), "Veterinario was null");
                 Assertions.assertNotNull(control.getFichaMedica(), "FichaMedica was null");
             }
-
         }
 
         // Retrieve a FichaMedica with Control
@@ -194,5 +191,4 @@ public final class TestModel {
     private static void print(String message, Object o) {
         log.debug("{}: {}", message, ToStringBuilder.reflectionToString(o, ToStringStyle.MULTI_LINE_STYLE));
     }
-
 }

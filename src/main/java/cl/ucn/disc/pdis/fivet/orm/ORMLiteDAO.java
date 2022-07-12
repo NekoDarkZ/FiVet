@@ -193,7 +193,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
                 return;
             }
 
-            t.get().deletedAt = ZonedDateTime.now();
+            t.get().setDeletedAt(ZonedDateTime.now());
             if (this.theDao.update(t.get()) != 1) {
                 throw new SQLException("Rows updated != 1");
             }
