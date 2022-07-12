@@ -90,8 +90,6 @@ service FivetService {
   // OK
   rpc retrieveFichaMedica(RetrieveFichaMedicaReq) returns (FichaMedicaReply) {}
 
-  // rpc retrievePersona(RetrievePersonaReq) returns (PersonaReply) {}
-
   // OK
   rpc searchFichaMedica(SearchFichaMedicaReq) returns (stream FichaMedicaReply) {}
 
