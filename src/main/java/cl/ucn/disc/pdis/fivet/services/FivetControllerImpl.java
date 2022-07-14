@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The Fivet Controller Implementation
+ * The Fivet Controller Implementation.
  *
  * @author Sebastian Murquio-Castillo
  */
@@ -55,18 +55,19 @@ public class FivetControllerImpl implements FivetController {
     /**
      * The Hasher.
      */
-    private final static PasswordEncoder PASSWORD_ENCODER =
+    private static final PasswordEncoder PASSWORD_ENCODER =
             new Argon2PasswordEncoder();
 
     /**
-     * The FivetControllerImpl Constructor
-     * @param dbUrl to connect
+     * The FivetControllerImpl Constructor.
+     *
+     *  @param dbUrl to connect
      */
     @SneakyThrows
     public FivetControllerImpl(String dbUrl) {
         ConnectionSource cs = new JdbcConnectionSource(dbUrl);
-        this.daoPersona = new ORMLiteDAO<>(cs,Persona.class);
-        this.daoFichaMedica = new ORMLiteDAO<>(cs,FichaMedica.class);
+        this.daoPersona = new ORMLiteDAO<>(cs, Persona.class);
+        this.daoFichaMedica = new ORMLiteDAO<>(cs, FichaMedica.class);
         DAO<Control> daoControl = new ORMLiteDAO<>(cs, Control.class);
         this.daoPersona.dropAndCreateTable();
         this.daoFichaMedica.dropAndCreateTable();
@@ -74,8 +75,9 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Retrieve a Persona by email or rut
-     * @param login email or rut
+     * Retrieve a Persona by email or rut.
+     *
+     *  @param login email or rut
      * @return a Optional Persona
      */
     @Override
@@ -92,8 +94,9 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Authentication of a person in the system
-     * @param login The login account
+     * Authentication of a person in the system.
+     *
+     *  @param login The login account
      * @param passwd The password of the user
      * @return a Persona
      */
@@ -117,7 +120,7 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Add a persona to the backend
+     * Add a persona to the backend.
      *
      * @param persona to add
      */
@@ -128,7 +131,7 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Add a Persona into the backend
+     * Add a Persona into the backend.
      *
      * @param persona  to add
      * @param password to hash
@@ -142,13 +145,14 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Add a control to a FichaMedica
-     * @param control to add
-     * @param numeroFichaMedica to attach
+     * Add a control to a FichaMedica.
+     *
+     *  @param control to add
+     *  @param numeroFichaMedica to attach
      */
     @Override
     public void addControl(@NonNull Control control, int numeroFichaMedica) {
-        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
+        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero", numeroFichaMedica);
         if (fichaMedica.isPresent()) {
             fichaMedica.get().add(control);
         } else {
@@ -157,8 +161,9 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Add a FichaMedica into the backend
-     * @param fichaMedica to add
+     * Add a FichaMedica into the backend.
+     *
+     *  @param fichaMedica to add
      */
     @Override
     public void addFichaMedica(@NonNull FichaMedica fichaMedica) {
@@ -167,14 +172,14 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Retrieve a FichaMedica from backend
+     * Retrieve a FichaMedica from backend.
      *
      * @param numeroFichaMedica to retrieve
      * @return a FichaMedica
      */
     @Override
     public Optional<FichaMedica> retrieveFichaMedica(int numeroFichaMedica) {
-        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero",numeroFichaMedica);
+        Optional<FichaMedica> fichaMedica = this.daoFichaMedica.get("numero", numeroFichaMedica);
         if (fichaMedica.isEmpty()) {
             return Optional.empty();
         } else {
@@ -183,8 +188,9 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Retrieve alL FichaMedica from backend
-     * @return a List of FichaMedica
+     * Retrieve alL FichaMedica from backend.
+     *
+     *  @return a List of FichaMedica
      */
     @Override
     public List<FichaMedica> retrieveAllFichaMedica() {
@@ -192,8 +198,9 @@ public class FivetControllerImpl implements FivetController {
     }
 
     /**
-     * Delete a Persona by id
-     * @param id to delete
+     * Delete a Persona by id.
+     *
+     *  @param id to delete
      */
     @Override
     public void delete(Integer id) {

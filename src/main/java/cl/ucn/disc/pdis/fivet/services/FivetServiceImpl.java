@@ -17,7 +17,18 @@
 
 package cl.ucn.disc.pdis.fivet.services;
 
-import cl.ucn.disc.pdis.fivet.grpc.*;
+import cl.ucn.disc.pdis.fivet.grpc.AddControlReq;
+import cl.ucn.disc.pdis.fivet.grpc.AddFichaMedicaReq;
+import cl.ucn.disc.pdis.fivet.grpc.AddPersonaReq;
+import cl.ucn.disc.pdis.fivet.grpc.AuthenticationReq;
+import cl.ucn.disc.pdis.fivet.grpc.ControlEntity;
+import cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply;
+import cl.ucn.disc.pdis.fivet.grpc.FivetServiceGrpc;
+import cl.ucn.disc.pdis.fivet.grpc.PersonaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.PersonaReply;
+import cl.ucn.disc.pdis.fivet.grpc.RetrieveFichaMedicaReq;
+import cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq;
 import cl.ucn.disc.pdis.fivet.model.Control;
 import cl.ucn.disc.pdis.fivet.model.FichaMedica;
 import cl.ucn.disc.pdis.fivet.model.ModelAdapter;
@@ -35,19 +46,19 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The Fivet Implementation
+ * The Fivet Implementation.
  *
  * @author Sebastian Murquio-Castillo
  */
 @Slf4j
 public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     /**
-     * The Controller
+     * The Controller.
      */
     private final FivetController fivetController;
 
     /**
-     * The Fivet Service
+     * The Fivet Service.
      *
      * @param databaseUrl to use
      */
@@ -56,9 +67,10 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     }
 
     /**
-     * Authenticate a {@link Persona}
-     * @param request credentials of Persona
-     * @param responseObserver StreamObserver of PersonaReply
+     * Authenticate a {@link Persona}.
+     *
+     *  @param request credentials of Persona
+     *  @param responseObserver StreamObserver of PersonaReply
      */
     @Override
     public void authenticate(AuthenticationReq request, StreamObserver<PersonaReply> responseObserver) {
@@ -80,16 +92,17 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     }
 
     /**
-     * Add a {@link Persona} to the backend
-     * @param request Persona to add
-     * @param responseObserver StreamObserver of PersonaReply
+     * Add a {@link Persona} to the backend.
+     *
+     *  @param request Persona to add
+     *  @param responseObserver StreamObserver of PersonaReply
      */
     @Override
     public void addPersona(AddPersonaReq request, StreamObserver<PersonaReply> responseObserver) {
 
         PersonaEntity personaEntity = request.getPersona();
 
-        if(personaEntity.getRut().isEmpty()) {
+        if (personaEntity.getRut().isEmpty()) {
             responseObserver.onError(buildException(Code.INVALID_ARGUMENT, "Invalid Argument"));
         } else {
             Optional<Persona> optionalPersona = this.fivetController.retrieveByLogin(personaEntity.getEmail());
@@ -97,26 +110,27 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
             optionalPersona.ifPresentOrElse(persona ->
                     responseObserver.onError(buildException(Code.ALREADY_EXISTS, "Persona already exists")), () -> {
 
-                Optional<Persona> optionalPersona1 = this.fivetController.retrieveByLogin(personaEntity.getRut());
+                    Optional<Persona> optionalPersona1 = this.fivetController.retrieveByLogin(personaEntity.getRut());
 
-                optionalPersona1.ifPresentOrElse(persona ->
+                    optionalPersona1.ifPresentOrElse(persona ->
                         responseObserver.onError(buildException(Code.ALREADY_EXISTS, "Persona already exists")), () -> {
 
-                    Persona persona = ModelAdapter.build(personaEntity);
-                    this.fivetController.add(persona,persona.getPasswd());
+                            Persona persona = ModelAdapter.build(personaEntity);
+                            this.fivetController.add(persona, persona.getPasswd());
 
-                    responseObserver.onNext(PersonaReply.newBuilder()
-                            .setPersona(ModelAdapter.build(persona))
-                            .build());
+                            responseObserver.onNext(PersonaReply.newBuilder()
+                                    .setPersona(ModelAdapter.build(persona))
+                                    .build());
 
-                    responseObserver.onCompleted();
-                });
-            });
+                            responseObserver.onCompleted();
+                        });
+                    });
         }
     }
 
     /**
-     * Add a {@link Control} to the backend
+     * Add a {@link Control} to the backend.
+     *
      * @param request Control to add
      * @param responseObserver  StreamObserver of FichaMedicaReply
      */
@@ -148,14 +162,15 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
                             .build());
 
                     responseObserver.onCompleted();
-                },() -> responseObserver.onError(buildException(Code.NOT_FOUND, "Veterinario not found")));
+                }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "Veterinario not found")));
 
             }, () -> responseObserver.onError(buildException(Code.NOT_FOUND, "FichaMedica not found")));
         }
     }
 
     /**
-     * Retrieve a {@link  FichaMedica}
+     * Retrieve a {@link  FichaMedica}.
+     *
      * @param request numero of FichaMedica to retrieve
      * @param responseObserver StreamObserver of FichaMedicaReply
      */
@@ -175,9 +190,10 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     }
 
     /**
-     * Retrieve a Iterator of {@link  FichaMedica} that match with the query
-     * @param request contains the query to use
-     * @param responseObserver StreamObserver of FichaMedicaReply
+     * Retrieve a Iterator of {@link  FichaMedica} that match with the query.
+     *
+     *  @param request contains the query to use
+     *  @param responseObserver StreamObserver of FichaMedicaReply
      */
     @Override
     public void searchFichaMedica(SearchFichaMedicaReq request, StreamObserver<FichaMedicaReply> responseObserver) {
@@ -239,9 +255,10 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     }
 
     /**
-     * Add a {@link FichaMedica} to the backend
-     * @param request the request
-     * @param responseObserver the response
+     * Add a {@link FichaMedica} to the backend.
+     *
+     *  @param request the request
+     *  @param responseObserver the response
      */
     @Override
     public void addFichaMedica(AddFichaMedicaReq request, StreamObserver<FichaMedicaReply> responseObserver) {
@@ -258,12 +275,14 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
 
                         FichaMedica fichaMedica = ModelAdapter.build(fichaMedicaEntity);
 
-                        Optional<Persona> optionalDuenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+                        Optional<Persona> optionalDuenio =
+                                this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
 
                         optionalDuenio.ifPresentOrElse(fichaMedica::setDuenio, () -> {
 
                             this.fivetController.addPersona(fichaMedica.getDuenio());
-                            Optional<Persona> duenio = this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
+                            Optional<Persona> duenio =
+                                    this.fivetController.retrieveByLogin(fichaMedica.getDuenio().getRut());
 
                             duenio.ifPresent(fichaMedica::setDuenio);
                         });
@@ -284,21 +303,23 @@ public class FivetServiceImpl extends FivetServiceGrpc.FivetServiceImplBase {
     }
 
     /**
-     * Check a String to convert into a Integer
+     * Check a String to convert into a Integer.
+     *
      * @param str to use
      * @return boolean (0 if not numeric and 1 if is numeric)
      */
-    private static boolean isNumeric(String str){
+    private static boolean isNumeric(String str) {
         return str != null && str.matches("[0-9.]+");
     }
 
     /**
      * Build a StatusRuntimeException with a message.
+     *
      * @param code error
      * @param message to use
      * @return the {@link StatusRuntimeException}
      */
-    private StatusRuntimeException buildException(final Code code ,final String message) {
+    private StatusRuntimeException buildException(final Code code, final String message) {
         return StatusProto.toStatusRuntimeException(Status.newBuilder()
                 .setCode(code.getNumber())
                 .setMessage(message)

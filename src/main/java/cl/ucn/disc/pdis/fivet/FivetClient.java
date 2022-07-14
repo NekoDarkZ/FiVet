@@ -1,6 +1,18 @@
 package cl.ucn.disc.pdis.fivet;
 
-import cl.ucn.disc.pdis.fivet.grpc.*;
+import cl.ucn.disc.pdis.fivet.grpc.AddControlReq;
+import cl.ucn.disc.pdis.fivet.grpc.AddFichaMedicaReq;
+import cl.ucn.disc.pdis.fivet.grpc.AddPersonaReq;
+import cl.ucn.disc.pdis.fivet.grpc.AuthenticationReq;
+import cl.ucn.disc.pdis.fivet.grpc.ControlEntity;
+import cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.FichaMedicaReply;
+import cl.ucn.disc.pdis.fivet.grpc.FivetServiceGrpc;
+import cl.ucn.disc.pdis.fivet.grpc.PersonaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.PersonaReply;
+import cl.ucn.disc.pdis.fivet.grpc.RetrieveFichaMedicaReq;
+import cl.ucn.disc.pdis.fivet.grpc.SearchFichaMedicaReq;
+import cl.ucn.disc.pdis.fivet.grpc.SexoEntity;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -147,7 +159,7 @@ public final class FivetClient {
             Iterator<FichaMedicaReply> fichaMedicaReply = stub.searchFichaMedica(SearchFichaMedicaReq.newBuilder()
                             .setQuery("Vanesa Briones Ibacache")
                     .build());
-            while(fichaMedicaReply.hasNext()) {
+            while (fichaMedicaReply.hasNext()) {
                 log.debug("FichaMedica from SearchFichaMedica: {}", fichaMedicaReply.next().getFichaMedica());
             }
 

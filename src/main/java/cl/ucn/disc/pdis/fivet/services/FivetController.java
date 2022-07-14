@@ -25,69 +25,78 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The Fivet Controller
+ * The Fivet Controller.
  *
  * @author Sebastian Murquio-Castillo
  */
 public interface FivetController {
 
     /**
-     * Retrieve a Persona by email or rut
+     * Retrieve a Persona by email or rut.
+     *
      * @param login email or rut
      * @return a Optional Persona
      */
     Optional<Persona> retrieveByLogin(String login);
 
     /**
-     * authenticate method
-     * @param login rut or email to login
-     * @param password to login
-     * @return a Persona
+     * authenticate method.
+     *
+     *  @param login rut or email to login
+     *  @param password to login
+     *  @return a Persona
      */
     Optional<Persona> authenticate(String login, String password);
 
     /**
-     * Add a persona to the backend
-     * @param persona to add
+     * Add a persona to the backend.
+     *
+     *  @param persona to add
      */
     void addPersona(Persona persona);
 
     /**
-     * Add a control to a FichaMedica
-     * @param control to add
-     * @param numeroFichaMedica to attach
+     * Add a control to a FichaMedica.
+     *
+     *  @param control to add
+     *  @param numeroFichaMedica to attach
      */
     void addControl(Control control, int numeroFichaMedica);
 
     /**
-     * Add a FichaMedica into the backend
-     * @param fichaMedica to add
+     * Add a FichaMedica into the backend.
+     *
+     *  @param fichaMedica to add
      */
     void addFichaMedica(FichaMedica fichaMedica);
 
     /**
-     * Retrieve a FichaMedica from backend
-     * @param numeroFichaMedica to retrieve
-     * @return a FichaMedica
+     * Retrieve a FichaMedica from backend.
+     *
+     *  @param numeroFichaMedica to retrieve
+     *  @return a FichaMedica
      */
     Optional<FichaMedica> retrieveFichaMedica(int numeroFichaMedica);
 
     /**
-     * Retrieve all FichaMedica from backend
-     * @return a List of FichaMedica
+     * Retrieve all FichaMedica from backend.
+     *
+     *  @return a List of FichaMedica
      */
     List<FichaMedica> retrieveAllFichaMedica();
 
     /**
-     * Add a Persona into the backend
-     * @param persona to add
-     * @param password to hash
+     * Add a Persona into the backend.
+     *
+     *  @param persona to add
+     *  @param password to hash
      */
     void add(Persona persona, String password);
 
     /**
-     * Delete a Persona by id
-     * @param id to delete
+     * Delete a Persona by id.
+     *
+     *  @param id to delete
      */
     void delete(Integer id);
 }

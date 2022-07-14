@@ -17,7 +17,10 @@
 
 package cl.ucn.disc.pdis.fivet.model;
 
-import cl.ucn.disc.pdis.fivet.grpc.*;
+import cl.ucn.disc.pdis.fivet.grpc.ControlEntity;
+import cl.ucn.disc.pdis.fivet.grpc.FichaMedicaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.PersonaEntity;
+import cl.ucn.disc.pdis.fivet.grpc.SexoEntity;
 import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
@@ -36,7 +39,7 @@ import java.util.List;
 public final class ModelAdapter {
 
     /**
-     * Build a {@link PersonaEntity} from {@link Persona}
+     * Build a {@link PersonaEntity} from {@link Persona}.
      *
      * @param persona to use
      * @return PersonaEntity
@@ -52,7 +55,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link Persona} from {@link PersonaEntity}
+     * Build a {@link Persona} from {@link PersonaEntity}.
      *
      * @param personaEntity to use
      * @return Persona
@@ -68,7 +71,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link Control} from {@link ControlEntity}
+     * Build a {@link Control} from {@link ControlEntity}.
      *
      * @param controlEntity to use
      * @return Control
@@ -85,7 +88,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link ControlEntity} from {@link Control}
+     * Build a {@link ControlEntity} from {@link Control}.
      *
      * @param control to use
      * @return ControlEntity
@@ -102,7 +105,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link ZonedDateTime} from String fecha
+     * Build a {@link ZonedDateTime} from String fecha.
      *
      * @param fecha to use
      * @return ZonedDateTime
@@ -112,17 +115,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link LocalDate} from String fechaNacimiento
-     *
-     * @param fechaNacimiento to use
-     * @return LocalDate
-     */
-    public static LocalDate buildLocalDate(final String fechaNacimiento) {
-        return LocalDate.parse(fechaNacimiento, DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
-    /**
-     * Build a {@link cl.ucn.disc.pdis.fivet.model.FichaMedica.Sexo} from a {@link SexoEntity}
+     * Build a {@link cl.ucn.disc.pdis.fivet.model.FichaMedica.Sexo} from a {@link SexoEntity}.
      *
      * @param sexoEntity to use
      * @return Sexo
@@ -132,7 +125,7 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link SexoEntity} from a {@link cl.ucn.disc.pdis.fivet.model.FichaMedica.Sexo}
+     * Build a {@link SexoEntity} from a {@link cl.ucn.disc.pdis.fivet.model.FichaMedica.Sexo}.
      *
      * @param sexo to use
      * @return SexoEntity
@@ -142,27 +135,8 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link FichaMedica} from a {@link FichaMedicaEntity}
-     * @param fichaMedicaEntity to use
-     * @return FichaMedica
-     */
-    public static FichaMedica build(final FichaMedicaEntity fichaMedicaEntity) {
-        return FichaMedica.builder()
-                .numero(fichaMedicaEntity.getNumero())
-                .nombrePaciente(fichaMedicaEntity.getNombrePaciente())
-                .fechaNacimiento(buildLocalDate(fichaMedicaEntity.getFechaNacimiento()))
-                .raza(fichaMedicaEntity.getRaza())
-                .color(fichaMedicaEntity.getColor())
-                .especie(fichaMedicaEntity.getEspecie())
-                .tipo(fichaMedicaEntity.getTipo())
-                .sexo(build(fichaMedicaEntity.getSexo()))
-                .duenio(build(fichaMedicaEntity.getDuenio()))
-                .controles(buildControles(fichaMedicaEntity.getControlesList()))
-                .build();
-    }
-
-    /**
-     * Build a {@link FichaMedicaEntity} from a {@link FichaMedica}
+     * Build a {@link FichaMedicaEntity} from a {@link FichaMedica}.
+     *
      * @param fichaMedica to use
      * @return FichaMedicaEntity
      */
@@ -182,9 +156,41 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link Collection<ControlEntity>} from a {@link Collection<Control>}
+     * Build a {@link FichaMedica} from a {@link FichaMedicaEntity}.
+     *
+     * @param fichaMedicaEntity to use
+     * @return FichaMedica
+     */
+    public static FichaMedica build(final FichaMedicaEntity fichaMedicaEntity) {
+        return FichaMedica.builder()
+                .numero(fichaMedicaEntity.getNumero())
+                .nombrePaciente(fichaMedicaEntity.getNombrePaciente())
+                .fechaNacimiento(buildLocalDate(fichaMedicaEntity.getFechaNacimiento()))
+                .raza(fichaMedicaEntity.getRaza())
+                .color(fichaMedicaEntity.getColor())
+                .especie(fichaMedicaEntity.getEspecie())
+                .tipo(fichaMedicaEntity.getTipo())
+                .sexo(build(fichaMedicaEntity.getSexo()))
+                .duenio(build(fichaMedicaEntity.getDuenio()))
+                .controles(buildControles(fichaMedicaEntity.getControlesList()))
+                .build();
+    }
+
+    /**
+     * Build a {@link LocalDate} from String fechaNacimiento.
+     *
+     * @param fechaNacimiento to use
+     * @return LocalDate
+     */
+    public static LocalDate buildLocalDate(final String fechaNacimiento) {
+        return LocalDate.parse(fechaNacimiento, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    /**
+     * Build a {@link Collection of ControlEntity} from a {@link Collection of Control}.
+     *
      * @param controles to use
-     * @return Collection<ControlEntity>
+     * @return Collection of ControlEntity
      */
     public static Collection<ControlEntity> buildControlEntities(final Collection<Control> controles) {
         List<ControlEntity> controlEntities = new ArrayList<>();
@@ -195,9 +201,10 @@ public final class ModelAdapter {
     }
 
     /**
-     * Build a {@link Collection<Control>} from a {@link Collection<ControlEntity>}
+     * Build a {@link Collection of Control} from a {@link Collection of ControlEntity}.
+     *
      * @param controlEntities to use
-     * @return Collection<Control>
+     * @return Collection of Control
      */
     public static Collection<Control> buildControles(final Collection<ControlEntity> controlEntities) {
         List<Control> controles = new ArrayList<>();

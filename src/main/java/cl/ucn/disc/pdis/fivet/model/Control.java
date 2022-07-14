@@ -20,12 +20,16 @@ package cl.ucn.disc.pdis.fivet.model;
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
 /**
- * The Control class
+ * The Control class.
  *
  * @author Sebastian Murquio-Castillo
  */
@@ -36,42 +40,42 @@ import java.time.ZonedDateTime;
 public final class Control extends BaseEntity {
 
     /**
-     * The fecha of Control
+     * The fecha of Control.
      */
     @Getter
     @DatabaseField(canBeNull = false)
     private ZonedDateTime fecha;
 
     /**
-     * The temperature of the Patient
+     * The temperature of the Patient.
      */
     @Getter
     @DatabaseField(canBeNull = false)
     private Double temperatura;
 
     /**
-     * The peso of the Patient
+     * The peso of the Patient.
      */
     @Getter
     @DatabaseField(canBeNull = false)
     private Double peso;
 
     /**
-     * The altura of the Patient
+     * The altura of the Patient.
      */
     @Getter
     @DatabaseField(canBeNull = false)
     private Double altura;
 
     /**
-     * The diagnostico of the Patient
+     * The diagnostico of the Patient.
      */
     @Getter
     @DatabaseField(canBeNull = false)
     private String diagnostico;
 
     /**
-     * The Veterinarian who diagnosed the patient
+     * The Veterinarian who diagnosed the patient.
      */
     @Getter
     @Setter
@@ -79,7 +83,7 @@ public final class Control extends BaseEntity {
     private Persona veterinario;
 
     /**
-     * The Ficha Medica
+     * The Ficha Medica.
      */
     @Getter
     @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "fichamedica_id")

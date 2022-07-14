@@ -17,7 +17,6 @@
 
 package cl.ucn.disc.pdis.fivet.orm;
 
-import cl.ucn.disc.pdis.fivet.model.Persona;
 import com.google.common.collect.Lists;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -40,7 +39,7 @@ import java.util.Optional;
  * @author Sebastian Murquio-Castillo
  */
 @Slf4j
-public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
+public final class ORMLiteDAO<T extends BaseEntity> implements DAO<T> {
 
     // Initialize
     static {
@@ -51,28 +50,30 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     }
 
     /**
-     * The real DAO (connection to ORMlite DAO)
+     * The real DAO (connection to ORMlite DAO).
      */
     private final Dao<T, Integer> theDao;
 
     /**
-     * The ConnectionSource
+     * The ConnectionSource.
      */
     private static ConnectionSource cs;
 
     /**
      * The Constructor of ORMLiteDAO.
-     * @param cs the connection to the database.
-     * @param clazz the type of T.
+     *
+     * @param cs the connection to the database
+     * @param clazz the type of T
      */
     @SneakyThrows(SQLException.class)
-    public ORMLiteDAO(@NonNull final ConnectionSource cs,@NonNull final Class<T> clazz){
-        this.theDao = DaoManager.createDao(cs,clazz);
+    public ORMLiteDAO(@NonNull final ConnectionSource cs, @NonNull final Class<T> clazz) {
+        this.theDao = DaoManager.createDao(cs, clazz);
         ORMLiteDAO.cs = cs;
     }
 
     /**
-     * Build a ConnectionSource to use
+     * Build a ConnectionSource to use.
+     *
      * @param s the database url
      * @return the ConnectionSource
      */
@@ -83,7 +84,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     }
 
     /**
-     * Get optional, T
+     * Get optional, T.
      *
      * @param id to search
      * @return a T
@@ -103,7 +104,8 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     }
 
     /**
-     * Gets an Optional T using an attribute and value given
+     * Gets an Optional T using an attribute and value given.
+     *
      * @param attrib to use
      * @param value to search
      * @return Optional T
@@ -113,15 +115,16 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     public Optional<T> get(final String attrib, final Object value) {
         List<T> list = this.theDao.queryForEq(attrib, value);
 
-        for (T t : list)
+        for (T t : list) {
             if (t.getDeletedAt() == null) {
                 return Optional.of(t);
             }
+        }
         return Optional.empty();
     }
 
     /**
-     * Get all the Ts
+     * Get all the Ts.
      *
      * @return the List of T
      */
@@ -139,7 +142,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     }
 
     /**
-     * Save a T
+     * Save a T.
      *
      * @param t to save
      */
@@ -147,13 +150,13 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     @Override
     public void save(T t) {
         int created = this.theDao.create(t);
-        if (created != 1){
+        if (created != 1) {
             throw new SQLException("Rows created != 1");
         }
     }
 
     /**
-     * Delete a T
+     * Delete a T.
      *
      * @param t to delete
      */
@@ -201,7 +204,7 @@ public final class ORMLiteDAO <T extends BaseEntity> implements DAO<T> {
     }
 
     /**
-     * Drops and Creates a Table
+     * Drops and Creates a Table.
      */
     @Override
     @SneakyThrows

@@ -20,7 +20,11 @@ package cl.ucn.disc.pdis.fivet.model;
 import cl.ucn.disc.pdis.fivet.orm.BaseEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Persona Class.
@@ -58,7 +62,7 @@ public final class Persona extends BaseEntity {
      * The Direccion.
      */
     @Getter
-    @DatabaseField(canBeNull = true)
+    @DatabaseField
     private String direccion;
 
     /**
@@ -66,7 +70,7 @@ public final class Persona extends BaseEntity {
      */
     @Getter
     @Setter
-    @DatabaseField(canBeNull = true)
+    @DatabaseField
     private String passwd;
 
 }

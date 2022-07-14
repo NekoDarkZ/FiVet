@@ -21,35 +21,38 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Data Access Object: DAO
- * @param <T> to use
+ * Data Access Object: DAO.
+ *
+ *  @param <T> to use
  *
  * @author Sebastian Murquio-Castillo
  */
-public interface DAO <T extends BaseEntity> {
+public interface DAO<T extends BaseEntity> {
 
     /**
-     * Get optional, T
-     * @param id to search
-     * @return a T
+     * Get optional, T.
+     *
+     *  @param id to search
+     *  @return a T
      */
     Optional<T> get(Integer id);
 
     /**
-     * Get an Optional T giving a attribute and a value
-     * @param attrib to use
-     * @param value to search
-     * @return optional T
+     * Get an Optional T giving a attribute and a value.
+     *
+     *  @param attrib to use
+     *  @param value to search
+     *  @return optional T
      */
     Optional<T> get(String attrib, Object value);
 
     /**
-     * Get all the Ts
+     * Get all the Ts.
      */
     List<T> getAll();
 
     /**
-     * Save a T
+     * Save a T.
      */
     void save(T t);
 
@@ -64,7 +67,7 @@ public interface DAO <T extends BaseEntity> {
     void delete(Integer id);
 
     /**
-     * Drops and Creates a Table
+     * Drops and Creates a Table.
      */
     void dropAndCreateTable();
 }

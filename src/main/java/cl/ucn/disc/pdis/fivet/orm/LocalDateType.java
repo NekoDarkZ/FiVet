@@ -17,15 +17,15 @@
 
 package cl.ucn.disc.pdis.fivet.orm;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import com.j256.ormlite.field.FieldType;
 import com.j256.ormlite.field.SqlType;
 import com.j256.ormlite.field.types.BaseDataType;
 import com.j256.ormlite.support.DatabaseResults;
 import lombok.extern.slf4j.Slf4j;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The LocalDate to Database VARCHAR converter.
@@ -36,32 +36,34 @@ import lombok.extern.slf4j.Slf4j;
 public final class LocalDateType extends BaseDataType {
 
     /**
-     * Singleton!
+     * Singleton!.
      */
     public static final LocalDateType INSTANCE = new LocalDateType();
 
     /**
-     * The formatter (LocalDate -- String)
+     * The formatter (LocalDate -- String).
      */
     private static final DateTimeFormatter DTF = DateTimeFormatter.ISO_LOCAL_DATE;
 
     /**
-     * The size of the String: 2022-04-20
+     * The size of the String: 2022-04-20.
      */
     private static final int DEFAULT_WIDTH = 10;
 
     /**
-     * The private Constructor
+     * The private Constructor.
      */
-    private LocalDateType(){
-        super(SqlType.STRING,new Class<?>[]{LocalDate.class});
+    private LocalDateType() {
+        super(SqlType.STRING, new Class<?>[]{LocalDate.class});
     }
 
     /**
-     * @return the size of the database field.
+     * Get the default width.
+     *
+     *  @return the size of the database field
      */
     @Override
-    public int getDefaultWidth(){
+    public int getDefaultWidth() {
         return DEFAULT_WIDTH;
     }
 
@@ -70,7 +72,7 @@ public final class LocalDateType extends BaseDataType {
      * Convert a default string object and return the appropriate argument to a SQL insert or update statement.
      */
     @Override
-    public Object parseDefaultString(FieldType fieldType, String defaultStr){
+    public Object parseDefaultString(FieldType fieldType, String defaultStr) {
         log.debug("parseDefaultString: {} -> {}", fieldType, defaultStr);
         return defaultStr;
     }
@@ -79,9 +81,11 @@ public final class LocalDateType extends BaseDataType {
      * The Java to SQL converter.
      */
     @Override
-    public Object javaToSqlArg(FieldType fieldType, Object javaObject){
+    public Object javaToSqlArg(FieldType fieldType, Object javaObject) {
         LocalDate ld = (LocalDate) javaObject;
-        if (ld == null) return null;
+        if (ld == null) {
+            return null;
+        }
         return DTF.format(ld);
     }
 
@@ -90,7 +94,7 @@ public final class LocalDateType extends BaseDataType {
      * For Example, if the type is a date-long then this return a long value or null.
      */
     @Override
-    public Object resultToSqlArg(FieldType fieldType, DatabaseResults results, int columnPos) throws SQLException{
+    public Object resultToSqlArg(FieldType fieldType, DatabaseResults results, int columnPos) throws SQLException {
         return results.getString(columnPos);
     }
 
@@ -98,8 +102,10 @@ public final class LocalDateType extends BaseDataType {
      * The SQL to Java converter.
      */
     @Override
-    public Object sqlArgToJava(FieldType fieldType, Object sqlArg, int columnPos){
-        if (sqlArg == null) return null;
+    public Object sqlArgToJava(FieldType fieldType, Object sqlArg, int columnPos) {
+        if (sqlArg == null) {
+            return null;
+        }
         return LocalDate.parse((String) sqlArg, DTF);
     }
 }
