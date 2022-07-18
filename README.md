@@ -4,6 +4,7 @@ Java Project for "Proyecto Desarrollo e integración de Soluciones".
 
 ## Domain Model
 
+```puml
 @startuml
 package cl.ucn.disc.pdis.fivet.model {
 class Control {
@@ -88,9 +89,11 @@ BaseEntity <|-- Control
 BaseEntity <|-- FichaMedica
 }
 @enduml
+```
 
 ## Class Diagram
 
+```puml
 @startuml
 package cl.ucn.disc.pdis.fivet {
 package model{
@@ -247,6 +250,7 @@ FivetServiceImpl -l-> FivetControllerImpl
 FivetControllerImpl -d-> DAO
 }
 @enduml
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
