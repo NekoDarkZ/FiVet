@@ -2,7 +2,8 @@
 
 Java Project for "Proyecto Desarrollo e integración de Soluciones".
 
-##Domain Model
+## Domain Model
+
 @startuml
 package cl.ucn.disc.pdis.fivet.model {
 class Control {
@@ -88,7 +89,8 @@ BaseEntity <|-- FichaMedica
 }
 @enduml
 
-##Class Diagram
+## Class Diagram
+
 @startuml
 package cl.ucn.disc.pdis.fivet {
 package model{
